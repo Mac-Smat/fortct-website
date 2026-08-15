@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import starIconSvg from './assets/icon-star.svg'
 import galleryPhoto7 from '../assets/Gallery Section Images/gallery-photo-7.webp'
 import imgGemini1 from './assets/img-gemini-1.png'
@@ -19,6 +19,7 @@ import GallerySection from './components/GallerySection.jsx'
 import TestimonialsSection from './components/TestimonialsSection.jsx'
 import ServiceSlider from './components/ServiceSlider.jsx'
 import ContactSection from './components/ContactSection.jsx'
+import ContactPage from './components/ContactPage.jsx'
 import CtaBanner from './components/CtaBanner.jsx'
 import HoverFooter from './components/HoverFooter.jsx'
 import {
@@ -43,8 +44,25 @@ const NAV_ITEMS = [
   { name: 'Home', link: '#home' },
   { name: 'Services', link: '#services' },
   { name: 'Portfolio', link: '#portfolio' },
-  { name: 'Contact', link: '#contact' },
+  { name: 'Contact', link: '/contact' },
 ]
+
+const CONTACT_NAV_ITEMS = [
+  { name: 'Home', link: '/' },
+  { name: 'Services', link: '/#services' },
+  { name: 'Portfolio', link: '/#portfolio' },
+  { name: 'Contact', link: '/contact' },
+]
+
+function usePathname() {
+  const [pathname, setPathname] = useState(() => window.location.pathname)
+  useEffect(() => {
+    const onPop = () => setPathname(window.location.pathname)
+    window.addEventListener('popstate', onPop)
+    return () => window.removeEventListener('popstate', onPop)
+  }, [])
+  return pathname
+}
 
 // Reusable 3D Tilt Wrapper for Image/Content Boxes
 function TiltCard({ children, className = '' }) {
@@ -121,6 +139,19 @@ function ProgressBar({ label, value }) {
 
 export default function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
+  const isContactPage = pathname === '/contact'
+  const navItems = isContactPage ? CONTACT_NAV_ITEMS : NAV_ITEMS
+
+  const handleQuoteClick = () => {
+    if (isContactPage) {
+      document
+        .getElementById('contact-form')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      return
+    }
+    window.location.hash = '#quote'
+  }
 
   return (
     <div className="min-h-screen bg-white text-black font-sans antialiased selection:bg-[#E0EC38] selection:text-[#1B1D00] dark:bg-[#0C0C0E] dark:text-[#F2F2F1] transition-colors duration-300">
@@ -129,15 +160,13 @@ export default function App() {
         {/* Desktop Navigation */}
         <NavBody>
           <NavbarLogo />
-          <NavItems items={NAV_ITEMS} />
+          <NavItems items={navItems} activeName={isContactPage ? 'Contact' : undefined} />
           <div className="flex items-center gap-4">
             <ThemeToggle />
             <LiquidMetalButton
               variant="light"
               label="Get a Quote"
-              onClick={() => {
-                window.location.hash = '#quote'
-              }}
+              onClick={handleQuoteClick}
             />
           </div>
         </NavBody>
@@ -159,7 +188,7 @@ export default function App() {
             isOpen={isMobileMenuOpen}
             onClose={() => setIsMobileMenuOpen(false)}
           >
-            {NAV_ITEMS.map((item, idx) => (
+            {navItems.map((item, idx) => (
               <a
                 key={`mobile-link-${idx}`}
                 href={item.link}
@@ -175,7 +204,7 @@ export default function App() {
                 label="Get a Quote"
                 onClick={() => {
                   setIsMobileMenuOpen(false)
-                  window.location.hash = '#quote'
+                  handleQuoteClick()
                 }}
               />
             </div>
@@ -183,6 +212,10 @@ export default function App() {
         </MobileNav>
       </Navbar>
 
+{isContactPage ? (
+        <ContactPage />
+      ) : (
+        <>
       {/* ============ HERO SECTION (LOCKED) ============ */}
       <section className="relative w-full max-w-[1280px] mx-auto px-4 pt-6 pb-12 overflow-hidden md:overflow-visible">
         {/* Tiles background — full-bleed, ~20% opacity */}
@@ -613,7 +646,9 @@ export default function App() {
 
       <ContactSection />
       <CtaBanner />
-      <HoverFooter />
+        </>
+      )}
+      <HoverFooter prefixLanding={isContactPage} />
     </div>
   )
 }

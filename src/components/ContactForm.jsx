@@ -1,0 +1,239 @@
+import { useEffect, useState } from 'react'
+import { ChevronDown, CheckCircle2 } from 'lucide-react'
+import { LiquidMetalButton } from './LiquidMetalButton.jsx'
+
+const SERVICE_OPTIONS = [
+  'Branding',
+  'General Printing',
+  'Billboard Construction & Installation',
+  'Large Format Print',
+  'Graphics & Video Design',
+  'Other',
+]
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const PHONE_RE = /^[+()\d\s-]{7,}$/
+
+const inputBase =
+  'w-full h-[48px] bg-[#F9F9F9] rounded-[12px] px-[14px] text-[14px] text-[#1A1C1C] placeholder:text-[#B7BBC4] outline-none focus:ring-2 transition-shadow border border-[#C5C8BC]/50 dark:bg-[#0F0F11] dark:text-[#F2F2F1] dark:placeholder:text-[#5C5C66] dark:border-[#26262B]'
+
+const inputValid =
+  'border-[#C5C8BC]/50 focus:ring-[#E0EC38]/60 focus:border-[#E0EC38]/60'
+
+const inputInvalid =
+  'border-[#B42318]/70 focus:ring-[#B42318]/40 focus:border-[#B42318]/70'
+
+export default function ContactForm({ selectedService, onServiceChange }) {
+  const [values, setValues] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    service: '',
+    message: '',
+  })
+  const [errors, setErrors] = useState({})
+  const [submitted, setSubmitted] = useState(false)
+
+  useEffect(() => {
+    if (selectedService) {
+      setValues((v) => ({ ...v, service: selectedService }))
+    }
+  }, [selectedService])
+
+  const setField = (field, value) => {
+    setValues((v) => ({ ...v, [field]: value }))
+    if (errors[field]) {
+      setErrors((e) => ({ ...e, [field]: undefined }))
+    }
+  }
+
+  const validate = () => {
+    const next = {}
+    if (!values.name.trim()) {
+      next.name = 'Please enter your full name'
+    } else if (values.name.trim().length < 2) {
+      next.name = 'Name must be at least 2 characters'
+    }
+    if (!values.email.trim()) {
+      next.email = 'Please enter your email address'
+    } else if (!EMAIL_RE.test(values.email.trim())) {
+      next.email = 'Please enter a valid email address'
+    }
+    if (values.phone.trim() && !PHONE_RE.test(values.phone.trim())) {
+      next.phone = 'Please enter a valid phone number'
+    }
+    if (!values.message.trim()) {
+      next.message = 'Please tell us how we can help'
+    } else if (values.message.trim().length < 10) {
+      next.message = 'Message must be at least 10 characters'
+    }
+    return next
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const nextErrors = validate()
+    setErrors(nextErrors)
+    if (Object.keys(nextErrors).length > 0) return
+    setSubmitted(true)
+    setValues({ name: '', email: '', phone: '', service: '', message: '' })
+    onServiceChange?.('')
+    setTimeout(() => {
+      document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 50)
+  }
+
+  const fieldClass = (field) =>
+    `${inputBase} ${errors[field] ? inputInvalid : inputValid}`
+
+  return (
+    <form onSubmit={handleSubmit} noValidate>
+      {submitted && (
+        <div
+          role="status"
+          className="mb-8 flex items-start gap-3 rounded-[16px] border border-[#3D4D2B]/30 bg-[#3D4D2B]/5 p-4 dark:border-[#AAB95F]/30 dark:bg-[#AAB95F]/10"
+        >
+          <CheckCircle2 className="w-5 h-5 text-[#3D4D2B] mt-0.5 shrink-0 dark:text-[#AAB95F]" />
+          <div className="flex flex-col gap-1">
+            <p className="text-[14px] font-semibold text-[#1A1C1C] dark:text-[#F2F2F1]">
+              Message sent!
+            </p>
+            <p className="text-[13px] font-normal leading-[20px] text-[#45483F] dark:text-[#A1A1AA]">
+              Thank you for reaching out. Our team will get back to you within 24 hours.
+            </p>
+          </div>
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div>
+          <label htmlFor="contact-name" className="block mb-[6px] text-[12px] font-normal text-[#666666] leading-[16px] dark:text-[#A1A1AA]">
+            Full Name <span className="text-[#3D4D2B] dark:text-[#AAB95F]">*</span>
+          </label>
+          <input
+            id="contact-name"
+            type="text"
+            name="name"
+            placeholder="Full name"
+            autoComplete="name"
+            value={values.name}
+            onChange={(e) => setField('name', e.target.value)}
+            aria-invalid={!!errors.name}
+            aria-describedby={errors.name ? 'contact-name-error' : undefined}
+            className={fieldClass('name')}
+          />
+          {errors.name && (
+            <p id="contact-name-error" className="mt-1.5 text-[12px] font-normal text-[#B42318] leading-[16px]">
+              {errors.name}
+            </p>
+          )}
+        </div>
+        <div>
+          <label htmlFor="contact-email" className="block mb-[6px] text-[12px] font-normal text-[#666666] leading-[16px] dark:text-[#A1A1AA]">
+            Email Address <span className="text-[#3D4D2B] dark:text-[#AAB95F]">*</span>
+          </label>
+          <input
+            id="contact-email"
+            type="email"
+            name="email"
+            placeholder="Email address"
+            autoComplete="email"
+            value={values.email}
+            onChange={(e) => setField('email', e.target.value)}
+            aria-invalid={!!errors.email}
+            aria-describedby={errors.email ? 'contact-email-error' : undefined}
+            className={fieldClass('email')}
+          />
+          {errors.email && (
+            <p id="contact-email-error" className="mt-1.5 text-[12px] font-normal text-[#B42318] leading-[16px]">
+              {errors.email}
+            </p>
+          )}
+        </div>
+      </div>
+
+      <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div>
+          <label htmlFor="contact-phone" className="block mb-[6px] text-[12px] font-normal text-[#666666] leading-[16px] dark:text-[#A1A1AA]">
+            Phone Number <span className="text-[#B7BBC4] dark:text-[#5C5C66]">(optional)</span>
+          </label>
+          <input
+            id="contact-phone"
+            type="tel"
+            name="phone"
+            placeholder="Phone number"
+            autoComplete="tel"
+            value={values.phone}
+            onChange={(e) => setField('phone', e.target.value)}
+            aria-invalid={!!errors.phone}
+            aria-describedby={errors.phone ? 'contact-phone-error' : undefined}
+            className={fieldClass('phone')}
+          />
+          {errors.phone && (
+            <p id="contact-phone-error" className="mt-1.5 text-[12px] font-normal text-[#B42318] leading-[16px]">
+              {errors.phone}
+            </p>
+          )}
+        </div>
+        <div>
+          <label htmlFor="contact-service" className="block mb-[6px] text-[12px] font-normal text-[#666666] leading-[16px] dark:text-[#A1A1AA]">
+            Service
+          </label>
+          <div className="relative">
+            <select
+              id="contact-service"
+              name="service"
+              value={values.service}
+              onChange={(e) => setField('service', e.target.value)}
+              className={`${inputBase} appearance-none pr-10 cursor-pointer ${
+                values.service ? '' : 'text-[#B7BBC4] dark:text-[#5C5C66]'
+              }`}
+            >
+              <option value="" disabled>
+                Select a service
+              </option>
+              {SERVICE_OPTIONS.map((option) => (
+                <option key={option} value={option} className="text-[#1A1C1C] dark:text-[#F2F2F1]">
+                  {option}
+                </option>
+              ))}
+            </select>
+            <ChevronDown className="w-4 h-4 text-[#45483F] dark:text-[#A1A1AA] pointer-events-none absolute right-[14px] top-1/2 -translate-y-1/2" />
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-6">
+        <label htmlFor="contact-message" className="block mb-[6px] text-[12px] font-normal text-[#666666] leading-[16px] dark:text-[#A1A1AA]">
+          Message <span className="text-[#3D4D2B] dark:text-[#AAB95F]">*</span>
+        </label>
+        <textarea
+          id="contact-message"
+          name="message"
+          rows="5"
+          placeholder="Tell us about your project..."
+          value={values.message}
+          onChange={(e) => setField('message', e.target.value)}
+          aria-invalid={!!errors.message}
+          aria-describedby={errors.message ? 'contact-message-error' : undefined}
+          className={`${fieldClass('message')} h-[124px] resize-none py-[14px]`}
+        />
+        {errors.message && (
+          <p id="contact-message-error" className="mt-1.5 text-[12px] font-normal text-[#B42318] leading-[16px]">
+            {errors.message}
+          </p>
+        )}
+      </div>
+
+      <div className="flex justify-center mt-8">
+        <LiquidMetalButton
+          variant="light"
+          label="Send Message"
+          showArrow
+          width={190}
+          onClick={() => {}}
+        />
+      </div>
+    </form>
+  )
+}

@@ -230,7 +230,8 @@ const socialLinks = [
   { icon: <LinkedInIcon />, label: 'LinkedIn', href: '#' },
 ]
 
-export default function HoverFooter() {
+export default function HoverFooter({ prefixLanding = false }) {
+  const landing = (href) => (prefixLanding && href.startsWith('#') ? `/${href}` : href)
   return (
     <footer className="relative mx-6 mb-6 bg-[#0F0F11] h-fit rounded-[28px] overflow-hidden">
       <div className="relative max-w-7xl mx-auto p-6 sm:p-8 md:p-14 z-40">
@@ -266,7 +267,7 @@ export default function HoverFooter() {
                   {section.links.map((link) => (
                     <li key={link.label}>
                       <a
-                        href={link.href}
+                        href={landing(link.href)}
                         className="text-white/60 hover:text-[#E0EC38] transition-colors"
                       >
                         {link.label}

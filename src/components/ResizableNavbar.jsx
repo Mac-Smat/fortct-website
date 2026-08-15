@@ -64,7 +64,7 @@ export const NavBody = ({ children, className, visible }) => {
   )
 }
 
-export const NavItems = ({ items, className, onItemClick }) => {
+export const NavItems = ({ items, className, onItemClick, activeName }) => {
   const [hovered, setHovered] = useState(null)
 
   return (
@@ -83,6 +83,12 @@ export const NavItems = ({ items, className, onItemClick }) => {
           key={`link-${idx}`}
           href={item.link}
         >
+          {activeName === item.name && (
+            <motion.div
+              layoutId="hovered"
+              className="absolute inset-0 h-full w-full rounded-full bg-gray-100 dark:bg-neutral-800"
+            />
+          )}
           {hovered === idx && (
             <motion.div
               layoutId="hovered"
