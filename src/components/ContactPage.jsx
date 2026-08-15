@@ -7,7 +7,7 @@ import { TextReveal } from './TextReveal.jsx'
 import { LiquidMetalButton } from './LiquidMetalButton.jsx'
 import ContactMap from './ContactMap.jsx'
 import ContactForm from './ContactForm.jsx'
-import { FooterBackgroundGradient } from './HoverFooter.jsx'
+import CtaBanner from './CtaBanner.jsx'
 
 const SERVICE_CARDS = [
   { title: 'Branding', note: 'Identity & design' },
@@ -315,54 +315,8 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* ============ FINAL CTA ============ */}
-      <section className="w-full bg-[#F9F9F9] px-6 pb-16 md:pb-24 dark:bg-[#131316]">
-        <Reveal delay={0}>
-          <div className="relative max-w-5xl mx-auto rounded-[28px] bg-[#0F0F11] overflow-hidden text-center py-16 md:py-24 px-6 sm:px-10">
-            <FooterBackgroundGradient />
-            <div className="relative z-10 flex flex-col items-center">
-              <RevealHeading
-                as="h2"
-                per="word"
-                preset="fade-in-blur"
-                className="text-2xl sm:text-3xl md:text-[40px] font-bold text-white max-w-2xl tracking-tight leading-snug"
-              >
-                Have a project in mind?
-              </RevealHeading>
-              <Reveal delay={120}>
-                <div className="h-[3px] w-32 my-6 bg-gradient-to-l from-transparent to-[#E0EC38]" />
-              </Reveal>
-              <Reveal delay={200}>
-                <p className="text-sm md:text-base text-white/85 max-w-xl leading-relaxed">
-                  Let&apos;s talk about it. Reach out directly and get a fast, no-obligation
-                  response from our team.
-                </p>
-              </Reveal>
-              <Reveal delay={300}>
-                <div
-                  className="mt-8"
-                  role="button"
-                  tabIndex={0}
-                  onClick={() =>
-                    document
-                      .getElementById('contact-form')
-                      ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                  }
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      document
-                        .getElementById('contact-form')
-                        ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                    }
-                  }}
-                >
-                  <LiquidMetalButton variant="light" label="Contact Us" showArrow width={180} />
-                </div>
-              </Reveal>
-            </div>
-          </div>
-        </Reveal>
-      </section>
+      {/* ============ FINAL CTA (shared CtaBanner, scrolls to form) ============ */}
+      <CtaBanner scrollTarget="contact-form" headingAs="h2" />
     </>
   )
 }

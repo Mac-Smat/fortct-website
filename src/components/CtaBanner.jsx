@@ -3,7 +3,17 @@ import { LiquidMetalButton } from './LiquidMetalButton.jsx'
 import { Reveal } from './Reveal.jsx'
 import { RevealHeading } from './RevealHeading.jsx'
 
-export default function CtaBanner() {
+export default function CtaBanner({ scrollTarget, headingAs = 'h1' }) {
+  const handleQuoteClick = () => {
+    if (scrollTarget) {
+      document
+        .getElementById(scrollTarget)
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      return
+    }
+    window.location.hash = '#contact'
+  }
+
   return (
     <section id="quote" className="w-full bg-[#F9F9F9] pb-20 px-6 dark:bg-[#131316]">
       <div className="relative max-w-5xl mx-auto w-full text-center overflow-hidden rounded-[28px] py-16 sm:py-20 md:py-24">
@@ -19,7 +29,7 @@ export default function CtaBanner() {
         />
         <div className="relative z-10 flex flex-col items-center px-6 sm:px-10">
           <RevealHeading
-            as="h1"
+            as={headingAs}
             per="word"
             preset="fade-in-blur"
             className="text-2xl sm:text-3xl md:text-[40px] font-bold text-white max-w-2xl tracking-tight leading-snug"
@@ -36,14 +46,12 @@ export default function CtaBanner() {
             </p>
           </Reveal>
           <Reveal delay={300}>
-<LiquidMetalButton
+            <LiquidMetalButton
               variant="light"
               label="Get a Quote"
               showArrow
               className="mt-8"
-              onClick={() => {
-                window.location.hash = '#contact'
-              }}
+              onClick={handleQuoteClick}
             />
           </Reveal>
         </div>
