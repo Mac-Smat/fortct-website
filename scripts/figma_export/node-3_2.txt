@@ -1,0 +1,560 @@
+
+########## NODE 3:2 (FRAME "Html → Body") ##########
+FRAME "Html → Body" id=3:2 x=0 y=0 w=1280 h=8684 fill=[null,null] strokeW=1
+  FRAME "Why Choose Us / Bento Section" id=3:323 x=0 y=3695 w=1280 h=868 strokeW=1
+    FRAME "Container" id=3:324 x=24 y=3745 w=1232 h=768 strokeW=1
+      FRAME "Container" id=3:325 x=24 y=3745 w=1232 h=120 strokeW=1
+        FRAME "Heading 2" id=3:326 x=24 y=3745 w=1232 h=56 strokeW=1
+          TEXT "Why Choose us" id=3:327 x=24 y=3745 w=535 h=56 fill=[null] strokeW=1 chars="Why Choose us" font="Inter" size=70 weight=700 lh=56 ls=
+        FRAME "Container" id=3:328 x=24 y=3817 w=672 h=48 strokeW=1
+          TEXT "Text" id=3:329 x=24 y=3817 w=650 h=48 fill=[null] strokeW=1 chars="Expert team, proven strategies, personalized approach, and dedicated support to help\nyour brand thrive and grow in the physical space." font="Inter" size=16 weight=400 lh=24 ls=
+      FRAME "Container" id=3:330 x=24 y=3913 w=1232 h=600 strokeW=1
+        FRAME "Print & Ship" id=3:331 x=650 y=3913 w=293 h=290 fill=[null] strokeW=1 radius=24
+          FRAME "Heading 3" id=3:332 x=682 y=3945 w=229 h=40 strokeW=1
+            TEXT "100%" id=3:333 x=682 y=3945 w=229 h=40 fill=[null] strokeW=1 chars="100%" font="Plus Jakarta Sans" size=36 weight=700 lh=40 ls=
+          FRAME "Margin" id=3:334 x=682 y=3985 w=229 h=186 strokeW=1
+            FRAME "HorizontalBorder" id=3:335 x=682 y=4138 w=229 h=33 strokeW=1 stroke=[]
+              FRAME "Container" id=3:336 x=682 y=4155 w=229 h=16 strokeW=1
+                TEXT "PRINT & SHIP ACCURACY" id=3:337 x=682 y=4155 w=229 h=16 fill=[null] strokeW=1 chars="PRINT & SHIP ACCURACY" font="Inter" size=12 weight=600 lh=16 ls=0.6000000238418579
+        FRAME "Open 24 Hours" id=3:338 x=24 y=4223 w=293 h=290 fill=[null] strokeW=1 radius=24
+          FRAME "Heading 3" id=3:339 x=56 y=4255 w=229 h=40 strokeW=1
+            TEXT "24/7" id=3:340 x=56 y=4255 w=229 h=40 fill=[null] strokeW=1 chars="24/7" font="Plus Jakarta Sans" size=36 weight=700 lh=40 ls=
+          FRAME "Margin" id=3:341 x=56 y=4295 w=229 h=186 strokeW=1
+            FRAME "HorizontalBorder" id=3:342 x=56 y=4448 w=229 h=33 strokeW=1 stroke=[]
+              FRAME "Container" id=3:343 x=56 y=4465 w=229 h=16 strokeW=1
+                TEXT "PRODUCTION CYCLE" id=3:344 x=56 y=4465 w=229 h=16 fill=[null] strokeW=1 chars="PRODUCTION CYCLE" font="Inter" size=12 weight=600 lh=16 ls=0.6000000238418579
+        FRAME "Testimonial Quote" id=3:345 x=337 y=4223 w=293 h=290 fill=[null] strokeW=1 stroke=[] radius=24
+          FRAME "Margin" id=3:346 x=370 y=4256 w=227 h=32 strokeW=1
+            FRAME "Container" id=3:347 x=370 y=4256 w=227 h=16 strokeW=1
+              TEXT "Building Lasting Success" id=3:348 x=370 y=4256 w=227 h=16 fill=[null] strokeW=1 chars="Building Lasting Success" font="Inter" size=12 weight=600 lh=16 ls=0.6000000238418579
+          FRAME "Margin" id=3:349 x=370 y=4288 w=227 h=120 strokeW=1
+            FRAME "Container" id=3:350 x=370 y=4288 w=227 h=96 strokeW=1
+              TEXT ""Your success is our mission — we don't just deliver prints, we build lasting brand partnerships."" id=3:351 x=370 y=4288 w=227 h=96 fill=[null] strokeW=1 chars="\"Your success is our mission\n— we don't just deliver prints,\nwe build lasting brand\npartnerships.\"" font="Inter" size=16 weight=400 lh=24 ls=
+          FRAME "Margin" id=3:352 x=370 y=4408 w=227 h=72 strokeW=1
+            FRAME "HorizontalBorder" id=3:353 x=370 y=4447 w=227 h=33 strokeW=1 stroke=[]
+              FRAME "Container" id=3:354 x=370 y=4464 w=227 h=16 strokeW=1
+                TEXT "Sarah Jenkins, CEO" id=3:355 x=370 y=4464 w=227 h=16 fill=[null] strokeW=1 chars="Sarah Jenkins, CEO" font="Inter" size=12 weight=600 lh=16 ls=0.6000000238418579
+        FRAME "5.0 Rating (Span 2x1)" id=3:356 x=24 y=3913 w=606 h=290 fill=[null] strokeW=1 radius=24
+          FRAME "Heading 3" id=3:357 x=56 y=3945 w=542 h=60 strokeW=1
+            TEXT "5.0" id=3:358 x=56 y=3945 w=542 h=60 fill=[null] strokeW=1 chars="5.0" font="Plus Jakarta Sans" size=60 weight=700 lh=60 ls=
+          FRAME "Container" id=3:359 x=56 y=4128 w=542 h=43 strokeW=1
+            FRAME "Container" id=3:360 x=56 y=4128 w=542 h=19 strokeW=1
+              FRAME "Container" id=3:361 x=56 y=4128 w=20 h=19 strokeW=1
+                VECTOR "Icon" id=3:362 x=56 y=4128 w=20 h=19 fill=[null]
+              FRAME "Container" id=3:363 x=76 y=4128 w=20 h=19 strokeW=1
+                VECTOR "Icon" id=3:364 x=76 y=4128 w=20 h=19 fill=[null]
+              FRAME "Container" id=3:365 x=96 y=4128 w=20 h=19 strokeW=1
+                VECTOR "Icon" id=3:366 x=96 y=4128 w=20 h=19 fill=[null]
+              FRAME "Container" id=3:367 x=116 y=4128 w=20 h=19 strokeW=1
+                VECTOR "Icon" id=3:368 x=116 y=4128 w=20 h=19 fill=[null]
+              FRAME "Container" id=3:369 x=136 y=4128 w=20 h=19 strokeW=1
+                VECTOR "Icon" id=3:370 x=136 y=4128 w=20 h=19 fill=[null]
+            FRAME "Container" id=3:371 x=56 y=4155 w=542 h=16 strokeW=1
+              TEXT "CLIENT SATISFACTION RATING" id=3:372 x=56 y=4155 w=542 h=16 fill=[null] strokeW=1 chars="CLIENT SATISFACTION RATING" font="Inter" size=12 weight=600 lh=16 ls=0.6000000238418579
+          RECTANGLE "Border" id=3:373 x=486 y=3865 w=192 h=192 strokeW=20 stroke=[] radius=9999
+        FRAME "Team Photo (Span 1x2 Vertical)" id=3:374 x=963 y=3913 w=293 h=600 strokeW=1 radius=24
+          FRAME "AB6AXuBGclpvZqV4x-gze6xnsZ_jsPEeB0hAkGQR9jdQvb4i3Jrw4J0TI8WhFqzNUBBf-OTt55AGiUQmo49tIIt1bL52lp7ait1IapQfuPl6yPesl0yKCVbY4XZIl1iw1-99kafgeqk5pNJTNqKGIbRkhTSXxdiq6U6ptqV30TVK_yXIkmWPnF3L36W4L238q9zW87g054tQsKeJ7DB6w7SOLxTkzwDVJlha_tKNJAjc4CTwvXCI8PeKvOtI" id=3:375 x=963 y=3913 w=293 h=600 strokeW=1
+          FRAME "Background" id=3:376 x=963 y=4441 w=293 h=72 strokeW=1
+            FRAME "Container" id=3:377 x=987 y=4465 w=245 h=24 strokeW=1
+              TEXT "Our Dedicated Team" id=3:378 x=987 y=4465 w=245 h=24 fill=[null] strokeW=1 chars="Our Dedicated Team" font="Inter" size=16 weight=500 lh=24 ls=
+        FRAME "Lime Accent Card" id=3:379 x=650 y=4223 w=293 h=290 fill=[null] strokeW=1 radius=24
+          FRAME "Heading 3" id=3:380 x=682 y=4255 w=229 h=40 strokeW=1
+            TEXT "3x" id=3:381 x=682 y=4255 w=229 h=40 fill=[null] strokeW=1 chars="3x" font="Plus Jakarta Sans" size=36 weight=700 lh=40 ls=
+          FRAME "Margin" id=3:382 x=682 y=4295 w=229 h=186 strokeW=1
+            FRAME "Container" id=3:383 x=682 y=4465 w=229 h=16 strokeW=1
+              FRAME "Container" id=3:384 x=682 y=4465 w=229 h=16 strokeW=1
+                TEXT "ENGAGEMENT GROWTH" id=3:385 x=682 y=4465 w=229 h=16 fill=[null] strokeW=1 chars="ENGAGEMENT GROWTH" font="Inter" size=12 weight=600 lh=16 ls=0.6000000238418579
+          FRAME "Container" id=3:386 x=859 y=4469 w=100 h=60 strokeW=1
+            VECTOR "Icon" id=3:387 x=859 y=4469 w=100 h=60 fill=[null]
+  FRAME "Gallery Section" id=3:388 x=0 y=4623 w=1280 h=1062 strokeW=1
+    FRAME "Container" id=3:389 x=24 y=4673 w=1232 h=962 strokeW=1
+      FRAME "Container" id=3:390 x=24 y=4673 w=1232 h=132 strokeW=1
+        FRAME "Container" id=3:391 x=24 y=4699 w=451 h=106 strokeW=1
+          FRAME "Background+Border" id=3:392 x=24 y=4699 w=94 h=34 fill=[null] strokeW=1 stroke=[] radius=9999
+            TEXT "Text" id=3:393 x=41 y=4708 w=60 h=16 fill=[null] strokeW=1 chars="Our Work" font="Inter" size=12 weight=600 lh=16 ls=0.6000000238418579
+          TEXT "Photo Gallery" id=3:394 x=24 y=4749 w=451 h=56 fill=[null] strokeW=1 chars="Photo Gallery" font="Inter" size=70 weight=700 lh=56 ls=-0.9599999785423279
+        FRAME "Frame 33" id=5:405 x=936 y=4673 w=320 h=132 strokeW=1
+          FRAME "Container" id=3:395 x=936 y=4673 w=320 h=72 strokeW=1
+            TEXT "Text" id=3:396 x=989 y=4673 w=267 h=72 fill=[null] strokeW=1 chars="Captured moments from our recent\nbranding and large-format printing\nprojects." font="Inter" size=16 weight=400 lh=24 ls=
+          FRAME "Link" id=5:400 x=1079 y=4765 w=177 h=40 strokeW=1 stroke=[] radius=15
+            TEXT "View All" id=5:401 x=1131 y=4777 w=52 h=16 fill=[null] strokeW=1 chars="View All" font="Inter" size=12 weight=600 lh=16 ls=0.6000000238418579
+            FRAME "Container" id=5:402 x=1191 y=4778 w=13 h=13 strokeW=1
+              VECTOR "Icon" id=5:403 x=1191 y=4778 w=13 h=13 fill=[null]
+      FRAME "Masonry Grid Approximation" id=3:397 x=24 y=4853 w=1232 h=782 strokeW=1
+        FRAME "Container" id=3:398 x=24 y=4853 w=816 h=516 strokeW=1 radius=24
+          FRAME "AB6AXuA4IUFvI67TxtQJN1oUcvfUw2gLh3KFSqIUzzgyUBQoGUErP0iDqX5Egfii4azn00NAS9qChXZ5y8NHDpi_d9YkX_7FJUc9rtArdZEhgA1Us20qsD49ZFpd_eW5b18hCduHG3hXBo6ZgbZUD7ByZU4qk-dIjCxZvQTIs6cE14x7wcEU_E2O4OtpR5vcZzJBgOR6JgHBJqdVIxyKXsl6XL3X8tFD97E1h1jSWPF3SP-5pkk_V1Vnxi_J" id=3:399 x=24 y=4853 w=816 h=516 strokeW=1
+          FRAME "Overlay" id=3:400 x=24 y=4853 w=816 h=516 fill=[null/0.4000000059604645] strokeW=1
+            FRAME "Background" id=3:401 x=361 y=5091 w=143 h=40 fill=[null] strokeW=1 radius=9999
+              TEXT "Text" id=3:402 x=385 y=5099 w=95 h=24 fill=[null] strokeW=1 chars="View Project" font="Inter" size=16 weight=400 lh=24 ls=
+        FRAME "Container" id=3:403 x=856 y=4853 w=400 h=250 strokeW=1 radius=24
+          FRAME "AB6AXuCWyUcZa6ZEn0RoeU442CQdqqZ6B9NU3wj7TAegorLV_edf6Ols7kd8DIZbeiPHKsv1ugaX2iS6LMjnDwA9UN8SJYUrxxSqV6nNzWg5t4tLXZ4lLG16GUIEsTFsubophgNBQQ2Tn_j9FhGXa-nfXhEi3QR6u20_PWt0TrrhsDh0p2PPCaDmWUhuWgcQycFMgOsNiyenOeX22rv-LBjCTssrvIcRVyeeqbyomqFkcRFreVj6-yXJabQr" id=3:404 x=856 y=4853 w=400 h=250 strokeW=1
+        FRAME "Container" id=3:405 x=856 y=5119 w=400 h=250 strokeW=1 radius=24
+          FRAME "AB6AXuCynIFOzs5U7ouML_p48o638_Bfkq5bN0aM3gg1bY9LwhgxF-EJM1jXcWlWymkyFsUaqrGBXySLZ8Nx_CsHTCaGF-efSyzvh6f_ksu00hPHDUpKin_msARiqUOw4aG8GtMsEo-P8r5s9cGerbGRCV0UiC05hy_fanvosMgZVxqVSaADpRtiiiR8CtyGeJ14gfK55MLmoY1tLBuf6zcl4tCxywkeylZngjGMrGxXn9P0_X7_pi5vFNAd" id=3:406 x=856 y=5119 w=400 h=250 strokeW=1
+        FRAME "Container" id=3:407 x=24 y=5385 w=400 h=250 strokeW=1 radius=24
+          FRAME "AB6AXuA3j6O4KsfhzEpyPnQuKnYkzZX31Nwu7VBwfnXxNA9SUjU_J1UCU7vfVllyiTX-r5zISd49_VeawaW-by6yog1GGVcHMX2aiY-XtMxYDoreTIq1vo3aDs9AbORuMiRuak3n4bm6HvYBSgREuOGAc_SVfEz507cMe6HpNunrpsQsijJaupN2VbyERxfdURLkcMY-QQ27wnAz7DJzC9Hikr75bB1sYxXCKxWNPCgyitIvmwzdEMPim6h3" id=3:408 x=24 y=5385 w=400 h=250 strokeW=1
+        FRAME "Container" id=3:409 x=440 y=5385 w=816 h=250 strokeW=1 radius=24
+          FRAME "AB6AXuC0o3ONMgpHBYDHLC73rLT-89E-Oi08JnvHAlKnAi2-fEYzb7MHlJbVI4IWnIqmqBr-QcrF9hRPquQDuYUnAvYkvKAZlrQRADnZfsReKjhcIDi1toRsP7VpOeWJdlaxaup9XHff-CzcJ_78Vs6osclnaprXTXJbgtwVZosS0fUzolmGpGwjYKI2yFpwmsLjJI-3XSvGc1deRJBFVv3EfDjuwFwtAUzlx8iOZjn_ZKA1l2xxvdu-JBEA" id=3:410 x=440 y=5385 w=816 h=250 strokeW=1
+  FRAME "Testimonials Section" id=3:411 x=0 y=5745 w=1280 h=1077 strokeW=1
+    FRAME "Container" id=3:412 x=24 y=5795 w=1232 h=977 strokeW=1
+      FRAME "Header" id=3:426 x=24 y=6243 w=1232 h=154 strokeW=1
+        FRAME "Background+Border" id=3:427 x=575 y=6243 w=130 h=34 fill=[null] strokeW=1 stroke=[] radius=9999
+          TEXT "Text" id=3:428 x=600 y=6252 w=80 h=16 fill=[null] strokeW=1 chars="Testimonials" font="Inter" size=12 weight=600 lh=16 ls=0.6000000238418579
+        FRAME "Heading 2" id=3:429 x=24 y=6285 w=1232 h=72 strokeW=1
+          TEXT "Trusted by Businesses" id=3:430 x=261 y=6301 w=759 h=56 fill=[null] strokeW=1 chars="Trusted by Businesses" font="Inter" size=70 weight=700 lh=56 ls=-0.9599999785423279
+        FRAME "Container" id=3:431 x=24 y=6365 w=1232 h=32 strokeW=1
+          TEXT "Text" id=3:432 x=559 y=6365 w=163 h=32 fill=[null] strokeW=1 chars="Across Ibadan" font="Inter" size=24 weight=500 lh=32 ls=
+      FRAME "Testimonial Cards Grid" id=3:433 x=24 y=6445 w=1232 h=327 strokeW=1
+        FRAME "Card 1" id=3:434 x=24 y=6461 w=389 h=311 fill=[null] strokeW=1 stroke=[] radius=24 [shadow]
+          FRAME "Container" id=3:435 x=57 y=6494 w=323 h=19 strokeW=1
+            FRAME "Container" id=3:436 x=57 y=6494 w=20 h=19 strokeW=1
+              VECTOR "Icon" id=3:437 x=57 y=6494 w=20 h=19 fill=[null]
+            FRAME "Container" id=3:438 x=77 y=6494 w=20 h=19 strokeW=1
+              VECTOR "Icon" id=3:439 x=77 y=6494 w=20 h=19 fill=[null]
+            FRAME "Container" id=3:440 x=97 y=6494 w=20 h=19 strokeW=1
+              VECTOR "Icon" id=3:441 x=97 y=6494 w=20 h=19 fill=[null]
+            FRAME "Container" id=3:442 x=117 y=6494 w=20 h=19 strokeW=1
+              VECTOR "Icon" id=3:443 x=117 y=6494 w=20 h=19 fill=[null]
+            FRAME "Container" id=3:444 x=137 y=6494 w=20 h=19 strokeW=1
+              VECTOR "Icon" id=3:445 x=137 y=6494 w=20 h=19 fill=[null]
+          FRAME "Container" id=3:446 x=57 y=6529 w=323 h=130 strokeW=1
+            TEXT ""FortCT makes printing our marketing materials so easy! Their attention to detail and quick turnaround time keeps our campaigns running smoothly. Highly recommend!"" id=3:447 x=57 y=6529 w=323 h=130 fill=[null] strokeW=1 chars="\"FortCT makes printing our marketing\nmaterials so easy! Their attention to detail\nand quick turnaround time keeps our\ncampaigns running smoothly. Highly\nrecommend!\"" font="Inter" size=16 weight=400 lh=26 ls=
+          FRAME "Container" id=3:448 x=57 y=6675 w=323 h=64 strokeW=1
+            FRAME "Joao M." id=3:449 x=57 y=6691 w=48 h=48 strokeW=1 radius=9999
+            FRAME "Container" id=3:450 x=121 y=6697 w=92 h=36 strokeW=1
+              FRAME "Container" id=3:451 x=121 y=6697 w=92 h=20 strokeW=1
+                TEXT "Text" id=3:452 x=121 y=6697 w=54 h=20 fill=[null] strokeW=1 chars="Joao M." font="Inter" size=14 weight=700 lh=20 ls=
+              FRAME "Container" id=3:453 x=121 y=6717 w=92 h=16 strokeW=1
+                TEXT "Text" id=3:454 x=121 y=6717 w=92 h=16 fill=[null] strokeW=1 chars="Startup Founder" font="Inter" size=12 weight=400 lh=16 ls=
+        FRAME "Card 2" id=3:455 x=445 y=6461 w=389 h=311 fill=[null] strokeW=1 stroke=[] radius=24 [shadow]
+          FRAME "Container" id=3:456 x=478 y=6494 w=323 h=19 strokeW=1
+            FRAME "Container" id=3:457 x=478 y=6494 w=20 h=19 strokeW=1
+              VECTOR "Icon" id=3:458 x=478 y=6494 w=20 h=19 fill=[null]
+            FRAME "Container" id=3:459 x=498 y=6494 w=20 h=19 strokeW=1
+              VECTOR "Icon" id=3:460 x=498 y=6494 w=20 h=19 fill=[null]
+            FRAME "Container" id=3:461 x=518 y=6494 w=20 h=19 strokeW=1
+              VECTOR "Icon" id=3:462 x=518 y=6494 w=20 h=19 fill=[null]
+            FRAME "Container" id=3:463 x=538 y=6494 w=20 h=19 strokeW=1
+              VECTOR "Icon" id=3:464 x=538 y=6494 w=20 h=19 fill=[null]
+            FRAME "Container" id=3:465 x=558 y=6494 w=20 h=19 strokeW=1
+              VECTOR "Icon" id=3:466 x=558 y=6494 w=20 h=19 fill=[null]
+          FRAME "Container" id=3:467 x=478 y=6529 w=323 h=130 strokeW=1
+            TEXT ""Our team needed a reliable partner for high-volume corporate stationery, and FortCT delivered flawlessly. The paper quality and print sharpness were exactly what we needed!"" id=3:468 x=478 y=6529 w=323 h=130 fill=[null] strokeW=1 chars="\"Our team needed a reliable partner for\nhigh-volume corporate stationery, and\nFortCT delivered flawlessly. The paper\nquality and print sharpness were exactly\nwhat we needed!\"" font="Inter" size=16 weight=400 lh=26 ls=
+          FRAME "Container" id=3:469 x=478 y=6675 w=323 h=64 strokeW=1
+            FRAME "Bruno K." id=3:470 x=478 y=6691 w=48 h=48 strokeW=1 radius=9999
+            FRAME "Container" id=3:471 x=542 y=6697 w=71 h=36 strokeW=1
+              FRAME "Container" id=3:472 x=542 y=6697 w=71 h=20 strokeW=1
+                TEXT "Text" id=3:473 x=542 y=6697 w=58 h=20 fill=[null] strokeW=1 chars="Bruno K." font="Inter" size=14 weight=700 lh=20 ls=
+              FRAME "Container" id=3:474 x=542 y=6717 w=71 h=16 strokeW=1
+                TEXT "Text" id=3:475 x=542 y=6717 w=71 h=16 fill=[null] strokeW=1 chars="UX Designer" font="Inter" size=12 weight=400 lh=16 ls=
+        FRAME "Card 3" id=3:476 x=867 y=6461 w=389 h=311 fill=[null] strokeW=1 stroke=[] radius=24 [shadow]
+          FRAME "Container" id=3:477 x=900 y=6494 w=323 h=19 strokeW=1
+            FRAME "Container" id=3:478 x=900 y=6494 w=20 h=19 strokeW=1
+              VECTOR "Icon" id=3:479 x=900 y=6494 w=20 h=19 fill=[null]
+            FRAME "Container" id=3:480 x=920 y=6494 w=20 h=19 strokeW=1
+              VECTOR "Icon" id=3:481 x=920 y=6494 w=20 h=19 fill=[null]
+            FRAME "Container" id=3:482 x=940 y=6494 w=20 h=19 strokeW=1
+              VECTOR "Icon" id=3:483 x=940 y=6494 w=20 h=19 fill=[null]
+            FRAME "Container" id=3:484 x=960 y=6494 w=20 h=19 strokeW=1
+              VECTOR "Icon" id=3:485 x=960 y=6494 w=20 h=19 fill=[null]
+            FRAME "Container" id=3:486 x=980 y=6494 w=20 h=19 strokeW=1
+              VECTOR "Icon" id=3:487 x=980 y=6494 w=20 h=19 fill=[null]
+          FRAME "Container" id=3:488 x=900 y=6529 w=323 h=104 strokeW=1
+            TEXT ""I love the variety of printing finishes available! Whether I need standard flyers or specialized gold-foil invitations, FortCT always provides the perfect option."" id=3:489 x=900 y=6529 w=323 h=104 fill=[null] strokeW=1 chars="\"I love the variety of printing finishes\navailable! Whether I need standard flyers\nor specialized gold-foil invitations, FortCT\nalways provides the perfect option.\"" font="Inter" size=16 weight=400 lh=26 ls=
+          FRAME "Container" id=3:490 x=900 y=6649 w=323 h=64 strokeW=1
+            FRAME "Lais A." id=3:491 x=900 y=6665 w=48 h=48 strokeW=1 radius=9999
+            FRAME "Container" id=3:492 x=964 y=6671 w=90 h=36 strokeW=1
+              FRAME "Container" id=3:493 x=964 y=6671 w=90 h=20 strokeW=1
+                TEXT "Text" id=3:494 x=964 y=6671 w=46 h=20 fill=[null] strokeW=1 chars="Lais A." font="Inter" size=14 weight=700 lh=20 ls=
+              FRAME "Container" id=3:495 x=964 y=6691 w=90 h=16 strokeW=1
+                TEXT "Text" id=3:496 x=964 y=6691 w=90 h=16 fill=[null] strokeW=1 chars="Digital Marketer" font="Inter" size=12 weight=400 lh=16 ls=
+      FRAME "Frame 27" id=4:149 x=82 y=5845 w=1116 h=432 strokeW=0.8920968174934387
+        RECTANGLE "Rectangle 33" id=4:134 x=509 y=5845 w=123 h=268 fill=[null] strokeW=0.8920968174934387 radius=22.302419662475586
+        RECTANGLE "Rectangle 35" id=4:136 x=369 y=5885 w=123 h=274 fill=[null] strokeW=0.8920968174934387 radius=22.302419662475586
+        RECTANGLE "Rectangle 42" id=4:143 x=223 y=5868 w=125 h=129 fill=[null] strokeW=0.8920968174934387 radius=22.302419662475586
+        RECTANGLE "Rectangle 43" id=4:144 x=223 y=6004 w=125 h=129 fill=[null] strokeW=0.8920968174934387 radius=22.302419662475586
+        RECTANGLE "Rectangle 44" id=4:145 x=223 y=6141 w=125 h=129 fill=[null] strokeW=0.8920968174934387 radius=22.302419662475586
+        RECTANGLE "Rectangle 45" id=4:147 x=82 y=6079 w=125 h=169 fill=[null] strokeW=0.8920968174934387 radius=22.302419662475586
+        RECTANGLE "Rectangle 46" id=4:148 x=82 y=5892 w=125 h=169 fill=[null] strokeW=0.8920968174934387 radius=22.302419662475586
+        RECTANGLE "Rectangle 34" id=4:135 x=649 y=5845 w=121 h=268 fill=[null] strokeW=0.8920968174934387 radius=22.302419662475586
+        RECTANGLE "Rectangle 36" id=4:137 x=788 y=5892 w=128 h=268 fill=[null] strokeW=0.8920968174934387 radius=22.302419662475586
+        RECTANGLE "Rectangle 37" id=4:138 x=1070 y=5892 w=128 h=170 fill=[null] strokeW=0.8920968174934387 radius=22.302419662475586
+        RECTANGLE "Rectangle 41" id=4:142 x=1070 y=6074 w=128 h=170 fill=[null] strokeW=0.8920968174934387 radius=22.302419662475586
+        RECTANGLE "Rectangle 38" id=4:139 x=929 y=5861 w=128 h=136 fill=[null] strokeW=0.8920968174934387 radius=22.302419662475586
+        RECTANGLE "Rectangle 39" id=4:140 x=929 y=6001 w=128 h=136 fill=[null] strokeW=0.8920968174934387 radius=22.302419662475586
+        RECTANGLE "Rectangle 40" id=4:141 x=929 y=6141 w=128 h=136 fill=[null] strokeW=0.8920968174934387 radius=22.302419662475586
+  FRAME "Contact Section" id=3:497 x=0 y=6882 w=1280 h=992 strokeW=1
+    FRAME "Container" id=3:498 x=24 y=6932 w=1232 h=892 strokeW=1
+      FRAME "Container" id=3:499 x=24 y=6932 w=1232 h=114 strokeW=1
+        FRAME "Background+Border" id=3:500 x=573 y=6932 w=135 h=34 fill=[null] strokeW=1 stroke=[] radius=9999
+          TEXT "Text" id=3:501 x=598 y=6941 w=85 h=16 fill=[null] strokeW=1 chars="CONTACT US" font="Inter" size=12 weight=600 lh=16 ls=0.6000000238418579
+        FRAME "Heading 2" id=3:502 x=24 y=6990 w=1232 h=56 strokeW=1
+          TEXT "Get in touch, let us know how we can help" id=3:503 x=151 y=6990 w=979 h=56 fill=[null] strokeW=1 chars="Get in touch, let us know how we can help" font="Inter" size=50 weight=700 lh=56 ls=-0.9599999785423279
+      FRAME "Contact Info Cards" id=3:504 x=24 y=7078 w=1232 h=128 strokeW=1
+        FRAME "Background+Shadow" id=3:505 x=24 y=7110 w=395 h=96 fill=[null] strokeW=1 radius=24 [shadow]
+          FRAME "Background" id=3:506 x=48 y=7134 w=48 h=48 fill=[null] strokeW=1 radius=9999
+            FRAME "Container" id=3:507 x=62 y=7150 w=20 h=16 strokeW=1
+              VECTOR "Icon" id=3:508 x=62 y=7150 w=20 h=16 fill=[null]
+          FRAME "Container" id=3:509 x=112 y=7136 w=116 h=44 strokeW=1
+            FRAME "Container" id=3:510 x=112 y=7136 w=116 h=16 strokeW=1
+              TEXT "Text" id=3:511 x=112 y=7136 w=81 h=16 fill=[null] strokeW=1 chars="Email Address" font="Inter" size=12 weight=400 lh=16 ls=
+            FRAME "Container" id=3:512 x=112 y=7156 w=116 h=24 strokeW=1
+              TEXT "Text" id=3:513 x=112 y=7156 w=116 h=24 fill=[null] strokeW=1 chars="hello@fortct.ltd" font="Inter" size=16 weight=500 lh=24 ls=
+        FRAME "Background+Shadow" id=3:514 x=443 y=7110 w=395 h=96 fill=[null] strokeW=1 radius=24 [shadow]
+          FRAME "Background" id=3:515 x=467 y=7134 w=48 h=48 fill=[null] strokeW=1 radius=9999
+            FRAME "Container" id=3:516 x=482 y=7149 w=18 h=18 strokeW=1
+              VECTOR "Icon" id=3:517 x=482 y=7149 w=18 h=18 fill=[null]
+          FRAME "Container" id=3:518 x=531 y=7136 w=112 h=44 strokeW=1
+            FRAME "Container" id=3:519 x=531 y=7136 w=112 h=16 strokeW=1
+              TEXT "Text" id=3:520 x=531 y=7136 w=85 h=16 fill=[null] strokeW=1 chars="Phone Number" font="Inter" size=12 weight=400 lh=16 ls=
+            FRAME "Container" id=3:521 x=531 y=7156 w=112 h=24 strokeW=1
+              TEXT "Text" id=3:522 x=531 y=7156 w=112 h=24 fill=[null] strokeW=1 chars="0707 787 5475" font="Inter" size=16 weight=500 lh=24 ls=
+        FRAME "Background+Shadow" id=3:523 x=861 y=7110 w=395 h=96 fill=[null] strokeW=1 radius=24 [shadow]
+          FRAME "Background" id=3:524 x=885 y=7134 w=48 h=48 fill=[null] strokeW=1 radius=9999
+            FRAME "Container" id=3:525 x=901 y=7148 w=16 h=20 strokeW=1
+              VECTOR "Icon" id=3:526 x=901 y=7148 w=16 h=20 fill=[null]
+          FRAME "Container" id=3:527 x=949 y=7136 w=225 h=44 strokeW=1
+            FRAME "Container" id=3:528 x=949 y=7136 w=225 h=16 strokeW=1
+              TEXT "Text" id=3:529 x=949 y=7136 w=59 h=16 fill=[null] strokeW=1 chars="Our Office" font="Inter" size=12 weight=400 lh=16 ls=
+            FRAME "Container" id=3:530 x=949 y=7156 w=225 h=24 strokeW=1
+              TEXT "Text" id=3:531 x=949 y=7156 w=225 h=24 fill=[null] strokeW=1 chars="86, Ile-Pupa Bus Stop, Ibadan" font="Inter" size=16 weight=500 lh=24 ls=
+      FRAME "Map & Form Area" id=3:532 x=24 y=7238 w=1232 h=586 fill=[null] strokeW=1 stroke=[] radius=24
+        RECTANGLE "Map & Form Area:shadow" id=3:533 x=24 y=7238 w=1232 h=586 fill=[null/0.0020000000949949026] strokeW=1 radius=24 [shadow]
+        FRAME "Map" id=3:534 x=57 y=7271 w=567 h=520 fill=[null] strokeW=1 radius=24
+          FRAME "AB6AXuBp5aMbQ1Z5qL4L7QfVcisW2IPdYj-B47bbLhbqSXxS9bpvg9xfLu6l6e-scnY-FTMUqiUIqPG0cLRIaOuUuA_9XPJxZEhXabH0agChC0S-itoLbgcxbbdDFKEUjtOp6rmkVJ1inywLCX8lX2DYrhMIm4Qqu0iBvUJxfEvTrO8e33GCpz2PNfH1yRN8WZ2IHqJ2oizFmsym2iUgYbeNYZ6j45JSZBj5twMI7ZW8XW4J-d7QI-6xLtKu" id=3:535 x=57 y=7271 w=567 h=520 fill=[null] strokeW=1
+          FRAME "Overlay" id=3:536 x=317 y=7507 w=48 h=48 fill=[null/0.30000001192092896] strokeW=1 radius=9999
+            FRAME "Background" id=3:537 x=333 y=7523 w=16 h=16 fill=[null] strokeW=1 radius=9999
+              RECTANGLE "Overlay+Shadow" id=3:538 x=333 y=7523 w=16 h=16 fill=[null/0.0020000000949949026] strokeW=1 radius=9999 [shadow]
+  FRAME "Actual JSON Footer" id=3:557 x=0 y=8196 w=1280 h=488 fill=[null] strokeW=1
+    FRAME "Container" id=3:558 x=24 y=8339 w=1232 h=196 strokeW=1
+      FRAME "Brand Column" id=3:559 x=24 y=8339 w=272 h=206 strokeW=1
+        VECTOR "main logo-01-01 1 (Traced)" id=6:409 x=24 y=8339 w=186 h=50 fill=[null] strokeW=0.21158842742443085
+        FRAME "Container" id=3:564 x=24 y=8413 w=272 h=60 strokeW=1
+          TEXT "Start building your visual identity with precision printing and dedicated branding expertise." id=3:565 x=24 y=8413 w=272 h=60 fill=[null] strokeW=1 chars="Start building your visual identity with\nprecision printing and dedicated\nbranding expertise." font="Inter" size=14 weight=400 lh=20 ls=
+        FRAME "Margin" id=3:566 x=24 y=8497 w=272 h=48 strokeW=1
+          FRAME "Container" id=3:567 x=24 y=8505 w=272 h=40 strokeW=1
+            FRAME "Link" id=3:568 x=24 y=8505 w=40 h=40 fill=[null/0.10000000149011612] strokeW=1 radius=9999
+              FRAME "Container" id=3:569 x=37 y=8517 w=15 h=17 strokeW=1
+                VECTOR "Icon" id=3:570 x=37 y=8517 w=15 h=17 fill=[null]
+            FRAME "Link" id=3:571 x=80 y=8505 w=40 h=40 fill=[null/0.10000000149011612] strokeW=1 radius=9999
+              FRAME "Container" id=3:572 x=92 y=8518 w=17 h=15 strokeW=1
+                VECTOR "Icon" id=3:573 x=92 y=8518 w=17 h=15 fill=[null]
+            FRAME "Link" id=3:574 x=136 y=8505 w=40 h=40 fill=[null/0.10000000149011612] strokeW=1 radius=9999
+              FRAME "Container" id=3:575 x=148 y=8521 w=17 h=8 strokeW=1
+                VECTOR "Icon" id=3:576 x=148 y=8521 w=17 h=8 fill=[null]
+      FRAME "Links Columns" id=3:577 x=344 y=8339 w=912 h=196 strokeW=1
+        FRAME "Container" id=3:578 x=344 y=8339 w=283 h=196 strokeW=1
+          FRAME "Heading 4:margin" id=3:579 x=344 y=8339 w=283 h=32 strokeW=1
+            FRAME "Heading 4" id=3:580 x=344 y=8339 w=283 h=24 strokeW=1
+              TEXT "Services" id=3:581 x=344 y=8339 w=283 h=24 fill=[null] strokeW=1 chars="Services" font="Inter" size=16 weight=700 lh=24 ls=
+          FRAME "Link" id=3:582 x=344 y=8387 w=283 h=24 strokeW=1
+            TEXT "Outdoor Advertising" id=3:583 x=344 y=8387 w=283 h=24 fill=[null] strokeW=1 chars="Outdoor Advertising" font="Inter" size=16 weight=400 lh=24 ls=
+          FRAME "Link" id=3:584 x=344 y=8427 w=283 h=24 strokeW=1
+            TEXT "Corporate Stationery" id=3:585 x=344 y=8427 w=283 h=24 fill=[null] strokeW=1 chars="Corporate Stationery" font="Inter" size=16 weight=400 lh=24 ls=
+          FRAME "Link" id=3:586 x=344 y=8467 w=283 h=24 strokeW=1
+            TEXT "Marketing Materials" id=3:587 x=344 y=8467 w=283 h=24 fill=[null] strokeW=1 chars="Marketing Materials" font="Inter" size=16 weight=400 lh=24 ls=
+        FRAME "Container" id=3:588 x=659 y=8339 w=283 h=196 strokeW=1
+          FRAME "Heading 4:margin" id=3:589 x=659 y=8339 w=283 h=32 strokeW=1
+            FRAME "Heading 4" id=3:590 x=659 y=8339 w=283 h=24 strokeW=1
+              TEXT "Specialty" id=3:591 x=659 y=8339 w=283 h=24 fill=[null] strokeW=1 chars="Specialty" font="Inter" size=16 weight=700 lh=24 ls=
+          FRAME "Link" id=3:592 x=659 y=8387 w=283 h=24 strokeW=1
+            TEXT "Books & Publishing" id=3:593 x=659 y=8387 w=283 h=24 fill=[null] strokeW=1 chars="Books & Publishing" font="Inter" size=16 weight=400 lh=24 ls=
+          FRAME "Link" id=3:594 x=659 y=8427 w=283 h=24 strokeW=1
+            TEXT "Specialized Printing" id=3:595 x=659 y=8427 w=283 h=24 fill=[null] strokeW=1 chars="Specialized Printing" font="Inter" size=16 weight=400 lh=24 ls=
+          FRAME "Link" id=3:596 x=659 y=8467 w=283 h=24 strokeW=1
+            TEXT "Design Services" id=3:597 x=659 y=8467 w=283 h=24 fill=[null] strokeW=1 chars="Design Services" font="Inter" size=16 weight=400 lh=24 ls=
+        FRAME "Container" id=3:598 x=973 y=8339 w=283 h=196 strokeW=1
+          FRAME "Heading 4:margin" id=3:599 x=973 y=8339 w=283 h=32 strokeW=1
+            FRAME "Heading 4" id=3:600 x=973 y=8339 w=283 h=24 strokeW=1
+              TEXT "Company" id=3:601 x=973 y=8339 w=283 h=24 fill=[null] strokeW=1 chars="Company" font="Inter" size=16 weight=700 lh=24 ls=
+          FRAME "Link" id=3:602 x=973 y=8387 w=283 h=24 strokeW=1
+            TEXT "About Us" id=3:603 x=973 y=8387 w=283 h=24 fill=[null] strokeW=1 chars="About Us" font="Inter" size=16 weight=400 lh=24 ls=
+          FRAME "Link" id=3:604 x=973 y=8427 w=283 h=24 strokeW=1
+            TEXT "Contact Us" id=3:605 x=973 y=8427 w=283 h=24 fill=[null] strokeW=1 chars="Contact Us" font="Inter" size=16 weight=400 lh=24 ls=
+          FRAME "Link" id=3:606 x=973 y=8467 w=283 h=24 strokeW=1
+            TEXT "Privacy Policy" id=3:607 x=973 y=8467 w=283 h=24 fill=[null] strokeW=1 chars="Privacy Policy" font="Inter" size=16 weight=400 lh=24 ls=
+    FRAME "Margin" id=3:608 x=24 y=8567 w=1232 h=69 strokeW=1
+      FRAME "HorizontalBorder" id=3:609 x=24 y=8583 w=1232 h=53 strokeW=1 stroke=[]
+        FRAME "Container" id=3:610 x=24 y=8616 w=513 h=20 strokeW=1
+          TEXT "Text" id=3:611 x=24 y=8616 w=513 h=20 fill=[null] strokeW=1 chars="© 2024 FortCT Ltd. Precision Printing & Modern Branding. All rights reserved." font="Inter" size=14 weight=400 lh=20 ls=
+        FRAME "Paragraph" id=3:612 x=1075 y=8616 w=181 h=20 strokeW=1
+          TEXT "Text" id=3:613 x=1075 y=8616 w=98 h=20 fill=[null] strokeW=1 chars="Designed with " font="Inter" size=14 weight=400 lh=20 ls=
+          VECTOR "Icon" id=3:614 x=1175 y=8622 w=12 h=11 fill=[null]
+          TEXT "Text" id=3:615 x=1187 y=8616 w=69 h=20 fill=[null] strokeW=1 chars=" in Ibadan." font="Inter" size=14 weight=400 lh=20 ls=
+  FRAME "Footer CTA Banner (Integrated within footer flow)" id=3:539 x=0 y=7890 w=1280 h=415 strokeW=1 stroke=[]
+    FRAME "Background" id=3:540 x=82 y=7938 w=1117 h=342 fill=[null] strokeW=1 radius=32
+      VECTOR "Icon" id=3:541 x=57 y=7913 w=150 h=143 fill=[null]
+      FRAME "Container" id=3:542 x=146 y=8002 w=570 h=214 strokeW=1
+        FRAME "Container" id=3:543 x=146 y=8002 w=570 h=22 strokeW=1
+          FRAME "Container" id=3:544 x=146 y=8002 w=22 h=22 strokeW=1
+            VECTOR "Icon" id=3:545 x=146 y=8002 w=22 h=22 fill=[null]
+          FRAME "Container" id=3:546 x=176 y=8005 w=165 h=16 strokeW=1
+            TEXT "Text" id=3:547 x=176 y=8005 w=165 h=16 fill=[null] strokeW=1 chars="LET'S WORK TOGETHER" font="Inter" size=12 weight=600 lh=16 ls=1.2000000476837158
+        FRAME "Heading 2" id=3:548 x=146 y=8040 w=570 h=112 strokeW=1
+          TEXT "Text" id=3:549 x=146 y=8040 w=570 h=112 fill=[null] strokeW=1 chars="Bring Your Next Project to\nLife" font="Plus Jakarta Sans" size=48 weight=700 lh=56 ls=-0.9599999785423279
+        FRAME "Container" id=3:550 x=146 y=8168 w=448 h=48 strokeW=1
+          TEXT "Text" id=3:551 x=146 y=8168 w=410 h=48 fill=[null/0.800000011920929] strokeW=1 chars="Streamline your printing processes and empower your\nbrand with our top-tier physical marketing products." font="Inter" size=16 weight=400 lh=24 ls=
+      FRAME "Container" id=3:552 x=885 y=8081 w=250 h=56 strokeW=1
+        FRAME "Link" id=3:553 x=885 y=8081 w=250 h=56 fill=[null] strokeW=1 radius=9999
+          TEXT "Text" id=3:554 x=954 y=8097 w=91 h=24 fill=[null] strokeW=1 chars="Get a Quote" font="Inter" size=16 weight=700 lh=24 ls=
+          FRAME "Container" id=3:555 x=1053 y=8103 w=12 h=12 strokeW=1
+            VECTOR "Icon" id=3:556 x=1053 y=8103 w=12 h=12 fill=[null]
+  FRAME "Services Section" id=3:231 x=0 y=2477 w=1280 h=1227 strokeW=1
+    FRAME "Container" id=3:232 x=24 y=2527 w=1232 h=144 strokeW=1
+      FRAME "Heading" id=3:233 x=24 y=2527 w=1232 h=144 strokeW=1
+        FRAME "Major Heading" id=3:234 x=24 y=2527 w=674 h=144 strokeW=1
+          FRAME "Sub Heading" id=3:235 x=24 y=2527 w=674 h=16 strokeW=1
+            TEXT "Text" id=3:236 x=24 y=2527 w=88 h=16 fill=[null] strokeW=1 chars="/ SERVICES /" font="Inter" size=12 weight=600 lh=16 ls=1.2000000476837158
+          TEXT "Explore our wide range of services" id=3:238 x=24 y=2559 w=674 h=112 fill=[null] strokeW=1 chars="Explore our wide range of services" font="Inter" size=70 weight=700 lh=56 ls=
+        FRAME "Button Container" id=5:399 x=933 y=2631 w=323 h=40 strokeW=1
+          FRAME "Get Quote Button" id=3:240 x=933 y=2631 w=144 h=40 fill=[null] strokeW=1 radius=15
+            TEXT "Text" id=3:241 x=957 y=2643 w=75 h=16 fill=[null] strokeW=1 chars="Get a Quote" font="Inter" size=12 weight=600 lh=16 ls=0.6000000238418579
+            FRAME "Container" id=3:242 x=1040 y=2644 w=13 h=13 strokeW=1
+              VECTOR "Icon" id=3:243 x=1040 y=2644 w=13 h=13 fill=[null]
+          FRAME "All Services Button" id=5:395 x=1091 y=2631 w=165 h=40 strokeW=1 stroke=[] radius=15
+            TEXT "See All Service" id=5:396 x=1115 y=2643 w=96 h=16 fill=[null] strokeW=1 chars="See All Service" font="Inter" size=12 weight=600 lh=16 ls=0.6000000238418579
+            FRAME "Container" id=5:397 x=1219 y=2644 w=13 h=13 strokeW=1
+              VECTOR "Icon" id=5:398 x=1219 y=2644 w=13 h=13 fill=[null]
+    FRAME "Service container" id=40:313 x=0 y=2671 w=1280 h=983 strokeW=1
+      FRAME "General Printing" id=40:330 x=521 y=2745 w=735 h=433 strokeW=1
+        RECTANGLE "General Printing Image" id=40:314 x=521 y=2745 w=735 h=433 strokeW=1 radius=20
+        TEXT "General Printing" id=40:323 x=540 y=3066 w=317 h=56 fill=[null] strokeW=1 chars="General Printing" font="Inter" size=40 weight=700 lh=56 ls=
+      FRAME "Large Format Print" id=40:327 x=731 y=3192 w=525 h=433 strokeW=1
+        RECTANGLE "Large Format Print Img" id=40:316 x=731 y=3192 w=525 h=433 strokeW=1 radius=20
+        TEXT "Large Format Print" id=40:326 x=744 y=3532 w=361 h=56 fill=[null] strokeW=1 chars="Large Format Print" font="Inter" size=40 weight=700 lh=56 ls=
+      FRAME "Construction & Installation  Of BillBoards" id=40:328 x=24 y=3230 w=683 h=395 strokeW=1
+        RECTANGLE "Construction & Installation  Of BillBoards IMg" id=40:317 x=24 y=3230 w=683 h=395 strokeW=1 radius=20
+        TEXT "Construction & Installation Of BillBoards" id=40:325 x=52 y=3502 w=531 h=112 fill=[null] strokeW=1 chars="Construction & Installation \nOf BillBoards" font="Inter" size=40 weight=700 lh=56 ls=
+      FRAME "Branding " id=40:329 x=24 y=2745 w=486 h=460 strokeW=1
+        RECTANGLE "Branding  Img" id=40:315 x=24 y=2745 w=486 h=460 strokeW=1 radius=20
+        TEXT "Branding" id=40:324 x=34 y=3107 w=177 h=56 fill=[null] strokeW=1 chars="Branding" font="Inter" size=40 weight=700 lh=56 ls=
+  FRAME "About Us Section" id=3:102 x=0 y=1258 w=1280 h=1159 strokeW=1
+    FRAME "Container" id=3:103 x=24 y=1258 w=1232 h=1159 strokeW=1
+      FRAME "Container" id=3:104 x=24 y=1258 w=1232 h=144 strokeW=1
+        FRAME "Margin" id=3:105 x=593 y=1258 w=93 h=32 strokeW=1
+          FRAME "Container" id=3:106 x=593 y=1258 w=93 h=16 strokeW=1
+            FRAME "Container" id=3:107 x=593 y=1259 w=13 h=13 strokeW=1
+              VECTOR "Icon" id=3:108 x=593 y=1259 w=13 h=13 fill=[null]
+            TEXT "Text" id=3:109 x=615 y=1258 w=72 h=16 fill=[null] strokeW=1 chars="ABOUT US" font="Inter" size=12 weight=600 lh=16 ls=1.2000000476837158
+        FRAME "Heading 2" id=3:110 x=438 y=1290 w=405 h=112 strokeW=1
+          TEXT "Text" id=3:111 x=438 y=1290 w=405 h=112 fill=[null] strokeW=1 chars="Precision Printing,\nTrusted Branding" font="Plus Jakarta Sans" size=48 weight=700 lh=56 ls=-0.9599999785423279
+      FRAME "Container" id=3:112 x=24 y=1466 w=1232 h=532 strokeW=1
+        FRAME "Stacked Images with Badge" id=3:113 x=24 y=1466 w=584 h=500 strokeW=1
+          FRAME "Container" id=3:114 x=24 y=1466 w=584 h=500 strokeW=1
+            FRAME "AB6AXuBeGBx4S1pgFJ1Ye0YEbZhp6Puullq7D6IB8PfIbnYv2y4_QJDhXCLTX6WzC5jWTpn7KJZuLaT09X-pKxn9toj0OmMGmHyIVEkVfJXoSxtRpP4_XuUHM5FrBhNTkj-t5UTsAWpOak7Sd3LBW2d_MJIKUMhAqQ2r8DhLvyqVNMkBF-e-965ECJTmtGkiRF6kAO1bGhhYUiRTZilsA-Iw3FUapStn5W_hFKrEYLkvmJrrKPIL6Iy0wjwx" id=3:115 x=24 y=1466 w=284 h=500 strokeW=1
+            FRAME "Container" id=3:116 x=324 y=1466 w=284 h=500 strokeW=1
+              FRAME "Background" id=3:117 x=324 y=1466 w=284 h=242 fill=[null] strokeW=1 radius=24
+                FRAME "Container" id=3:118 x=356 y=1563 w=220 h=48 strokeW=1
+                  TEXT "Text" id=3:119 x=367 y=1563 w=198 h=48 fill=[null] strokeW=1 chars="Combining Strategy, Data,\nand Creative Design." font="Inter" size=16 weight=500 lh=24 ls=
+                FRAME "Container" id=3:120 x=574 y=1674 w=50 h=50 strokeW=1
+                  VECTOR "Icon" id=3:121 x=574 y=1674 w=50 h=50 fill=[null/0.10000000149011612]
+              FRAME "AB6AXuDG_7IMFFtMrf7kCLYq8EI62USdr2KKUsdGAKIFtoLFmsYocsN7x3ZJE0IQc0nH4wJVeexT6UHtKl1Q5jeo6-nE4c9wL7pc2eoAnMSO9tkRc3qlDyetn7-ou8by6svnUod2c4wRiRtt_5RaXXYADX1THpi9EmuTumAhwzbBwmGmT0N_6HJLCDNhP1ALuKLQWVbHsGoYtqUnpA8m6R4nB1ZheDCmt5-wahXpC2gBGSZfKKZqtOa8kfsa" id=3:122 x=324 y=1724 w=284 h=242 strokeW=1
+        FRAME "Content & Progress" id=3:171 x=672 y=1520 w=584 h=392 strokeW=1
+          FRAME "Container" id=3:172 x=672 y=1520 w=584 h=112 strokeW=1
+            TEXT "We help organizations unlock growth and efficiency through high- quality printed materials and cohesive brand identities. From business cards to large-scale outdoor advertising, we deliver excellence." id=3:173 x=672 y=1520 w=584 h=112 fill=[null] strokeW=1 chars="We help organizations unlock growth and efficiency through high-\nquality printed materials and cohesive brand identities. From\nbusiness cards to large-scale outdoor advertising, we deliver\nexcellence." font="Inter" size=18 weight=400 lh=28 ls=
+          FRAME "Margin" id=3:174 x=672 y=1664 w=584 h=160 strokeW=1
+            FRAME "Container" id=3:175 x=672 y=1680 w=584 h=144 strokeW=1
+              FRAME "Container" id=3:176 x=672 y=1680 w=584 h=32 strokeW=1
+                FRAME "Container" id=3:177 x=672 y=1680 w=584 h=16 strokeW=1
+                  FRAME "Container" id=3:178 x=672 y=1680 w=117 h=16 strokeW=1
+                    TEXT "Text" id=3:179 x=672 y=1680 w=117 h=16 fill=[null] strokeW=1 chars="Quality Assurance" font="Inter" size=12 weight=600 lh=16 ls=0.6000000238418579
+                  FRAME "Container" id=3:180 x=1227 y=1680 w=29 h=16 strokeW=1
+                    TEXT "Text" id=3:181 x=1227 y=1680 w=29 h=16 fill=[null] strokeW=1 chars="98%" font="Inter" size=12 weight=600 lh=16 ls=0.6000000238418579
+                FRAME "Background" id=3:182 x=672 y=1704 w=584 h=8 fill=[null] strokeW=1 radius=9999
+                  FRAME "Background" id=3:183 x=672 y=1704 w=572 h=8 fill=[null] strokeW=1 radius=9999
+                    FRAME "Background" id=3:184 x=1228 y=1700 w=16 h=16 fill=[null] strokeW=1 radius=9999
+                      RECTANGLE "Overlay+Shadow" id=3:185 x=1228 y=1700 w=16 h=16 fill=[null/0.0020000000949949026] strokeW=1 radius=9999 [shadow]
+              FRAME "Container" id=3:186 x=672 y=1736 w=584 h=32 strokeW=1
+                FRAME "Container" id=3:187 x=672 y=1736 w=584 h=16 strokeW=1
+                  FRAME "Container" id=3:188 x=672 y=1736 w=111 h=16 strokeW=1
+                    TEXT "Text" id=3:189 x=672 y=1736 w=111 h=16 fill=[null] strokeW=1 chars="On-Time Delivery" font="Inter" size=12 weight=600 lh=16 ls=0.6000000238418579
+                  FRAME "Container" id=3:190 x=1227 y=1736 w=29 h=16 strokeW=1
+                    TEXT "Text" id=3:191 x=1227 y=1736 w=29 h=16 fill=[null] strokeW=1 chars="95%" font="Inter" size=12 weight=600 lh=16 ls=0.6000000238418579
+                FRAME "Background" id=3:192 x=672 y=1760 w=584 h=8 fill=[null] strokeW=1 radius=9999
+                  FRAME "Background" id=3:193 x=672 y=1760 w=555 h=8 fill=[null] strokeW=1 radius=9999
+                    FRAME "Background" id=3:194 x=1211 y=1756 w=16 h=16 fill=[null] strokeW=1 radius=9999
+                      RECTANGLE "Overlay+Shadow" id=3:195 x=1211 y=1756 w=16 h=16 fill=[null/0.0020000000949949026] strokeW=1 radius=9999 [shadow]
+              FRAME "Container" id=3:196 x=672 y=1792 w=584 h=32 strokeW=1
+                FRAME "Container" id=3:197 x=672 y=1792 w=584 h=16 strokeW=1
+                  FRAME "Container" id=3:198 x=672 y=1792 w=117 h=16 strokeW=1
+                    TEXT "Text" id=3:199 x=672 y=1792 w=117 h=16 fill=[null] strokeW=1 chars="Client Satisfaction" font="Inter" size=12 weight=600 lh=16 ls=0.6000000238418579
+                  FRAME "Container" id=3:200 x=1221 y=1792 w=35 h=16 strokeW=1
+                    TEXT "Text" id=3:201 x=1221 y=1792 w=35 h=16 fill=[null] strokeW=1 chars="100%" font="Inter" size=12 weight=600 lh=16 ls=0.6000000238418579
+                FRAME "Background" id=3:202 x=672 y=1816 w=584 h=8 fill=[null,null] strokeW=1 radius=9999
+                  FRAME "Background" id=3:203 x=1240 y=1812 w=16 h=16 fill=[null] strokeW=1 radius=9999
+                    RECTANGLE "Overlay+Shadow" id=3:204 x=1240 y=1812 w=16 h=16 fill=[null/0.0020000000949949026] strokeW=1 radius=9999 [shadow]
+          FRAME "Link:margin" id=3:205 x=672 y=1856 w=139 h=56 strokeW=1
+            FRAME "Link" id=3:206 x=672 y=1872 w=139 h=40 fill=[null] strokeW=1 radius=9999
+              TEXT "Text" id=3:207 x=696 y=1884 w=72 h=16 fill=[null] strokeW=1 chars="Learn More" font="Inter" size=12 weight=600 lh=16 ls=0.6000000238418579
+              FRAME "Container" id=3:208 x=776 y=1887 w=11 h=11 strokeW=1
+                VECTOR "Icon" id=3:209 x=776 y=1887 w=11 h=11 fill=[null]
+        FRAME "Floating Rotating Badge" id=3:123 x=252 y=1652 w=128 h=128 strokeW=4
+          RECTANGLE "Circular Badge:shadow" id=3:124 x=252 y=1652 w=128 h=128 fill=[null] strokeW=1 radius=9999 [shadow]
+          RECTANGLE "Circular Badge:shadow" id=30:136 x=256 y=1656 w=120 h=120 fill=[null] strokeW=1 radius=9999 [shadow]
+          VECTOR "Icon" id=3:170 x=304 y=1704 w=25 h=25 fill=[null]
+          GROUP "Circle Text" id=30:106 x=260 y=1660 w=112 h=113 strokeW=1
+            TEXT "W" id=30:107 x=304 y=1757 w=13 h=15 fill=[null] strokeW=1 chars="W" font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+            TEXT "E" id=30:108 x=292 y=1755 w=10 h=15 fill=[null] strokeW=1 chars="E" font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+            TEXT " " id=30:109 x=290 y=1753 w=9 h=14 fill=[null] strokeW=1 chars=" " font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+            TEXT "P" id=30:110 x=278 y=1746 w=15 h=16 fill=[null] strokeW=1 chars="P" font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+            TEXT "R" id=30:111 x=268 y=1737 w=16 h=15 fill=[null] strokeW=1 chars="R" font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+            TEXT "I" id=30:112 x=263 y=1730 w=14 h=9 fill=[null] strokeW=1 chars="I" font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+            TEXT "N" id=30:113 x=260 y=1717 w=15 h=11 fill=[null] strokeW=1 chars="N" font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+            TEXT "T" id=30:114 x=260 y=1703 w=15 h=11 fill=[null] strokeW=1 chars="T" font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+            TEXT " " id=30:115 x=264 y=1693 w=14 h=9 fill=[null] strokeW=1 chars=" " font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+            TEXT "I" id=30:116 x=268 y=1684 w=14 h=11 fill=[null] strokeW=1 chars="I" font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+            TEXT "T" id=30:117 x=275 y=1673 w=16 h=16 fill=[null] strokeW=1 chars="T" font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+            TEXT "." id=30:118 x=287 y=1667 w=10 h=14 fill=[null] strokeW=1 chars="." font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+            TEXT "." id=30:119 x=296 y=1663 w=8 h=14 fill=[null] strokeW=1 chars="." font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+            TEXT " " id=30:120 x=306 y=1661 w=6 h=14 fill=[null] strokeW=1 chars=" " font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+            TEXT "W" id=30:121 x=315 y=1660 w=14 h=15 fill=[null] strokeW=1 chars="W" font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+            TEXT "E" id=30:122 x=330 y=1664 w=13 h=16 fill=[null] strokeW=1 chars="E" font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+            TEXT " " id=30:123 x=340 y=1671 w=12 h=13 fill=[null] strokeW=1 chars=" " font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+            TEXT "D" id=30:124 x=346 y=1678 w=17 h=16 fill=[null] strokeW=1 chars="D" font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+            TEXT "E" id=30:125 x=353 y=1692 w=16 h=12 fill=[null] strokeW=1 chars="E" font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+            TEXT "S" id=30:126 x=357 y=1706 w=15 h=10 fill=[null] strokeW=1 chars="S" font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+            TEXT "I" id=30:127 x=357 y=1720 w=14 h=6 fill=[null] strokeW=1 chars="I" font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+            TEXT "G" id=30:128 x=353 y=1727 w=17 h=14 fill=[null] strokeW=1 chars="G" font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+            TEXT "N" id=30:129 x=345 y=1739 w=17 h=16 fill=[null] strokeW=1 chars="N" font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+            TEXT " " id=30:130 x=340 y=1748 w=11 h=13 fill=[null] strokeW=1 chars=" " font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+            TEXT "I" id=30:131 x=339 y=1751 w=10 h=14 fill=[null] strokeW=1 chars="I" font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+            TEXT "T" id=30:132 x=327 y=1754 w=11 h=16 fill=[null] strokeW=1 chars="T" font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+            TEXT "." id=30:133 x=324 y=1758 w=4 h=14 fill=[null] strokeW=1 chars="." font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+            TEXT "." id=30:134 x=318 y=1757 w=6 h=15 fill=[null] strokeW=1 chars="." font="Inter" size=12.479999542236328 weight=600 lh=15.103635787963867 ls=
+      FRAME "Cards " id=3:24 x=56 y=2062 w=1168 h=170 strokeW=1
+        FRAME "Container" id=3:25 x=56 y=2062 w=1168 h=170 strokeW=1
+          FRAME "Card 1" id=3:26 x=56 y=2062 w=274 h=170 fill=[null] strokeW=1 stroke=[] radius=24
+            RECTANGLE "Card 1:shadow" id=3:27 x=56 y=2062 w=274 h=170 fill=[null/0.0020000000949949026] strokeW=1 radius=24 [shadow]
+            FRAME "Container" id=3:28 x=81 y=2087 w=224 h=24 strokeW=1
+              FRAME "Container" id=3:29 x=81 y=2089 w=67 h=20 strokeW=1
+                TEXT "Text" id=3:30 x=81 y=2089 w=67 h=20 fill=[null] strokeW=1 chars="Efficiency" font="Inter" size=14 weight=700 lh=20 ls=
+              FRAME "Overlay" id=3:31 x=261 y=2087 w=44 h=24 fill=[null/0.20000000298023224] strokeW=1 radius=4
+                TEXT "Text" id=3:32 x=269 y=2091 w=28 h=16 fill=[null] strokeW=1 chars="90%" font="Inter" size=12 weight=700 lh=16 ls=
+            FRAME "Margin" id=3:33 x=81 y=2127 w=224 h=32 strokeW=1
+              FRAME "Container" id=3:34 x=81 y=2135 w=224 h=24 strokeW=1
+                FRAME "Background" id=3:35 x=81 y=2135 w=48 h=24 fill=[null] strokeW=1 radius=9999
+                  TEXT "Text" id=3:36 x=93 y=2139 w=24 h=16 fill=[null] strokeW=1 chars="Fast" font="Inter" size=12 weight=400 lh=16 ls=
+                FRAME "Background" id=3:37 x=137 y=2135 w=68 h=24 fill=[null] strokeW=1 radius=9999
+                  TEXT "Text" id=3:38 x=149 y=2139 w=44 h=16 fill=[null] strokeW=1 chars="Reliable" font="Inter" size=12 weight=400 lh=16 ls=
+                FRAME "Background" id=3:39 x=213 y=2135 w=64 h=24 fill=[null] strokeW=1 radius=9999
+                  TEXT "Text" id=3:40 x=225 y=2139 w=40 h=16 fill=[null] strokeW=1 chars="Quality" font="Inter" size=12 weight=400 lh=16 ls=
+          FRAME "Card 2" id=3:41 x=354 y=2062 w=274 h=170 fill=[null] strokeW=1 stroke=[] radius=24
+            RECTANGLE "Card 2:shadow" id=3:42 x=354 y=2062 w=274 h=170 fill=[null/0.0020000000949949026] strokeW=1 radius=24 [shadow]
+            FRAME "Margin" id=3:43 x=467 y=2087 w=48 h=56 strokeW=1
+              FRAME "Overlay" id=3:44 x=467 y=2087 w=48 h=48 fill=[null/0.20000000298023224] strokeW=1 radius=9999
+                FRAME "Container" id=3:45 x=481 y=2101 w=20 h=20 strokeW=1
+                  VECTOR "Icon" id=3:46 x=481 y=2101 w=20 h=20 fill=[null]
+            FRAME "Container" id=3:47 x=454 y=2151 w=74 h=28 strokeW=1
+              TEXT "Text" id=3:48 x=454 y=2151 w=74 h=28 fill=[null] strokeW=1 chars="Open 24" font="Inter" size=18 weight=700 lh=28 ls=
+            FRAME "Container" id=3:49 x=471 y=2187 w=40 h=20 strokeW=1
+              TEXT "Text" id=3:50 x=471 y=2187 w=40 h=20 fill=[null] strokeW=1 chars="Hours" font="Inter" size=14 weight=400 lh=20 ls=
+          FRAME "Card 3" id=3:51 x=652 y=2062 w=274 h=170 fill=[null] strokeW=1 stroke=[] radius=24
+            RECTANGLE "Card 3:shadow" id=3:52 x=652 y=2062 w=274 h=170 fill=[null/0.0020000000949949026] strokeW=1 radius=24 [shadow]
+            FRAME "Container" id=3:53 x=677 y=2101 w=224 h=91 strokeW=1
+              TEXT "Precision that Combines Strategy, Data, and Expert Printing" id=3:54 x=677 y=2101 w=224 h=90 fill=[null] strokeW=1 chars="Precision that\nCombines Strategy,\nData, and Expert\nPrinting" font="Inter" size=18 weight=400 lh=22.5 ls=
+          FRAME "Card 4" id=3:55 x=950 y=2062 w=274 h=166 fill=[null] strokeW=1 stroke=[] radius=24
+            RECTANGLE "Card 4:shadow" id=3:56 x=950 y=2062 w=274 h=166 fill=[null/0.0020000000949949026] strokeW=1 radius=24 [shadow]
+            FRAME "HorizontalBorder" id=3:57 x=975 y=2087 w=224 h=37 strokeW=1 stroke=[]
+              FRAME "Container" id=3:58 x=975 y=2089 w=108 h=20 strokeW=1
+                FRAME "Container" id=3:59 x=975 y=2091 w=22 h=16 strokeW=1
+                  VECTOR "Icon" id=3:60 x=975 y=2091 w=22 h=16 fill=[null]
+                FRAME "Container" id=3:61 x=1005 y=2089 w=78 h=20 strokeW=1
+                  TEXT "Text" id=3:62 x=1005 y=2089 w=78 h=20 fill=[null] strokeW=1 chars="Print & Ship" font="Inter" size=14 weight=700 lh=20 ls=
+              FRAME "Overlay" id=3:63 x=1158 y=2087 w=41 h=24 fill=[null/0.20000000298023224] strokeW=1 radius=4
+                TEXT "Text" id=3:64 x=1166 y=2091 w=25 h=16 fill=[null] strokeW=1 chars="Fast" font="Inter" size=12 weight=700 lh=16 ls=
+            FRAME "HorizontalBorder" id=3:65 x=975 y=2140 w=224 h=33 strokeW=1 stroke=[]
+              FRAME "Container" id=3:66 x=975 y=2140 w=113 h=20 strokeW=1
+                FRAME "Container" id=3:67 x=975 y=2140 w=19 h=20 strokeW=1
+                  VECTOR "Icon" id=3:68 x=975 y=2140 w=19 h=20 fill=[null]
+                FRAME "Container" id=3:69 x=1002 y=2140 w=86 h=20 strokeW=1
+                  TEXT "Text" id=3:70 x=1002 y=2140 w=86 h=20 fill=[null] strokeW=1 chars="6 Categories" font="Inter" size=14 weight=700 lh=20 ls=
+      FRAME "Stats Row" id=3:210 x=24 y=2296 w=1232 h=121 strokeW=1 stroke=[]
+        FRAME "Container" id=3:211 x=24 y=2345 w=284 h=72 strokeW=1
+          FRAME "Heading 3" id=3:212 x=127 y=2345 w=78 h=40 strokeW=1
+            TEXT "Text" id=3:213 x=127 y=2345 w=58 h=40 fill=[null] strokeW=1 chars="3k+" font="Plus Jakarta Sans" size=32 weight=700 lh=40 ls=-0.3199999928474426
+            RECTANGLE "Background" id=3:214 x=193 y=2359 w=12 h=12 fill=[null] strokeW=1 radius=9999
+          TEXT "Text" id=3:215 x=91 y=2393 w=149 h=24 fill=[null] strokeW=1 chars="Successful Projects" font="Inter" size=16 weight=400 lh=24 ls=
+        FRAME "Container" id=3:216 x=340 y=2345 w=284 h=72 strokeW=1
+          FRAME "Heading 3" id=3:217 x=430 y=2345 w=104 h=40 strokeW=1
+            TEXT "Text" id=3:218 x=430 y=2345 w=84 h=40 fill=[null] strokeW=1 chars="200+" font="Plus Jakarta Sans" size=32 weight=700 lh=40 ls=-0.3199999928474426
+            RECTANGLE "Background" id=3:219 x=522 y=2359 w=12 h=12 fill=[null] strokeW=1 radius=9999
+          TEXT "Text" id=3:220 x=434 y=2393 w=95 h=24 fill=[null] strokeW=1 chars="Expert Team" font="Inter" size=16 weight=400 lh=24 ls=
+        FRAME "Container" id=3:221 x=656 y=2345 w=284 h=72 strokeW=1
+          FRAME "Heading 3" id=3:222 x=747 y=2345 w=102 h=40 strokeW=1
+            TEXT "Text" id=3:223 x=747 y=2345 w=82 h=40 fill=[null] strokeW=1 chars="350+" font="Plus Jakarta Sans" size=32 weight=700 lh=40 ls=-0.3199999928474426
+            RECTANGLE "Background" id=3:224 x=837 y=2359 w=12 h=12 fill=[null] strokeW=1 radius=9999
+          TEXT "Text" id=3:225 x=730 y=2393 w=136 h=24 fill=[null] strokeW=1 chars="Happy Customers" font="Inter" size=16 weight=400 lh=24 ls=
+        FRAME "Container" id=3:226 x=972 y=2345 w=284 h=72 strokeW=1
+          FRAME "Heading 3" id=3:227 x=1078 y=2345 w=72 h=40 strokeW=1
+            TEXT "Text" id=3:228 x=1078 y=2345 w=52 h=40 fill=[null] strokeW=1 chars="16+" font="Plus Jakarta Sans" size=32 weight=700 lh=40 ls=-0.3199999928474426
+            RECTANGLE "Background" id=3:229 x=1138 y=2359 w=12 h=12 fill=[null] strokeW=1 radius=9999
+          TEXT "Text" id=3:230 x=1038 y=2393 w=152 h=24 fill=[null] strokeW=1 chars="Years of Experience" font="Inter" size=16 weight=400 lh=24 ls=
+  FRAME "Hero Section" id=4:54 x=0 y=0 w=1280 h=1198 strokeW=1
+    FRAME "Frame 24" id=4:58 x=-3 y=574 w=1285 h=602 strokeW=0.8432989120483398
+      RECTANGLE "Rectangle 26" id=4:59 x=10 y=739 w=250 h=220 strokeW=0.8432989120483398 radius=10
+      RECTANGLE "Rectangle 32" id=4:60 x=1007 y=738 w=250 h=220 fill=[null] strokeW=0.8432989120483398 radius=10
+      RECTANGLE "Rectangle 27" id=4:61 x=275 y=622 w=186 h=220 fill=[null] strokeW=0.8432989120483398 radius=10
+      RECTANGLE "Rectangle 30" id=4:62 x=810 y=622 w=186 h=220 fill=[null] strokeW=0.8432989120483398 radius=10
+      RECTANGLE "Rectangle 29" id=4:63 x=473 y=574 w=330 h=600 fill=[null] strokeW=0.8432989120483398 radius=10
+      RECTANGLE "Rectangle 28" id=4:64 x=275 y=867 w=186 h=220 fill=[null] strokeW=0.8432989120483398 radius=10
+      RECTANGLE "Rectangle 31" id=4:65 x=810 y=867 w=186 h=220 fill=[null] strokeW=0.8432989120483398 radius=10
+      FRAME "Container" id=4:119 x=1060 y=1070 w=185 h=67 strokeW=1
+        FRAME "Container" id=4:120 x=1060 y=1070 w=185 h=40 strokeW=1
+          TEXT "Rated 4.9/5 by 4,900+ clients" id=4:121 x=1060 y=1070 w=185 h=40 fill=[null] strokeW=1 chars="Rated 4.9/5 by 4,900+ clients" font="Inter" size=14 weight=400 lh=20 ls=
+        FRAME "Container" id=4:122 x=1060 y=1118 w=185 h=19 strokeW=1
+          FRAME "Container" id=4:123 x=1060 y=1118 w=20 h=19 strokeW=1
+            VECTOR "Icon" id=4:124 x=1060 y=1118 w=20 h=19 fill=[null]
+          FRAME "Container" id=4:125 x=1080 y=1118 w=20 h=19 strokeW=1
+            VECTOR "Icon" id=4:126 x=1080 y=1118 w=20 h=19 fill=[null]
+          FRAME "Container" id=4:127 x=1100 y=1118 w=20 h=19 strokeW=1
+            VECTOR "Icon" id=4:128 x=1100 y=1118 w=20 h=19 fill=[null]
+          FRAME "Container" id=4:129 x=1120 y=1118 w=20 h=19 strokeW=1
+            VECTOR "Icon" id=4:130 x=1120 y=1118 w=20 h=19 fill=[null]
+          FRAME "Container" id=4:131 x=1140 y=1118 w=20 h=19 strokeW=1
+            VECTOR "Icon" id=4:132 x=1140 y=1118 w=20 h=19 fill=[null]
+    GROUP "Easily to Customize " id=4:66 x=133 y=572 w=133 h=134 strokeW=0.46101874113082886
+      GROUP "Group" id=4:67 x=137 y=575 w=113 h=89 strokeW=0.46101874113082886
+        TEXT "E" id=4:68 x=155 y=653 w=12 h=10 fill=[null] strokeW=0.46101874113082886 chars="E" font="Inter" size=9 weight=600 lh=10.892045021057129 ls=
+        TEXT "a" id=4:69 x=153 y=646 w=12 h=8 fill=[null] strokeW=0.46101874113082886 chars="a" font="Inter" size=9 weight=600 lh=10.892045021057129 ls=
+        TEXT "s" id=4:70 x=152 y=640 w=11 h=6 fill=[null] strokeW=0.46101874113082886 chars="s" font="Inter" size=9 weight=600 lh=10.892045021057129 ls=
+        TEXT "i" id=4:71 x=153 y=633 w=11 h=4 fill=[null] strokeW=0.46101874113082886 chars="i" font="Inter" size=9 weight=600 lh=10.892045021057129 ls=
+        TEXT "l" id=4:72 x=154 y=625 w=11 h=6 fill=[null] strokeW=0.46101874113082886 chars="l" font="Inter" size=9 weight=600 lh=10.892045021057129 ls=
+        TEXT "y" id=4:73 x=157 y=615 w=13 h=10 fill=[null] strokeW=0.46101874113082886 chars="y" font="Inter" size=9 weight=600 lh=10.892045021057129 ls=
+        TEXT "Text" id=4:74 x=162 y=611 w=9 h=7 fill=[null] strokeW=0.46101874113082886 chars=" " font="Inter" size=9 weight=600 lh=10.892045021057129 ls=
+        TEXT "T" id=4:75 x=167 y=602 w=12 h=12 fill=[null] strokeW=0.46101874113082886 chars="T" font="Inter" size=9 weight=600 lh=10.892045021057129 ls=
+        TEXT "o" id=4:76 x=173 y=597 w=11 h=12 fill=[null] strokeW=0.46101874113082886 chars="o" font="Inter" size=9 weight=600 lh=10.892045021057129 ls=
+        TEXT "Text" id=4:77 x=183 y=595 w=4 h=10 fill=[null] strokeW=0.46101874113082886 chars=" " font="Inter" size=9 weight=600 lh=10.892045021057129 ls=
+        TEXT "C" id=4:78 x=188 y=591 w=9 h=12 fill=[null] strokeW=0.46101874113082886 chars="C" font="Inter" size=9 weight=600 lh=10.892045021057129 ls=
+        TEXT "u" id=4:79 x=197 y=591 w=7 h=11 fill=[null] strokeW=0.46101874113082886 chars="u" font="Inter" size=9 weight=600 lh=10.892045021057129 ls=
+        TEXT "s" id=4:80 x=205 y=591 w=6 h=11 fill=[null] strokeW=0.46101874113082886 chars="s" font="Inter" size=9 weight=600 lh=10.892045021057129 ls=
+        TEXT "t" id=4:81 x=212 y=592 w=7 h=12 fill=[null] strokeW=0.46101874113082886 chars="t" font="Inter" size=9 weight=600 lh=10.892045021057129 ls=
+        TEXT "o" id=4:82 x=218 y=595 w=10 h=13 fill=[null] strokeW=0.46101874113082886 chars="o" font="Inter" size=9 weight=600 lh=10.892045021057129 ls=
+        TEXT "m" id=4:83 x=223 y=599 w=14 h=14 fill=[null] strokeW=0.46101874113082886 chars="m" font="Inter" size=9 weight=600 lh=10.892045021057129 ls=
+        TEXT "i" id=4:84 x=230 y=606 w=10 h=10 fill=[null] strokeW=0.46101874113082886 chars="i" font="Inter" size=9 weight=600 lh=10.892045021057129 ls=
+        TEXT "z" id=4:85 x=234 y=612 w=12 h=11 fill=[null] strokeW=0.46101874113082886 chars="z" font="Inter" size=9 weight=600 lh=10.892045021057129 ls=
+        TEXT "e" id=4:86 x=238 y=619 w=12 h=10 fill=[null] strokeW=0.46101874113082886 chars="e" font="Inter" size=9 weight=600 lh=10.892045021057129 ls=
+      ELLIPSE "Ellipse 2" id=4:87 x=144 y=584 w=118 h=118 strokeW=0.46101874113082886 stroke=[]
+    FRAME "Frame 26" id=4:118 x=130 y=148 w=1021 h=376 strokeW=1
+      FRAME "Frame 21" id=4:55 x=556 y=148 w=169 h=37 strokeW=1 stroke=[] radius=20
+        TEXT "YOUR NO.1 QUALITY" id=4:56 x=572 y=158 w=137 h=17 fill=[null] strokeW=1 chars="YOUR NO.1 QUALITY " font="Inter" size=14 weight=400 lh=16.94318199157715 ls=
+      FRAME "Frame 25" id=4:117 x=130 y=194 w=1021 h=330 strokeW=1
+        TEXT "PREMIUM PRINTING & BRANDING." id=4:57 x=209 y=194 w=863 h=208 fill=[null] strokeW=1 chars="PREMIUM PRINTING \n& BRANDING." font="Inter" size=86 weight=500 lh=104.07954406738281 ls=
+        TEXT "We combine industrial printing capability with creative branding expertise to deliver precision and quality for your business." id=4:88 x=313 y=440 w=656 h=84 fill=[null/0.800000011920929] strokeW=1 chars="We combine industrial printing capability with creative\nbranding expertise to deliver precision and quality for\nyour business." font="Inter" size=20 weight=400 lh=28 ls=
+        RECTANGLE "Gemini_Generated_Image_j59lg5j59lg5j59l 1" id=4:89 x=131 y=195 w=88 h=99 strokeW=0.06689189374446869
+        RECTANGLE "Gemini_Generated_Image_j59lg5j59lg5j59l 2" id=4:90 x=983 y=362 w=88 h=99 strokeW=0.06689189374446869
+  FRAME "Top Navigation Bar (Integrated)" id=4:92 x=56 y=24 w=1168 h=40 strokeW=1
+    VECTOR "main logo-01-01 1 (Traced)" id=4:115 x=56 y=25 w=146 h=39 fill=[null] strokeW=0.21158842742443085
+    FRAME "Container" id=4:97 x=461 y=24 w=330 h=40 strokeW=1
+      FRAME "Link" id=4:98 x=461 y=24 w=46 h=40 strokeW=1
+        TEXT "Home" id=4:99 x=461 y=32 w=46 h=24 fill=[null] strokeW=1 chars="Home" font="Inter" size=16 weight=700 lh=24 ls=
+      FRAME "Link" id=4:100 x=539 y=24 w=66 h=40 strokeW=1
+        TEXT "Text" id=4:101 x=539 y=32 w=66 h=24 fill=[null/0.800000011920929] strokeW=1 chars="Services" font="Inter" size=16 weight=400 lh=24 ls=
+      FRAME "Link" id=4:102 x=637 y=24 w=63 h=40 strokeW=1
+        TEXT "Text" id=4:103 x=637 y=32 w=63 h=24 fill=[null/0.800000011920929] strokeW=1 chars="Portfolio" font="Inter" size=16 weight=400 lh=24 ls=
+      FRAME "Link" id=4:104 x=732 y=24 w=59 h=40 strokeW=1
+        TEXT "Text" id=4:105 x=732 y=32 w=59 h=24 fill=[null/0.800000011920929] strokeW=1 chars="Contact" font="Inter" size=16 weight=400 lh=24 ls=
+    FRAME "Container" id=4:106 x=1051 y=24 w=173 h=40 strokeW=1
+      FRAME "Button" id=4:107 x=1051 y=24 w=34 h=40 strokeW=1 radius=9999
+        FRAME "Container" id=4:108 x=1059 y=32 w=18 h=18 strokeW=1
+          VECTOR "Icon" id=4:109 x=1059 y=32 w=18 h=18 fill=[null]
+      FRAME "Link" id=4:110 x=1101 y=28 w=123 h=32 fill=[null] strokeW=1 radius=9999
+        TEXT "Text" id=4:111 x=1125 y=36 w=75 h=16 fill=[null] strokeW=1 chars="Get a Quote" font="Inter" size=12 weight=600 lh=16 ls=0.6000000238418579

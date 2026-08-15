@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --tile: rgba(224, 236, 56, 0.18);
+}
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #000000;
+  --color-pine: #1a2e15;
+  --color-moss: #3d4d2b;
+  --color-charcoal: #181818;
+  --color-gunmetal: #232323;
+  --color-stone-50: #323232;
+  --color-taupe: #524848;
+  --color-lime: #e0ec38;
+  --color-olive: #1b1d00;
+  --color-cloud: #d9d9d9;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  color: #000000;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html.dark,
+html.dark body {
+  background: #0c0c0e;
+  color: #f2f2f1;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Grayscale map tiles to match the muted design reference (keeps the lime pin untouched) */
+#contact .leaflet-tile {
+  filter: grayscale(1) brightness(1.12) contrast(0.95);
+}
+
+html.dark #contact .leaflet-tile {
+  filter: grayscale(1) brightness(0.55) contrast(1.05);
+}
+
+/* 1. Seamless 360 Continuous Rotation */
+@keyframes spin-continuous {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-continuous 14s linear infinite;
+  transform-origin: center center;
+}
+
+/* 2. Soft Breathing Glow / Pulse for Star (Gemini_Generated_Image_j59lg5j59lg5j59l 1) */
+@keyframes star-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 2px rgba(224, 236, 56, 0.2)) opacity(0.85);
+  }
+  50% {
+    filter: drop-shadow(0 0 14px rgba(224, 236, 56, 0.75)) drop-shadow(0 0 26px rgba(224, 236, 56, 0.35)) opacity(1);
+  }
+}
+
+.animate-star-glow {
+  animation: star-glow 3.5s ease-in-out infinite;
+  will-change: filter, opacity;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+    scroll-padding-top: 0;
+  }
+
+  .animate-spin-slow,
+  .animate-star-glow {
+    animation: none !important;
+  }
+}
+
+/* Scroll-reveal: fade + rise when a block enters the viewport */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
