@@ -233,35 +233,35 @@ export default function App() {
           </div>
 
           <Reveal delay={160}>
-            <div className="hidden md:flex items-start justify-center gap-3 lg:gap-4 min-h-[600px] pt-4">
-            <div className="pt-[165px]">
-              <TiltCard className="w-[200px] lg:w-[250px] h-[220px] rounded-[10px] overflow-hidden shadow-md">
+            <div className="hidden md:flex items-start justify-center gap-3 lg:gap-4 min-h-[480px] lg:min-h-[540px] xl:min-h-[600px] pt-4">
+            <div className="pt-[110px] lg:pt-[130px] xl:pt-[165px]">
+              <TiltCard className="w-[130px] lg:w-[190px] xl:w-[250px] h-[160px] lg:h-[200px] xl:h-[220px] rounded-[10px] overflow-hidden shadow-md">
                 <img src={galleryPhoto7} alt="Print product" className="w-full h-full object-cover" />
               </TiltCard>
             </div>
-            <div className="pt-[48px] flex flex-col gap-6">
-              <TiltCard className="w-[150px] lg:w-[186px] h-[220px] rounded-[10px] overflow-hidden">
+            <div className="pt-[36px] lg:pt-[40px] xl:pt-[48px] flex flex-col gap-6">
+              <TiltCard className="w-[96px] lg:w-[140px] xl:w-[186px] h-[160px] lg:h-[200px] xl:h-[220px] rounded-[10px] overflow-hidden">
                 <img src={heroCardImage1} alt="Print product" className="w-full h-full object-cover" />
               </TiltCard>
-              <TiltCard className="w-[150px] lg:w-[186px] h-[220px] rounded-[10px] overflow-hidden">
+              <TiltCard className="w-[96px] lg:w-[140px] xl:w-[186px] h-[160px] lg:h-[200px] xl:h-[220px] rounded-[10px] overflow-hidden">
                 <img src={heroCardImage2} alt="Print product" className="w-full h-full object-cover" />
               </TiltCard>
             </div>
             <div className="pt-0">
-              <TiltCard className="w-[260px] lg:w-[330px] h-[600px] rounded-[10px] overflow-hidden shadow-lg">
+              <TiltCard className="w-[190px] lg:w-[250px] xl:w-[330px] h-[430px] lg:h-[490px] xl:h-[600px] rounded-[10px] overflow-hidden shadow-lg">
                 <img src={heroMainImage} alt="Hero print product" className="w-full h-full object-cover" />
               </TiltCard>
             </div>
-            <div className="pt-[48px] flex flex-col gap-6">
-              <TiltCard className="w-[150px] lg:w-[186px] h-[220px] rounded-[10px] overflow-hidden">
+            <div className="pt-[36px] lg:pt-[40px] xl:pt-[48px] flex flex-col gap-6">
+              <TiltCard className="w-[96px] lg:w-[140px] xl:w-[186px] h-[160px] lg:h-[200px] xl:h-[220px] rounded-[10px] overflow-hidden">
                 <img src={heroCardImage3} alt="Print product" className="w-full h-full object-cover" />
               </TiltCard>
-              <TiltCard className="w-[150px] lg:w-[186px] h-[220px] rounded-[10px] overflow-hidden">
+              <TiltCard className="w-[96px] lg:w-[140px] xl:w-[186px] h-[160px] lg:h-[200px] xl:h-[220px] rounded-[10px] overflow-hidden">
                 <img src={heroCardImage4} alt="Print product" className="w-full h-full object-cover" />
               </TiltCard>
             </div>
-            <div className="pt-[164px] flex flex-col gap-6">
-              <TiltCard className="w-[200px] lg:w-[250px] h-[220px] rounded-[10px] overflow-hidden">
+            <div className="pt-[110px] lg:pt-[130px] xl:pt-[164px] flex flex-col gap-6">
+              <TiltCard className="w-[130px] lg:w-[190px] xl:w-[250px] h-[160px] lg:h-[200px] xl:h-[220px] rounded-[10px] overflow-hidden">
                 <img src={heroCardImage5} alt="Print product" className="w-full h-full object-cover" />
               </TiltCard>
               <div className="pt-2 pl-2 flex flex-col gap-2">
@@ -303,10 +303,10 @@ export default function App() {
       </section>
 
       {/* ============ ABOUT US SECTION (3:102) ============ */}
-      <section className="relative w-full bg-[#F9F9F9] pt-20 pb-32 dark:bg-[#131316]">
+      <section className="relative w-full bg-[#F9F9F9] pt-14 pb-20 md:pt-20 md:pb-32 dark:bg-[#131316]">
         <div className="max-w-[1280px] mx-auto px-6">
           {/* Section Header (3:104) */}
-           <Reveal className="flex flex-col items-center text-center mb-16">
+           <Reveal className="flex flex-col items-center text-center mb-10 md:mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-4">
               <svg className="w-[13px] h-[13px] text-[#3D4D2B] dark:text-[#AAB95F]" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
@@ -317,28 +317,28 @@ export default function App() {
               as="h2"
               per="line"
               preset="fade-in-blur"
-              className="text-[36px] sm:text-[42px] md:text-[48px] font-bold leading-[56px] tracking-[-0.96px] text-[#1A1C1C] dark:text-[#F2F2F1]"
+              className="text-[32px] sm:text-[42px] md:text-[48px] font-bold leading-[40px] sm:leading-[56px] tracking-[-0.96px] text-[#1A1C1C] dark:text-[#F2F2F1]"
             >
               {'Precision Printing,\nTrusted Branding'}
             </RevealHeading>
           </Reveal>
 
           {/* Main 2-Column Grid (3:112) */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             {/* Left Column: Stacked Images with Circular Badge (3:113) */}
             <Reveal className="relative flex flex-col sm:flex-row gap-4 items-center justify-center">
               {/* Left Image (blueprints) */}
-              <TiltCard className="w-full sm:w-[284px] h-[500px] rounded-tl-[24px] rounded-tr-[100px] rounded-bl-[24px] rounded-br-[24px] overflow-hidden shadow-lg shrink-0">
+              <TiltCard className="w-full sm:w-[284px] h-[360px] sm:h-[500px] rounded-tl-[24px] rounded-tr-[100px] rounded-bl-[24px] rounded-br-[24px] overflow-hidden shadow-lg shrink-0">
                 <img src={aboutMainImage1} alt="About Us 1" className="w-full h-full object-cover" />
               </TiltCard>
 
               {/* Right Image (machinery) - offset down slightly for a staggered layout */}
-              <TiltCard className="w-full sm:w-[284px] h-[500px] rounded-tl-[24px] rounded-tr-[24px] rounded-bl-[24px] rounded-br-[100px] overflow-hidden shadow-lg shrink-0 sm:mt-12">
+              <TiltCard className="w-full sm:w-[284px] h-[360px] sm:h-[500px] rounded-tl-[24px] rounded-tr-[24px] rounded-bl-[24px] rounded-br-[100px] overflow-hidden shadow-lg shrink-0 sm:mt-12">
                 <img src={aboutMainImage2} alt="About Us 2" className="w-full h-full object-cover" />
               </TiltCard>
 
               {/* Circular Badge - perfectly centered on the gap between images */}
-              <div className="absolute left-1/2 top-[50%] -translate-x-1/2 -translate-y-1/2 w-[128px] h-[128px] rounded-full bg-[#3D4D2B] border-4 border-[#F9F9F9] dark:border-[#131316] shadow-2xl pointer-events-none select-none z-10">
+              <div className="absolute left-1/2 top-[50%] -translate-x-1/2 -translate-y-1/2 w-[100px] h-[100px] sm:w-[128px] sm:h-[128px] rounded-full bg-[#3D4D2B] border-4 border-[#F9F9F9] dark:border-[#131316] shadow-2xl pointer-events-none select-none z-10">
                 <img src={aboutBadge} alt="FortCT Quality" className="w-full h-full object-contain animate-spin-slow" />
               </div>
             </Reveal>
@@ -373,7 +373,7 @@ export default function App() {
           </div>
 
           {/* ============ FLOATING UI FACT CARDS (3:24) ============ */}
-          <Reveal className="relative z-20 mt-16 lg:mt-24">
+          <Reveal className="relative z-20 mt-12 lg:mt-24">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {/* Card 1: Efficiency */}
               <Reveal delay={0}>
@@ -437,7 +437,7 @@ export default function App() {
           </Reveal>
 
           {/* ============ STATS ROW (3:210) ============ */}
-          <Reveal className="mt-20 pt-12 pb-12 border-t border-b border-[#C5C8BC] dark:border-[#26262B]">
+          <Reveal className="mt-14 pt-10 pb-10 lg:mt-20 lg:pt-12 lg:pb-12 border-t border-b border-[#C5C8BC] dark:border-[#26262B]">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
               <Reveal delay={0}>
                 <div className="flex flex-col items-center justify-center gap-2">
@@ -487,7 +487,7 @@ export default function App() {
       <ServiceSlider />
 
       {/* ============ WHY CHOOSE US / BENTO SECTION (3:323) ============ */}
-      <section id="why-us" className="w-full bg-white pt-6 lg:pt-[80px] pb-20 dark:bg-[#0C0C0E]">
+      <section id="why-us" className="w-full bg-white pt-6 lg:pt-[80px] pb-16 md:pb-20 dark:bg-[#0C0C0E]">
         <div className="max-w-[1280px] mx-auto px-6">
           {/* Header (3:326) */}
           <Reveal className="max-w-[672px]">
@@ -504,14 +504,14 @@ export default function App() {
               per="word"
               preset="fade"
               speedReveal={1.4}
-              className="mt-[40px] text-[15px] sm:text-[16px] font-normal leading-[24px] text-[#45483F] dark:text-[#A1A1AA]"
+              className="mt-8 lg:mt-[40px] text-[15px] sm:text-[16px] font-normal leading-[24px] text-[#45483F] dark:text-[#A1A1AA]"
             >
               Expert team, proven strategies, personalized approach, and dedicated support to help your brand thrive and grow in the physical space.
             </RevealHeading>
           </Reveal>
 
           {/* Bento Grid (3:330) */}
-          <Reveal className="mt-[50px] lg:mt-[72px]">
+          <Reveal className="mt-10 lg:mt-[72px]">
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 lg:gap-[20px]">
               {/* 5.0 Rating (span 2x1) — 3:356 */}
               <Reveal delay={0} className="md:col-span-3 lg:col-span-2 h-[290px]">

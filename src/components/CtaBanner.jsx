@@ -6,7 +6,7 @@ import { RevealHeading } from './RevealHeading.jsx'
 export default function CtaBanner() {
   return (
     <section id="quote" className="w-full bg-[#F9F9F9] pb-20 px-6 dark:bg-[#131316]">
-      <div className="relative max-w-5xl mx-auto w-full text-center overflow-hidden rounded-[28px] py-20 md:py-24">
+      <div className="relative max-w-5xl mx-auto w-full text-center overflow-hidden rounded-[28px] py-16 sm:py-20 md:py-24">
         <img
           src={ctaBannerImage}
           alt=""

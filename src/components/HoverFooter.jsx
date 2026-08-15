@@ -233,8 +233,8 @@ const socialLinks = [
 export default function HoverFooter() {
   return (
     <footer className="relative mx-6 mb-6 bg-[#0F0F11] h-fit rounded-[28px] overflow-hidden">
-      <div className="relative max-w-7xl mx-auto p-8 md:p-14 z-40">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8 lg:gap-16 pb-12">
+      <div className="relative max-w-7xl mx-auto p-6 sm:p-8 md:p-14 z-40">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8 lg:gap-16 pb-12">
           {/* Brand section */}
           <Reveal delay={0}>
             <div className="flex flex-col space-y-4">

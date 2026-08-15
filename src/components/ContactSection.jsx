@@ -64,7 +64,7 @@ function ContactMap() {
   return (
     <div
       ref={ref}
-      className="w-full lg:w-[567px] h-[520px] shrink-0 rounded-[24px] overflow-hidden [&_.leaflet-tile]:grayscale [&_.leaflet-tile]:brightness-[1.12] [&_.leaflet-tile]:contrast-[0.95]"
+      className="w-full lg:w-[567px] h-[420px] lg:h-[520px] shrink-0 rounded-[24px] overflow-hidden [&_.leaflet-tile]:grayscale [&_.leaflet-tile]:brightness-[1.12] [&_.leaflet-tile]:contrast-[0.95]"
     />
   )
 }
@@ -92,7 +92,7 @@ const infoCards = [
 export default function ContactSection() {
   return (
     <section id="contact" className="relative w-full bg-[#F9F9F9] dark:bg-[#131316]">
-      <div className="relative z-10 max-w-[1280px] mx-auto px-6 pt-[50px] pb-[50px]">
+      <div className="relative z-10 max-w-[1280px] mx-auto px-6 pt-10 pb-10 md:pt-[50px] md:pb-[50px]">
         {/* Header */}
         <div className="flex flex-col items-center text-center">
           <Reveal delay={0}>
@@ -113,7 +113,7 @@ export default function ContactSection() {
         </div>
 
         {/* Contact Info Cards (3:504) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-[24px] mt-[64px]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-[24px] mt-10 md:mt-[64px]">
           {infoCards.map((card, i) => (
             <Reveal key={card.label} delay={i * 80}>
               <div className="flex items-center gap-4 bg-white rounded-[24px] p-6 shadow-[0_2px_24px_rgba(0,0,0,0.05)] dark:bg-[#1A1A1E] dark:shadow-none">
@@ -137,14 +137,14 @@ export default function ContactSection() {
 
         {/* Map & Form Area (3:532) */}
         <Reveal delay={160}>
-          <div className="mt-[32px] bg-white rounded-[24px] shadow-[0_2px_24px_rgba(0,0,0,0.05)] p-[33px] pr-[18px] dark:bg-[#1A1A1E] dark:shadow-none">
-            <div className="flex flex-col lg:flex-row gap-[41px]">
+          <div className="mt-6 sm:mt-[32px] bg-white rounded-[24px] shadow-[0_2px_24px_rgba(0,0,0,0.05)] p-5 sm:p-[33px] sm:pr-[18px] dark:bg-[#1A1A1E] dark:shadow-none">
+            <div className="flex flex-col lg:flex-row gap-6 lg:gap-[41px]">
               <ContactMap />
 
             {/* Form */}
             <form className="flex-1 w-full lg:w-[573px] lg:pt-[28px]" onSubmit={(e) => e.preventDefault()}>
               {/* Row 1: Full Name | Email Address */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-[41px]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-[41px]">
                 <div>
                   <label className="block mb-[4px] text-[12px] font-normal text-[#666666] leading-[16px] dark:text-[#A1A1AA]">Full Name</label>
                   <input
@@ -166,7 +166,7 @@ export default function ContactSection() {
               </div>
 
               {/* Row 2: Phone Number */}
-              <div className="mt-[32px]">
+              <div className="mt-6 sm:mt-[32px]">
                 <label className="block mb-[4px] text-[12px] font-normal text-[#666666] leading-[16px] dark:text-[#A1A1AA]">Phone Number</label>
                 <input
                   type="tel"
@@ -177,7 +177,7 @@ export default function ContactSection() {
               </div>
 
               {/* Row 3: Subject */}
-              <div className="mt-[32px]">
+              <div className="mt-6 sm:mt-[32px]">
                 <label className="block mb-[4px] text-[12px] font-normal text-[#666666] leading-[16px] dark:text-[#A1A1AA]">Subject</label>
                 <input
                   type="text"
@@ -188,7 +188,7 @@ export default function ContactSection() {
               </div>
 
               {/* Row 4: Message */}
-              <div className="mt-[32px]">
+              <div className="mt-6 sm:mt-[32px]">
                 <label className="block mb-[4px] text-[12px] font-normal text-[#666666] leading-[16px] dark:text-[#A1A1AA]">Message</label>
                 <textarea
                   name="message"
@@ -199,7 +199,7 @@ export default function ContactSection() {
               </div>
 
               {/* Submit */}
-              <div className="flex justify-center mt-[32px]">
+              <div className="flex justify-center mt-6 sm:mt-[32px]">
                 <LiquidMetalButton
                   variant="light"
                   label="Send Message"

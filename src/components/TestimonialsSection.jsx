@@ -61,18 +61,18 @@ export default function TestimonialsSection() {
     <section id="testimonials" className="relative w-full bg-[#F9F9F9] overflow-hidden dark:bg-[#131316]">
       <div className="w-full max-w-2xl mx-auto px-6 py-16 md:py-24">
         {/* Large index number */}
-        <div className="flex items-start gap-8">
+        <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-8">
           <span
-            className="text-[120px] font-light leading-none text-[#1A1C1C]/10 select-none transition-all duration-500 dark:text-[#F2F2F1]/10"
+            className="text-[72px] sm:text-[120px] font-light leading-none text-[#1A1C1C]/10 select-none transition-all duration-500 dark:text-[#F2F2F1]/10"
             style={{ fontFeatureSettings: '"tnum"' }}
           >
             {String(active + 1).padStart(2, '0')}
           </span>
 
-          <div className="flex-1 pt-6">
+          <div className="flex-1 min-w-0 pt-2 sm:pt-6">
             {/* Quote */}
             <blockquote
-              className={`text-2xl md:text-3xl font-light leading-relaxed text-[#1A1C1C] tracking-tight transition-all duration-300 dark:text-[#F2F2F1] ${
+              className={`text-xl sm:text-2xl md:text-3xl font-light leading-relaxed text-[#1A1C1C] tracking-tight transition-all duration-300 dark:text-[#F2F2F1] ${
                 isTransitioning ? 'opacity-0 translate-x-4' : 'opacity-100 translate-x-0'
               }`}
             >
@@ -81,21 +81,21 @@ export default function TestimonialsSection() {
 
             {/* Author info with hover reveal */}
             <div
-              className={`mt-10 group cursor-default transition-all duration-300 delay-100 ${
+              className={`mt-8 sm:mt-10 group cursor-default transition-all duration-300 delay-100 ${
                 isTransitioning ? 'opacity-0' : 'opacity-100'
               }`}
             >
               <div className="flex items-center gap-4">
-                <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-[#1A1C1C]/10 group-hover:ring-[#1A1C1C]/30 transition-all duration-300 dark:ring-[#F2F2F1]/10 dark:group-hover:ring-[#F2F2F1]/30">
+                <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-[#1A1C1C]/10 group-hover:ring-[#1A1C1C]/30 transition-all duration-300 dark:ring-[#F2F2F1]/10 dark:group-hover:ring-[#F2F2F1]/30 shrink-0">
                   <img
                     src={current.image}
                     alt={current.author}
                     className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                   />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <p className="font-medium text-[#1A1C1C] dark:text-[#F2F2F1]">{current.author}</p>
-                  <p className="text-sm text-[#45483F] dark:text-[#A1A1AA]">
+                  <p className="flex flex-wrap items-center text-sm text-[#45483F] dark:text-[#A1A1AA]">
                     {current.role}
                     <span className="mx-2 text-[#1A1C1C]/20 dark:text-[#F2F2F1]/20">/</span>
                     <span className="group-hover:text-[#1A1C1C] transition-colors duration-300 dark:group-hover:text-[#F2F2F1]">
@@ -109,7 +109,7 @@ export default function TestimonialsSection() {
         </div>
 
         {/* Navigation - vertical line selector */}
-        <div className="mt-16 flex items-center justify-between">
+        <div className="mt-10 sm:mt-16 flex items-center justify-between">
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-3">
               {testimonials.map((_, index) => (

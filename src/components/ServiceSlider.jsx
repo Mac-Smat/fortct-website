@@ -162,7 +162,7 @@ export default function ServiceSlider() {
         </RevealHeading>
       </div>
       <Reveal delay={120}>
-        <HoverSlider className="min-h-[70vh] place-content-center px-6 md:px-12 pb-20 text-[#1A1C1C] dark:text-[#F2F2F1]">
+        <HoverSlider className="min-h-[60vh] md:min-h-[70vh] place-content-center px-6 md:px-12 pb-16 md:pb-20 text-[#1A1C1C] dark:text-[#F2F2F1]">
           <div className="flex flex-wrap items-center justify-evenly gap-6 md:gap-12">
             <div className="flex flex-col space-y-2 md:space-y-4">
               {SLIDES.map((slide, index) => (
