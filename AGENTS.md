@@ -15,4 +15,14 @@
 
 ## Verify before pushing
 - Run `npm run lint` and `npm run build` after every change.
-- Browser checks via agent-browser session `fortct-verify` at http://127.0.0.1:4173 (preview server: `npx vite preview --host 127.0.0.1 --port 4173 --strictPort`).
+- Browser checks via agent-browser session `fortct-verify` at http://127.0.0.1:4173/fortct-website/ (preview server: `npx vite preview --host 127.0.0.1 --port 4173 --strictPort`; note the base-path prefix).
+- `vite.config.js` sets `base: '/fortct-website/'` — nav links and routing in `App.jsx`/`HoverFooter` use `import.meta.env.BASE_URL`; never hardcode `/contact` or `/#...` links.
+
+## Deploy (GitHub Pages)
+- Live site: https://mac-smat.github.io/fortct-website/ (shareable link, branch `gh-pages`).
+- After verifying, run:
+  1. `npm run build`
+  2. `Copy-Item dist\index.html dist\404.html` (SPA fallback so `/contact` deep links render on Pages)
+  3. `npx -y gh-pages -d dist`
+  4. Wait for Pages build, then verify live URL with agent-browser (root + `/contact`, no console errors).
+- Requires `gh` auth (account Mac-Smat).

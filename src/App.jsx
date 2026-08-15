@@ -40,18 +40,21 @@ import { RevealHeading } from './components/RevealHeading.jsx'
 import { Tiles } from './components/Tiles.jsx'
 import { useInView } from './hooks/useInView'
 
+const BASE_URL = import.meta.env.BASE_URL
+const CONTACT_PATH = `${BASE_URL}contact`
+
 const NAV_ITEMS = [
-  { name: 'Home', link: '#home' },
-  { name: 'Services', link: '#services' },
-  { name: 'Portfolio', link: '#portfolio' },
-  { name: 'Contact', link: '/contact' },
+  { name: 'Home', link: `${BASE_URL}#home` },
+  { name: 'Services', link: `${BASE_URL}#services` },
+  { name: 'Portfolio', link: `${BASE_URL}#portfolio` },
+  { name: 'Contact', link: CONTACT_PATH },
 ]
 
 const CONTACT_NAV_ITEMS = [
-  { name: 'Home', link: '/' },
-  { name: 'Services', link: '/#services' },
-  { name: 'Portfolio', link: '/#portfolio' },
-  { name: 'Contact', link: '/contact' },
+  { name: 'Home', link: BASE_URL },
+  { name: 'Services', link: `${BASE_URL}#services` },
+  { name: 'Portfolio', link: `${BASE_URL}#portfolio` },
+  { name: 'Contact', link: CONTACT_PATH },
 ]
 
 function usePathname() {
@@ -140,7 +143,7 @@ function ProgressBar({ label, value }) {
 export default function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
-  const isContactPage = pathname === '/contact'
+  const isContactPage = pathname === CONTACT_PATH
   const navItems = isContactPage ? CONTACT_NAV_ITEMS : NAV_ITEMS
 
   const handleQuoteClick = () => {

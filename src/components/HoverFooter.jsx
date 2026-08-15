@@ -231,7 +231,8 @@ const socialLinks = [
 ]
 
 export default function HoverFooter({ prefixLanding = false }) {
-  const landing = (href) => (prefixLanding && href.startsWith('#') ? `/${href}` : href)
+  const baseUrl = import.meta.env.BASE_URL
+  const landing = (href) => (prefixLanding && href.startsWith('#') ? `${baseUrl}${href}` : href)
   return (
     <footer className="relative mx-6 mb-6 bg-[#0F0F11] h-fit rounded-[28px] overflow-hidden">
       <div className="relative max-w-7xl mx-auto p-6 sm:p-8 md:p-14 z-40">
