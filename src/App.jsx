@@ -20,6 +20,7 @@ import TestimonialsSection from './components/TestimonialsSection.jsx'
 import ServiceSlider from './components/ServiceSlider.jsx'
 import ContactSection from './components/ContactSection.jsx'
 import ContactPage from './components/ContactPage.jsx'
+import ServicesPage from './components/ServicesPage.jsx'
 import CtaBanner from './components/CtaBanner.jsx'
 import HoverFooter from './components/HoverFooter.jsx'
 import {
@@ -42,17 +43,25 @@ import { useInView } from './hooks/useInView'
 
 const BASE_URL = import.meta.env.BASE_URL
 const CONTACT_PATH = `${BASE_URL}contact`
+const SERVICES_PATH = `${BASE_URL}services`
 
 const NAV_ITEMS = [
   { name: 'Home', link: `${BASE_URL}#home` },
-  { name: 'Services', link: `${BASE_URL}#services` },
+  { name: 'Services', link: SERVICES_PATH },
   { name: 'Portfolio', link: `${BASE_URL}#portfolio` },
   { name: 'Contact', link: CONTACT_PATH },
 ]
 
 const CONTACT_NAV_ITEMS = [
   { name: 'Home', link: BASE_URL },
-  { name: 'Services', link: `${BASE_URL}#services` },
+  { name: 'Services', link: SERVICES_PATH },
+  { name: 'Portfolio', link: `${BASE_URL}#portfolio` },
+  { name: 'Contact', link: CONTACT_PATH },
+]
+
+const SERVICES_NAV_ITEMS = [
+  { name: 'Home', link: BASE_URL },
+  { name: 'Services', link: SERVICES_PATH },
   { name: 'Portfolio', link: `${BASE_URL}#portfolio` },
   { name: 'Contact', link: CONTACT_PATH },
 ]
@@ -144,13 +153,23 @@ export default function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
   const isContactPage = pathname === CONTACT_PATH
-  const navItems = isContactPage ? CONTACT_NAV_ITEMS : NAV_ITEMS
+  const isServicesPage = pathname === SERVICES_PATH
+  const navItems = isContactPage
+    ? CONTACT_NAV_ITEMS
+    : isServicesPage
+      ? SERVICES_NAV_ITEMS
+      : NAV_ITEMS
+  const activeNavName = isContactPage ? 'Contact' : isServicesPage ? 'Services' : undefined
 
   const handleQuoteClick = () => {
     if (isContactPage) {
       document
         .getElementById('contact-form')
         ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      return
+    }
+    if (isServicesPage) {
+      window.location.href = CONTACT_PATH
       return
     }
     window.location.hash = '#quote'
@@ -163,7 +182,7 @@ export default function App() {
         {/* Desktop Navigation */}
         <NavBody>
           <NavbarLogo />
-          <NavItems items={navItems} activeName={isContactPage ? 'Contact' : undefined} />
+          <NavItems items={navItems} activeName={activeNavName} />
           <div className="flex items-center gap-4">
             <ThemeToggle />
             <LiquidMetalButton
@@ -217,6 +236,8 @@ export default function App() {
 
 {isContactPage ? (
         <ContactPage />
+      ) : isServicesPage ? (
+        <ServicesPage />
       ) : (
         <>
       {/* ============ HERO SECTION (LOCKED) ============ */}
@@ -651,7 +672,7 @@ export default function App() {
       <CtaBanner />
         </>
       )}
-      <HoverFooter prefixLanding={isContactPage} />
+      <HoverFooter prefixLanding={isContactPage || isServicesPage} />
     </div>
   )
 }
