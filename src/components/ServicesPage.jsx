@@ -194,7 +194,9 @@ export default function ServicesPage() {
   }, [activeCategory, query])
 
   const grouped = useMemo(() => {
-    if (activeCategory !== 'All') return [[activeCategory, filtered]]
+    if (activeCategory !== 'All') {
+      return filtered.length > 0 ? [[activeCategory, filtered]] : []
+    }
     return SERVICES_CATEGORIES.map((category) => [
       category,
       filtered.filter((s) => s.category === category),
@@ -304,6 +306,7 @@ export default function ServicesPage() {
             <p className="mt-6 text-[13px] font-normal text-[#45483F]/70 dark:text-[#A1A1AA]/70" role="status">
               {totalCount} {totalCount === 1 ? 'service' : 'services'}
               {query.trim() ? ` matching "${query.trim()}"` : ''}
+              {activeCategory !== 'All' ? ` in ${activeCategory}` : ''}
             </p>
           </Reveal>
 
@@ -315,7 +318,7 @@ export default function ServicesPage() {
                   No services found
                 </p>
                 <p className="mt-2 text-[14px] font-normal text-[#45483F] dark:text-[#A1A1AA]">
-                  Try a different search term or category.
+                  Nothing matches this search and category combination. Try a different term or clear the filters.
                 </p>
                 <button
                   type="button"
