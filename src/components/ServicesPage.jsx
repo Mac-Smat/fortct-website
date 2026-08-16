@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import {
   Printer,
@@ -13,7 +13,8 @@ import {
   Search,
   X,
 } from 'lucide-react'
-import { SERVICES, SERVICES_CATEGORIES } from '../data/services.js'
+import { fetchPublishedCategories, fetchPublishedProducts, fetchProductImages } from '../lib/public-api.js'
+import { formatPrice } from '../lib/format.js'
 import { Tiles } from './Tiles.jsx'
 import { Reveal } from './Reveal.jsx'
 import { TextReveal } from './TextReveal.jsx'
@@ -182,26 +183,65 @@ export default function ServicesPage() {
   const [activeCategory, setActiveCategory] = useState('All')
   const [query, setQuery] = useState('')
   const [detailProduct, setDetailProduct] = useState(null)
+  const [status, setStatus] = useState('loading')
+  const [categories, setCategories] = useState([])
+  const [services, setServices] = useState([])
+
+  const load = useCallback(async () => {
+    setStatus('loading')
+    try {
+      const [categoryRows, productRows, imageRows] = await Promise.all([
+        fetchPublishedCategories(),
+        fetchPublishedProducts(),
+        fetchProductImages(),
+      ])
+      const imageByProduct = {}
+      for (const img of imageRows) {
+        if (!imageByProduct[img.product_id]) imageByProduct[img.product_id] = img.image_url
+      }
+      const publishedCategories = new Set(categoryRows.map((c) => c.name))
+      setCategories(categoryRows.map((c) => c.name))
+      setServices(
+        productRows
+          .filter((p) => p.categories?.name && publishedCategories.has(p.categories.name))
+          .map((p) => ({
+            id: p.id,
+            name: p.name,
+            category: p.categories.name,
+            price: formatPrice(p),
+            image: imageByProduct[p.id],
+            featured: p.featured,
+            slug: p.slug,
+          })),
+      )
+      setStatus('ready')
+    } catch {
+      setStatus('error')
+    }
+  }, [])
+
+  useEffect(() => {
+    load()
+  }, [load])
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
-    return SERVICES.filter((s) => {
+    return services.filter((s) => {
       const matchesCategory = activeCategory === 'All' || s.category === activeCategory
       const matchesQuery =
         !q || s.name.toLowerCase().includes(q) || s.category.toLowerCase().includes(q)
       return matchesCategory && matchesQuery
     })
-  }, [activeCategory, query])
+  }, [activeCategory, query, services])
 
   const grouped = useMemo(() => {
     if (activeCategory !== 'All') {
       return filtered.length > 0 ? [[activeCategory, filtered]] : []
     }
-    return SERVICES_CATEGORIES.map((category) => [
-      category,
-      filtered.filter((s) => s.category === category),
-    ]).filter(([, items]) => items.length > 0)
-  }, [activeCategory, filtered])
+    return categories
+      .map((category) => [category, filtered.filter((s) => s.category === category)])
+      .filter(([, items]) => items.length > 0)
+  }, [activeCategory, filtered, categories])
 
   const totalCount = filtered.length
 
@@ -255,6 +295,38 @@ export default function ServicesPage() {
       {/* ============ CATALOGUE ============ */}
       <section className="w-full bg-white dark:bg-[#0C0C0E]">
         <div className="max-w-[1280px] mx-auto px-6 py-12 md:py-16">
+          {status === 'loading' && (
+            <div className="flex flex-col items-center justify-center py-24" role="status">
+              <span className="relative flex h-3 w-3" aria-hidden="true">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#E0EC38] opacity-60" />
+                <span className="relative inline-flex h-3 w-3 rounded-full bg-[#E0EC38]" />
+              </span>
+              <p className="mt-4 text-[14px] font-normal text-[#45483F] dark:text-[#A1A1AA]">
+                Loading services...
+              </p>
+            </div>
+          )}
+
+          {status === 'error' && (
+            <div className="flex flex-col items-center text-center py-24">
+              <p className="text-[16px] font-semibold text-[#1A1C1C] dark:text-[#F2F2F1]">
+                Something went wrong
+              </p>
+              <p className="mt-2 text-[14px] font-normal text-[#45483F] dark:text-[#A1A1AA]">
+                We could not load the services catalogue. Please check your connection and try again.
+              </p>
+              <button
+                type="button"
+                onClick={load}
+                className="mt-6 px-5 py-2.5 rounded-full border border-[#C5C8BC]/60 text-[13px] font-semibold text-[#45483F] hover:border-[#3D4D2B] hover:text-[#3D4D2B] transition-colors dark:border-[#26262B] dark:text-[#A1A1AA] dark:hover:border-[#AAB95F] dark:hover:text-[#AAB95F]"
+              >
+                Try again
+              </button>
+            </div>
+          )}
+
+          {status === 'ready' && (
+            <>
           {/* Search */}
           <Reveal className="flex justify-center">
             <div className="relative w-full max-w-md">
@@ -280,7 +352,7 @@ export default function ServicesPage() {
               role="group"
               aria-label="Filter services by category"
             >
-              {['All', ...SERVICES_CATEGORIES].map((category) => {
+              {['All', ...categories].map((category) => {
                 const active = activeCategory === category
                 return (
                   <button
@@ -360,6 +432,8 @@ export default function ServicesPage() {
                 </Reveal>
               </div>
             ))
+          )}
+            </>
           )}
         </div>
       </section>
