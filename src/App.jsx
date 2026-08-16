@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, lazy, Suspense } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import starIconSvg from './assets/icon-star.svg'
 import galleryPhoto7 from '../assets/Gallery Section Images/gallery-photo-7.webp'
 import imgGemini1 from './assets/img-gemini-1.png'
@@ -44,6 +45,8 @@ import { useInView } from './hooks/useInView'
 const BASE_URL = import.meta.env.BASE_URL
 const CONTACT_PATH = `${BASE_URL}contact`
 const SERVICES_PATH = `${BASE_URL}services`
+const CONTACT_ROUTE = '/contact'
+const SERVICES_ROUTE = '/services'
 
 const NAV_ITEMS = [
   { name: 'Home', link: `${BASE_URL}#home` },
@@ -67,13 +70,7 @@ const SERVICES_NAV_ITEMS = [
 ]
 
 function usePathname() {
-  const [pathname, setPathname] = useState(() => window.location.pathname)
-  useEffect(() => {
-    const onPop = () => setPathname(window.location.pathname)
-    window.addEventListener('popstate', onPop)
-    return () => window.removeEventListener('popstate', onPop)
-  }, [])
-  return pathname
+  return useLocation().pathname
 }
 
 // Reusable 3D Tilt Wrapper for Image/Content Boxes
@@ -149,11 +146,28 @@ function ProgressBar({ label, value }) {
   )
 }
 
+const AdminArea = lazy(() => import('./admin/AdminArea.jsx'))
+
 export default function App() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center bg-[#F9F9F9] dark:bg-[#0C0C0E]" />
+      }
+    >
+      <Routes>
+        <Route path="/admin/*" element={<AdminArea />} />
+        <Route path="*" element={<PublicSite />} />
+      </Routes>
+    </Suspense>
+  )
+}
+
+function PublicSite() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
-  const isContactPage = pathname === CONTACT_PATH
-  const isServicesPage = pathname === SERVICES_PATH
+  const isContactPage = pathname === CONTACT_ROUTE
+  const isServicesPage = pathname === SERVICES_ROUTE
   const navItems = isContactPage
     ? CONTACT_NAV_ITEMS
     : isServicesPage
