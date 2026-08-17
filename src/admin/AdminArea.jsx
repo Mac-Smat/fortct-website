@@ -11,6 +11,7 @@ const AdminLayout = lazy(() => import('./AdminLayout.jsx'))
 const AdminServicesPage = lazy(() => import('./AdminServicesPage.jsx'))
 const AdminServiceEditorPage = lazy(() => import('./AdminServiceEditorPage.jsx'))
 const AdminCategoriesPage = lazy(() => import('./AdminCategoriesPage.jsx'))
+const AdminEnquiriesPage = lazy(() => import('./AdminEnquiriesPage.jsx'))
 
 function AdminFallback() {
   return (
@@ -34,6 +35,7 @@ export default function AdminArea() {
                 <Route path="services" element={<AdminServicesPage />} />
                 <Route path="services/:id" element={<AdminServiceEditorPage />} />
                 <Route path="categories" element={<AdminCategoriesPage />} />
+                <Route path="enquiries" element={<AdminEnquiriesPage />} />
               </Route>
             </Route>
             <Route path="*" element={<Navigate to="/admin" replace />} />

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { MapPin, Phone, Mail, Clock, Check } from 'lucide-react'
 import { Tiles } from './Tiles.jsx'
 import { Reveal } from './Reveal.jsx'
@@ -10,10 +11,10 @@ import ContactForm from './ContactForm.jsx'
 import CtaBanner from './CtaBanner.jsx'
 
 const SERVICE_CARDS = [
-  { title: 'Branding', note: 'Identity & design' },
-  { title: 'General Printing', note: 'Flyers, stationery & more' },
-  { title: 'Billboard Construction & Installation', note: 'Outdoor advertising' },
-  { title: 'Large Format Print', note: 'Banners, signage & wraps' },
+  { title: 'Business Printing', note: 'Flyers, stationery & documents' },
+  { title: 'Marketing & Promotional', note: 'Campaigns & promo materials' },
+  { title: 'Branding & Large Format', note: 'Identity, signage & billboards' },
+  { title: 'Packaging', note: 'Boxes, bags & product packaging' },
 ]
 
 const infoCards = [
@@ -76,7 +77,16 @@ const socialLinks = [
 ]
 
 export default function ContactPage() {
-  const [selectedService, setSelectedService] = useState('')
+  const [searchParams] = useSearchParams()
+  const [selectedService, setSelectedService] = useState(() => {
+    const fromUrl = searchParams.get('service')
+    if (!fromUrl) return ''
+    const normalized = decodeURIComponent(fromUrl)
+    return SERVICE_CARDS.some((card) => card.title === normalized) ||
+      normalized === 'General Enquiry'
+      ? normalized
+      : ''
+  })
 
   const handleServiceSelect = (title) => {
     setSelectedService(title)
@@ -263,7 +273,10 @@ export default function ContactPage() {
                     Fill in the form and our team will get back to you shortly.
                   </p>
                 </div>
-                <ContactForm selectedService={selectedService} onServiceChange={setSelectedService} />
+                <ContactForm
+                  selectedService={selectedService}
+                  onServiceChange={setSelectedService}
+                />
               </div>
             </Reveal>
           </div>

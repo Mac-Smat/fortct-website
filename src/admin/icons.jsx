@@ -1,3 +1,3 @@
-import { LayoutGrid, FolderOpen, ExternalLink, LogOut, Menu as IconMenu2, X as IconX } from 'lucide-react'
+import { LayoutGrid, FolderOpen, ExternalLink, LogOut, Menu as IconMenu2, X as IconX, MessageSquare } from 'lucide-react'
 
-export { LayoutGrid, FolderOpen, ExternalLink, LogOut, IconMenu2, IconX }
+export { LayoutGrid, FolderOpen, ExternalLink, LogOut, IconMenu2, IconX, MessageSquare }

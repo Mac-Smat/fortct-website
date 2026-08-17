@@ -293,3 +293,26 @@ export async function reorderProductImages(productId, orderedIds) {
   }
   return true
 }
+
+// ================= enquiries =================
+
+export async function fetchEnquiries() {
+  const { data, error } = await supabase
+    .from('enquiries')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .limit(200)
+  if (error) throw new Error(messageFor(error, 'Could not load enquiries'))
+  return data ?? []
+}
+
+export async function updateEnquiryStatus(id, status) {
+  const { data, error } = await supabase
+    .from('enquiries')
+    .update({ status, updated_at: new Date().toISOString() })
+    .eq('id', id)
+    .select()
+    .single()
+  if (error) throw new Error(messageFor(error, 'Could not update enquiry status'))
+  return data
+}

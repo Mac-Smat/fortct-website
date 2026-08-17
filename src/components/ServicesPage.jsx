@@ -262,9 +262,12 @@ export default function ServicesPage() {
 
   const totalCount = filtered.length
 
-  const handleGetQuote = () => {
+  const handleGetQuote = (product) => {
     setDetailProduct(null)
-    window.location.href = CONTACT_PATH
+    const service = product?.category
+    window.location.href = service
+      ? `${CONTACT_PATH}?service=${encodeURIComponent(service)}`
+      : CONTACT_PATH
   }
 
   return (

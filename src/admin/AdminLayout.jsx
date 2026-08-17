@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
-import { LayoutGrid, FolderOpen, ExternalLink, LogOut, IconMenu2, IconX } from './icons.jsx'
+import { LayoutGrid, FolderOpen, ExternalLink, LogOut, IconMenu2, IconX, MessageSquare } from './icons.jsx'
 import { useAdminAuth } from './useAdminAuth.js'
 import { ThemeToggle } from '../components/ThemeToggle.jsx'
 import logoSvg from '../assets/logo.svg'
@@ -11,6 +11,7 @@ const BASE_URL = import.meta.env.BASE_URL
 const NAV_ITEMS = [
   { to: '/admin/services', label: 'Services', icon: LayoutGrid },
   { to: '/admin/categories', label: 'Categories', icon: FolderOpen },
+  { to: '/admin/enquiries', label: 'Enquiries', icon: MessageSquare },
 ]
 
 const NAV_CLASS = ({ isActive }) =>

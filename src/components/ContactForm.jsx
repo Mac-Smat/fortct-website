@@ -1,19 +1,12 @@
 import { useEffect, useState } from 'react'
 import { ChevronDown, CheckCircle2, AlertCircle } from 'lucide-react'
 import { LiquidMetalButton } from './LiquidMetalButton.jsx'
-import { submitContactMessage } from '../lib/contact-api.js'
+import { fetchPublishedCategories } from '../lib/public-api.js'
+import { normalizeWhatsAppNumber, submitEnquiry } from '../lib/enquiry-api.js'
 
-const SERVICE_OPTIONS = [
-  'Branding',
-  'General Printing',
-  'Billboard Construction & Installation',
-  'Large Format Print',
-  'Graphics & Video Design',
-  'Other',
-]
+const GENERAL_ENQUIRY = 'General Enquiry'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-const PHONE_RE = /^[+()\d\s-]{7,}$/
 
 const inputBase =
   'w-full h-[48px] bg-[#F9F9F9] rounded-[12px] px-[14px] text-[14px] text-[#1A1C1C] placeholder:text-[#B7BBC4] outline-none focus:ring-2 transition-shadow border border-[#C5C8BC]/50 dark:bg-[#0F0F11] dark:text-[#F2F2F1] dark:placeholder:text-[#5C5C66] dark:border-[#26262B]'
@@ -27,15 +20,37 @@ const inputInvalid =
 export default function ContactForm({ selectedService, onServiceChange }) {
   const [values, setValues] = useState({
     name: '',
+    whatsapp: '',
     email: '',
-    phone: '',
     service: '',
     message: '',
+    hp: '',
   })
   const [errors, setErrors] = useState({})
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState('')
+  const [serviceOptions, setServiceOptions] = useState([GENERAL_ENQUIRY])
+  const [servicesUnavailable, setServicesUnavailable] = useState(false)
+
+  useEffect(() => {
+    let active = true
+    fetchPublishedCategories()
+      .then((rows) => {
+        if (!active) return
+        setServiceOptions([
+          GENERAL_ENQUIRY,
+          ...rows.map((c) => c.name),
+        ])
+      })
+      .catch(() => {
+        if (!active) return
+        setServicesUnavailable(true)
+      })
+    return () => {
+      active = false
+    }
+  }, [])
 
   useEffect(() => {
     if (selectedService) {
@@ -57,13 +72,14 @@ export default function ContactForm({ selectedService, onServiceChange }) {
     } else if (values.name.trim().length < 2) {
       next.name = 'Name must be at least 2 characters'
     }
-    if (!values.email.trim()) {
-      next.email = 'Please enter your email address'
-    } else if (!EMAIL_RE.test(values.email.trim())) {
-      next.email = 'Please enter a valid email address'
+    if (!values.whatsapp.trim()) {
+      next.whatsapp = 'Please enter your WhatsApp number'
+    } else if (!normalizeWhatsAppNumber(values.whatsapp)) {
+      next.whatsapp =
+        'Please enter a valid WhatsApp number with country code (e.g. +234 707 787 5475)'
     }
-    if (values.phone.trim() && !PHONE_RE.test(values.phone.trim())) {
-      next.phone = 'Please enter a valid phone number'
+    if (values.email.trim() && !EMAIL_RE.test(values.email.trim())) {
+      next.email = 'Please enter a valid email address'
     }
     if (!values.message.trim()) {
       next.message = 'Please tell us how we can help'
@@ -82,13 +98,22 @@ export default function ContactForm({ selectedService, onServiceChange }) {
     setSubmitting(true)
     setSubmitError('')
     try {
-      await submitContactMessage(values)
+      await submitEnquiry({
+        full_name: values.name,
+        whatsapp_number: values.whatsapp,
+        email: values.email,
+        service_name: values.service || GENERAL_ENQUIRY,
+        message: values.message,
+        hp: values.hp,
+      })
       setSubmitted(true)
-      setValues({ name: '', email: '', phone: '', service: '', message: '' })
+      setValues({ name: '', whatsapp: '', email: '', service: '', message: '', hp: '' })
       onServiceChange?.('')
-    } catch {
+    } catch (err) {
       setSubmitError(
-        'Something went wrong sending your message. Please try again, or email us directly at hello@fortct.ltd.',
+        err?.status === 429
+          ? 'Too many submissions. Please try again in a few minutes.'
+          : 'Something went wrong sending your enquiry. Please try again, or email us directly at hello@fortct.ltd.',
       )
     } finally {
       setSubmitting(false)
@@ -103,6 +128,22 @@ export default function ContactForm({ selectedService, onServiceChange }) {
 
   return (
     <form onSubmit={handleSubmit} noValidate>
+      <div
+        aria-hidden="true"
+        className="absolute -left-[9999px] w-px h-px overflow-hidden"
+      >
+        <label htmlFor="contact-hp">Leave this field empty</label>
+        <input
+          id="contact-hp"
+          type="text"
+          name="hp"
+          tabIndex={-1}
+          autoComplete="off"
+          value={values.hp}
+          onChange={(e) => setField('hp', e.target.value)}
+        />
+      </div>
+
       {submitted && (
         <div
           role="status"
@@ -111,10 +152,10 @@ export default function ContactForm({ selectedService, onServiceChange }) {
           <CheckCircle2 className="w-5 h-5 text-[#3D4D2B] mt-0.5 shrink-0 dark:text-[#AAB95F]" />
           <div className="flex flex-col gap-1">
             <p className="text-[14px] font-semibold text-[#1A1C1C] dark:text-[#F2F2F1]">
-              Message sent!
+              Enquiry received!
             </p>
             <p className="text-[13px] font-normal leading-[20px] text-[#45483F] dark:text-[#A1A1AA]">
-              Thank you for reaching out. Our team will get back to you within 24 hours.
+              Thank you for reaching out. Our team will contact you on WhatsApp within 24 hours.
             </p>
           </div>
         </div>
@@ -157,7 +198,7 @@ export default function ContactForm({ selectedService, onServiceChange }) {
         </div>
         <div>
           <label htmlFor="contact-email" className="block mb-[6px] text-[12px] font-normal text-[#666666] leading-[16px] dark:text-[#A1A1AA]">
-            Email Address <span className="text-[#3D4D2B] dark:text-[#AAB95F]">*</span>
+            Email Address <span className="text-[#B7BBC4] dark:text-[#5C5C66]">(optional)</span>
           </label>
           <input
             id="contact-email"
@@ -181,24 +222,33 @@ export default function ContactForm({ selectedService, onServiceChange }) {
 
       <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="contact-phone" className="block mb-[6px] text-[12px] font-normal text-[#666666] leading-[16px] dark:text-[#A1A1AA]">
-            Phone Number <span className="text-[#B7BBC4] dark:text-[#5C5C66]">(optional)</span>
+          <label htmlFor="contact-whatsapp" className="block mb-[6px] text-[12px] font-normal text-[#666666] leading-[16px] dark:text-[#A1A1AA]">
+            WhatsApp Number <span className="text-[#3D4D2B] dark:text-[#AAB95F]">*</span>
           </label>
           <input
-            id="contact-phone"
+            id="contact-whatsapp"
             type="tel"
-            name="phone"
-            placeholder="Phone number"
+            name="whatsapp"
+            placeholder="e.g. +234 707 787 5475"
             autoComplete="tel"
-            value={values.phone}
-            onChange={(e) => setField('phone', e.target.value)}
-            aria-invalid={!!errors.phone}
-            aria-describedby={errors.phone ? 'contact-phone-error' : undefined}
-            className={fieldClass('phone')}
+            inputMode="tel"
+            value={values.whatsapp}
+            onChange={(e) => setField('whatsapp', e.target.value)}
+            aria-invalid={!!errors.whatsapp}
+            aria-describedby={
+              errors.whatsapp
+                ? 'contact-whatsapp-error'
+                : 'contact-whatsapp-hint'
+            }
+            className={fieldClass('whatsapp')}
           />
-          {errors.phone && (
-            <p id="contact-phone-error" className="mt-1.5 text-[12px] font-normal text-[#B42318] leading-[16px]">
-              {errors.phone}
+          {errors.whatsapp ? (
+            <p id="contact-whatsapp-error" className="mt-1.5 text-[12px] font-normal text-[#B42318] leading-[16px]">
+              {errors.whatsapp}
+            </p>
+          ) : (
+            <p id="contact-whatsapp-hint" className="mt-1.5 text-[12px] font-normal text-[#B7BBC4] leading-[16px] dark:text-[#5C5C66]">
+              We&apos;ll contact you on WhatsApp.
             </p>
           )}
         </div>
@@ -219,7 +269,7 @@ export default function ContactForm({ selectedService, onServiceChange }) {
               <option value="" disabled>
                 Select a service
               </option>
-              {SERVICE_OPTIONS.map((option) => (
+              {serviceOptions.map((option) => (
                 <option key={option} value={option} className="text-[#1A1C1C] dark:text-[#F2F2F1]">
                   {option}
                 </option>
@@ -227,6 +277,11 @@ export default function ContactForm({ selectedService, onServiceChange }) {
             </select>
             <ChevronDown className="w-4 h-4 text-[#45483F] dark:text-[#A1A1AA] pointer-events-none absolute right-[14px] top-1/2 -translate-y-1/2" />
           </div>
+          {servicesUnavailable && (
+            <p className="mt-1.5 text-[12px] font-normal text-[#B7BBC4] leading-[16px] dark:text-[#5C5C66]">
+              Service list unavailable — check your connection and try again.
+            </p>
+          )}
         </div>
       </div>
 
