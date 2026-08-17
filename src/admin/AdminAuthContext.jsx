@@ -1,7 +1,6 @@
-import { createContext, useCallback, useContext, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase.js'
-
-const AdminAuthContext = createContext(null)
+import { AdminAuthContext } from './useAdminAuth.js'
 
 export function AdminAuthProvider({ children }) {
   const [session, setSession] = useState(null)
@@ -46,10 +45,4 @@ export function AdminAuthProvider({ children }) {
       {children}
     </AdminAuthContext.Provider>
   )
-}
-
-export function useAdminAuth() {
-  const ctx = useContext(AdminAuthContext)
-  if (!ctx) throw new Error('useAdminAuth must be used within AdminAuthProvider')
-  return ctx
 }

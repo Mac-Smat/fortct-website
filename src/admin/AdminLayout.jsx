@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { LayoutGrid, FolderOpen, ExternalLink, LogOut, IconMenu2, IconX } from './icons.jsx'
-import { useAdminAuth } from './AdminAuthContext.jsx'
+import { useAdminAuth } from './useAdminAuth.js'
 import { ThemeToggle } from '../components/ThemeToggle.jsx'
 import logoSvg from '../assets/logo.svg'
 import { cn } from '../lib/utils.js'

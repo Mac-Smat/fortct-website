@@ -10,7 +10,7 @@ import {
   setProductFeatured,
 } from '../lib/admin-api.js'
 import { formatPrice, formatDate } from '../lib/format.js'
-import { useAdminToast } from './AdminToast.jsx'
+import { useAdminToast } from './useAdminToast.js'
 import { AdminButton, AdminIconButton } from './ui/AdminButton.jsx'
 import { AdminSelect, AdminInput } from './ui/AdminFields.jsx'
 import { StatusBadge, AdminBadge } from './ui/AdminBadge.jsx'

@@ -13,7 +13,7 @@ import {
   reorderProductImages,
 } from '../lib/admin-api.js'
 import { slugify, PRICING_TYPES, ALLOWED_IMAGE_TYPES, MAX_IMAGE_BYTES } from '../lib/format.js'
-import { useAdminToast } from './AdminToast.jsx'
+import { useAdminToast } from './useAdminToast.js'
 import { AdminButton } from './ui/AdminButton.jsx'
 import { AdminInput, AdminSelect, AdminTextarea, FieldLabel, FieldError } from './ui/AdminFields.jsx'
 import { AdminLoading, AdminErrorState, AdminPageHeader } from './ui/AdminStates.jsx'

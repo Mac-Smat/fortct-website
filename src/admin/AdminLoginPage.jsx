@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { AlertCircle } from 'lucide-react'
-import { useAdminAuth } from './AdminAuthContext.jsx'
+import { useAdminAuth } from './useAdminAuth.js'
 import { LiquidMetalButton } from '../components/LiquidMetalButton.jsx'
 import { Tiles } from '../components/Tiles.jsx'
 import logoSvg from '../assets/logo.svg'

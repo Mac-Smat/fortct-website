@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom'
-import { useAdminAuth } from './AdminAuthContext.jsx'
+import { useAdminAuth } from './useAdminAuth.js'
 import { AdminLoading } from './ui/AdminStates.jsx'
 import { AdminButton } from './ui/AdminButton.jsx'
 import logoSvg from '../assets/logo.svg'

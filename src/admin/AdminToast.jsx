@@ -1,7 +1,6 @@
-import { createContext, useCallback, useContext, useMemo, useRef, useState } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import { CheckCircle2, AlertCircle } from 'lucide-react'
-
-const ToastContext = createContext(null)
+import { ToastContext } from './useAdminToast.js'
 
 let toastId = 0
 
@@ -68,10 +67,4 @@ export function AdminToastProvider({ children }) {
       </div>
     </ToastContext.Provider>
   )
-}
-
-export function useAdminToast() {
-  const ctx = useContext(ToastContext)
-  if (!ctx) throw new Error('useAdminToast must be used within AdminToastProvider')
-  return ctx
 }

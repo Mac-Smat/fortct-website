@@ -6,7 +6,7 @@ import {
   updateCategory,
 } from '../lib/admin-api.js'
 import { slugify } from '../lib/format.js'
-import { useAdminToast } from './AdminToast.jsx'
+import { useAdminToast } from './useAdminToast.js'
 import { AdminButton } from './ui/AdminButton.jsx'
 import { AdminInput, AdminSelect, AdminTextarea, FieldLabel, FieldError } from './ui/AdminFields.jsx'
 import { StatusBadge } from './ui/AdminBadge.jsx'
