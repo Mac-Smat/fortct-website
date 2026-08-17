@@ -1,2 +1,4 @@
 User-agent: *
-Disallow: /admin/
+Disallow: /fortct-website/admin/
+
+Sitemap: https://mac-smat.github.io/fortct-website/sitemap.xml
