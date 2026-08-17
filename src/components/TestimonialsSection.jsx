@@ -59,6 +59,7 @@ export default function TestimonialsSection() {
 
   return (
     <section id="testimonials" className="relative w-full bg-[#F9F9F9] overflow-hidden dark:bg-[#131316]">
+      <h2 className="sr-only">Client Testimonials</h2>
       <div className="w-full max-w-2xl mx-auto px-6 py-16 md:py-24">
         {/* Large index number */}
         <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-8">

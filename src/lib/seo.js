@@ -24,10 +24,23 @@ const PAGE_META = {
       'Get in touch with FortCT Ltd in Ibadan for printing, branding, billboard and large format services. Call 0707 787 5475 or send us a message.',
     path: 'contact',
   },
+  about: {
+    title: 'About FortCT Ltd — Printing & Branding Experts in Ibadan',
+    description:
+      'Learn about FortCT Ltd, the printing and branding company in Ibadan behind premium business printing, large format and outdoor advertising services.',
+    path: 'about',
+  },
+  notfound: {
+    title: 'Page Not Found | FortCT Ltd',
+    description: '',
+    path: null,
+    private: true,
+  },
   admin: {
     title: 'Admin — FortCT Ltd',
     description: '',
     path: null,
+    private: true,
   },
 }
 
@@ -104,9 +117,13 @@ export function applyPageMeta(pathname) {
       ? 'services'
       : pathname === '/contact'
         ? 'contact'
-        : 'home'
+        : pathname === '/about'
+          ? 'about'
+          : pathname === '/'
+            ? 'home'
+            : 'notfound'
   const meta = PAGE_META[key]
-  const isAdmin = key === 'admin'
+  const isPrivate = key === 'admin' || key === 'notfound'
   const url = meta.path === null ? null : `${SITE_URL}${BASE_URL}${meta.path}`
 
   document.title = meta.title
@@ -114,9 +131,9 @@ export function applyPageMeta(pathname) {
   if (meta.description) upsertMeta('name', 'description', meta.description)
   else document.head.querySelector('meta[name="description"]')?.remove()
 
-  upsertMeta('name', 'robots', isAdmin ? 'noindex, nofollow' : 'index, follow')
+  upsertMeta('name', 'robots', isPrivate ? 'noindex, nofollow' : 'index, follow')
 
-  if (isAdmin) {
+  if (isPrivate) {
     setCanonical(null)
     for (const tag of [
       ['property', 'og:title'],

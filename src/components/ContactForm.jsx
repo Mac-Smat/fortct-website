@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import { ChevronDown, CheckCircle2 } from 'lucide-react'
+import { ChevronDown, CheckCircle2, AlertCircle } from 'lucide-react'
 import { LiquidMetalButton } from './LiquidMetalButton.jsx'
+import { submitContactMessage } from '../lib/contact-api.js'
 
 const SERVICE_OPTIONS = [
   'Branding',
@@ -33,6 +34,8 @@ export default function ContactForm({ selectedService, onServiceChange }) {
   })
   const [errors, setErrors] = useState({})
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   useEffect(() => {
     if (selectedService) {
@@ -70,14 +73,26 @@ export default function ContactForm({ selectedService, onServiceChange }) {
     return next
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    if (submitting) return
     const nextErrors = validate()
     setErrors(nextErrors)
     if (Object.keys(nextErrors).length > 0) return
-    setSubmitted(true)
-    setValues({ name: '', email: '', phone: '', service: '', message: '' })
-    onServiceChange?.('')
+    setSubmitting(true)
+    setSubmitError('')
+    try {
+      await submitContactMessage(values)
+      setSubmitted(true)
+      setValues({ name: '', email: '', phone: '', service: '', message: '' })
+      onServiceChange?.('')
+    } catch {
+      setSubmitError(
+        'Something went wrong sending your message. Please try again, or email us directly at hello@fortct.ltd.',
+      )
+    } finally {
+      setSubmitting(false)
+    }
     setTimeout(() => {
       document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }, 50)
@@ -102,6 +117,18 @@ export default function ContactForm({ selectedService, onServiceChange }) {
               Thank you for reaching out. Our team will get back to you within 24 hours.
             </p>
           </div>
+        </div>
+      )}
+
+      {submitError && (
+        <div
+          role="alert"
+          className="mb-8 flex items-start gap-3 rounded-[16px] border border-[#B42318]/40 bg-[#B42318]/5 p-4 dark:border-[#E5484D]/40 dark:bg-[#E5484D]/10"
+        >
+          <AlertCircle className="w-5 h-5 text-[#B42318] mt-0.5 shrink-0 dark:text-[#E5484D]" />
+          <p className="text-[13px] font-normal leading-[20px] text-[#B42318] dark:text-[#E5484D]">
+            {submitError}
+          </p>
         </div>
       )}
 
@@ -228,7 +255,7 @@ export default function ContactForm({ selectedService, onServiceChange }) {
       <div className="flex justify-center mt-8">
         <LiquidMetalButton
           variant="light"
-          label="Send Message"
+          label={submitting ? 'Sending…' : 'Send Message'}
           showArrow
           width={190}
           onClick={() => {}}
