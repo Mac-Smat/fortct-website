@@ -176,7 +176,7 @@ export default function GallerySection() {
       <ContainerStagger className="relative z-[9999] -mb-12 place-self-center px-6 pt-12 text-center">
         <ContainerAnimated>
           <RevealHeading
-            as="h1"
+            as="h2"
             per="word"
             preset="fade-in-blur"
             className="text-4xl font-bold tracking-tight text-black dark:text-[#F2F2F1] md:text-5xl"
@@ -228,7 +228,7 @@ export default function GallerySection() {
                   key={index}
                   className="aspect-[1600/1835] block h-auto max-h-full w-full rounded-md object-cover shadow"
                   src={imageUrl}
-                  alt="Gallery item"
+                  alt="" loading="lazy" decoding="async"
                 />
               ))}
             </GalleryCol>
@@ -238,7 +238,7 @@ export default function GallerySection() {
                   key={index}
                   className="aspect-video block h-auto max-h-full w-full rounded-md object-cover shadow"
                   src={imageUrl}
-                  alt="Gallery item"
+                  alt="" loading="lazy" decoding="async"
                 />
               ))}
             </GalleryCol>
@@ -248,7 +248,7 @@ export default function GallerySection() {
                   key={index}
                   className="aspect-[1600/1835] block h-auto max-h-full w-full rounded-md object-cover shadow"
                   src={imageUrl}
-                  alt="Gallery item"
+                  alt="" loading="lazy" decoding="async"
                 />
               ))}
             </GalleryCol>

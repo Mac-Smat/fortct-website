@@ -41,6 +41,7 @@ import { TextReveal } from './components/TextReveal.jsx'
 import { RevealHeading } from './components/RevealHeading.jsx'
 import { Tiles } from './components/Tiles.jsx'
 import { useInView } from './hooks/useInView'
+import { usePageMeta } from './lib/seo.js'
 
 const BASE_URL = import.meta.env.BASE_URL
 const CONTACT_PATH = `${BASE_URL}contact`
@@ -166,6 +167,7 @@ export default function App() {
 function PublicSite() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
+  usePageMeta(pathname)
   const isContactPage = pathname === CONTACT_ROUTE
   const isServicesPage = pathname === SERVICES_ROUTE
   const navItems = isContactPage
@@ -307,39 +309,39 @@ function PublicSite() {
             <div className="hidden md:flex items-start justify-center gap-3 lg:gap-4 min-h-[480px] lg:min-h-[540px] xl:min-h-[600px] pt-4">
             <div className="pt-[110px] lg:pt-[130px] xl:pt-[165px]">
               <TiltCard className="w-[130px] lg:w-[190px] xl:w-[250px] h-[160px] lg:h-[200px] xl:h-[220px] rounded-[10px] overflow-hidden shadow-md">
-                <img src={galleryPhoto7} alt="Print product" className="w-full h-full object-cover" />
+                <img src={galleryPhoto7} alt="" className="w-full h-full object-cover" />
               </TiltCard>
             </div>
             <div className="pt-[36px] lg:pt-[40px] xl:pt-[48px] flex flex-col gap-6">
               <TiltCard className="w-[96px] lg:w-[140px] xl:w-[186px] h-[160px] lg:h-[200px] xl:h-[220px] rounded-[10px] overflow-hidden">
-                <img src={heroCardImage1} alt="Print product" className="w-full h-full object-cover" />
+                <img src={heroCardImage1} alt="" className="w-full h-full object-cover" />
               </TiltCard>
               <TiltCard className="w-[96px] lg:w-[140px] xl:w-[186px] h-[160px] lg:h-[200px] xl:h-[220px] rounded-[10px] overflow-hidden">
-                <img src={heroCardImage2} alt="Print product" className="w-full h-full object-cover" />
+                <img src={heroCardImage2} alt="" className="w-full h-full object-cover" />
               </TiltCard>
             </div>
             <div className="pt-0">
               <TiltCard className="w-[190px] lg:w-[250px] xl:w-[330px] h-[430px] lg:h-[490px] xl:h-[600px] rounded-[10px] overflow-hidden shadow-lg">
-                <img src={heroMainImage} alt="Hero print product" className="w-full h-full object-cover" />
+                <img src={heroMainImage} alt="Premium printed business cards, brochures and branding materials by FortCT" className="w-full h-full object-cover" />
               </TiltCard>
             </div>
             <div className="pt-[36px] lg:pt-[40px] xl:pt-[48px] flex flex-col gap-6">
               <TiltCard className="w-[96px] lg:w-[140px] xl:w-[186px] h-[160px] lg:h-[200px] xl:h-[220px] rounded-[10px] overflow-hidden">
-                <img src={heroCardImage3} alt="Print product" className="w-full h-full object-cover" />
+                <img src={heroCardImage3} alt="" className="w-full h-full object-cover" />
               </TiltCard>
               <TiltCard className="w-[96px] lg:w-[140px] xl:w-[186px] h-[160px] lg:h-[200px] xl:h-[220px] rounded-[10px] overflow-hidden">
-                <img src={heroCardImage4} alt="Print product" className="w-full h-full object-cover" />
+                <img src={heroCardImage4} alt="" className="w-full h-full object-cover" />
               </TiltCard>
             </div>
             <div className="pt-[110px] lg:pt-[130px] xl:pt-[164px] flex flex-col gap-6">
               <TiltCard className="w-[130px] lg:w-[190px] xl:w-[250px] h-[160px] lg:h-[200px] xl:h-[220px] rounded-[10px] overflow-hidden">
-                <img src={heroCardImage5} alt="Print product" className="w-full h-full object-cover" />
+                <img src={heroCardImage5} alt="" className="w-full h-full object-cover" />
               </TiltCard>
               <div className="pt-2 pl-2 flex flex-col gap-2">
                 <p className="text-[14px] font-normal text-[#3D4D2B] leading-[20px] dark:text-[#AAB95F]">Rated 4.9/5 by 4,900+ clients</p>
                 <div className="flex items-center gap-1">
                   {[...Array(5)].map((_, i) => (
-                    <img key={i} src={starIconSvg} alt="Star rating" className="w-[20px] h-[19px]" />
+                    <img key={i} src={starIconSvg} alt="" className="w-[20px] h-[19px]" />
                   ))}
                 </div>
               </div>
@@ -350,21 +352,21 @@ function PublicSite() {
           <Reveal delay={240} className="md:hidden">
             <div className="flex flex-col items-center gap-6 pt-16">
               <TiltCard className="w-full max-w-[330px] h-[360px] rounded-[10px] overflow-hidden">
-                <img src={heroMainImage} alt="Hero print product" className="w-full h-full object-cover" />
+                <img src={heroMainImage} alt="Premium printed business cards, brochures and branding materials by FortCT" className="w-full h-full object-cover" />
               </TiltCard>
               <div className="grid grid-cols-2 gap-4 w-full max-w-[330px]">
                 <TiltCard className="h-[160px] rounded-[10px] overflow-hidden">
-                  <img src={galleryPhoto7} alt="Print product" className="w-full h-full object-cover" />
+                  <img src={galleryPhoto7} alt="" className="w-full h-full object-cover" />
                 </TiltCard>
                 <TiltCard className="h-[160px] rounded-[10px] overflow-hidden">
-                  <img src={heroCardImage6} alt="Print product" className="w-full h-full object-cover" />
+                  <img src={heroCardImage6} alt="" className="w-full h-full object-cover" />
                 </TiltCard>
               </div>
               <div className="flex flex-col items-center text-center gap-2 pt-4">
                 <p className="text-[14px] font-normal text-[#3D4D2B] leading-[20px] dark:text-[#AAB95F]">Rated 4.9/5 by 4,900+ clients</p>
                 <div className="flex items-center gap-1">
                   {[...Array(5)].map((_, i) => (
-                    <img key={i} src={starIconSvg} alt="Star" className="w-[20px] h-[19px]" />
+                    <img key={i} src={starIconSvg} alt="" className="w-[20px] h-[19px]" />
                   ))}
                 </div>
               </div>
@@ -400,12 +402,12 @@ function PublicSite() {
             <Reveal className="relative flex flex-col sm:flex-row gap-4 items-center justify-center">
               {/* Left Image (blueprints) */}
               <TiltCard className="w-full sm:w-[284px] h-[360px] sm:h-[500px] rounded-tl-[24px] rounded-tr-[100px] rounded-bl-[24px] rounded-br-[24px] overflow-hidden shadow-lg shrink-0">
-                <img src={aboutMainImage1} alt="About Us 1" className="w-full h-full object-cover" />
+                <img src={aboutMainImage1} alt="FortCT printing production workshop" className="w-full h-full object-cover" />
               </TiltCard>
 
               {/* Right Image (machinery) - offset down slightly for a staggered layout */}
               <TiltCard className="w-full sm:w-[284px] h-[360px] sm:h-[500px] rounded-tl-[24px] rounded-tr-[24px] rounded-bl-[24px] rounded-br-[100px] overflow-hidden shadow-lg shrink-0 sm:mt-12">
-                <img src={aboutMainImage2} alt="About Us 2" className="w-full h-full object-cover" />
+                <img src={aboutMainImage2} alt="FortCT large format printing equipment" className="w-full h-full object-cover" />
               </TiltCard>
 
               {/* Circular Badge - perfectly centered on the gap between images */}
@@ -594,7 +596,7 @@ function PublicSite() {
                   <div className="mt-[18px] flex flex-col gap-[8px]">
                     <div className="flex items-center gap-1">
                       {[...Array(5)].map((_, i) => (
-                        <img key={i} src={starIconSvg} alt="Star rating" className="w-[20px] h-[19px]" />
+                        <img key={i} src={starIconSvg} alt="" className="w-[20px] h-[19px]" />
                       ))}
                     </div>
                     <span className="text-[12px] font-semibold tracking-[0.6px] text-[#1A1C1C]/70">

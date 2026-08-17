@@ -4,6 +4,7 @@ import { AdminAuthProvider } from './AdminAuthContext.jsx'
 import { AdminToastProvider } from './AdminToast.jsx'
 import { RequireAdmin } from './RequireAdmin.jsx'
 import { AdminLoading } from './ui/AdminStates.jsx'
+import { usePageMeta } from '../lib/seo.js'
 
 const AdminLoginPage = lazy(() => import('./AdminLoginPage.jsx'))
 const AdminLayout = lazy(() => import('./AdminLayout.jsx'))
@@ -20,6 +21,7 @@ function AdminFallback() {
 }
 
 export default function AdminArea() {
+  usePageMeta('/admin')
   return (
     <AdminToastProvider>
       <AdminAuthProvider>

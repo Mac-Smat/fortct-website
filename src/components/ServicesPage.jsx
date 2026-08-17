@@ -98,11 +98,27 @@ function ProductCard({ product, onViewDetails, onGetQuote }) {
 
 function ServiceDetailModal({ product, onClose, onGetQuote }) {
   const closeRef = useRef(null)
+  const modalRef = useRef(null)
   const Icon = product ? (CATEGORY_ICONS[product.category] ?? Package) : Package
 
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === 'Escape') onClose()
+      if (e.key === 'Tab') {
+        const focusable = modalRef.current?.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+        )
+        if (!focusable?.length) return
+        const first = focusable[0]
+        const last = focusable[focusable.length - 1]
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault()
+          last.focus()
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault()
+          first.focus()
+        }
+      }
     }
     window.addEventListener('keydown', onKey)
     document.body.style.overflow = 'hidden'
@@ -123,6 +139,7 @@ function ServiceDetailModal({ product, onClose, onGetQuote }) {
       onClick={onClose}
     >
       <motion.div
+        ref={modalRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby="service-detail-title"

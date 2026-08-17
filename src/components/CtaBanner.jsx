@@ -3,7 +3,7 @@ import { LiquidMetalButton } from './LiquidMetalButton.jsx'
 import { Reveal } from './Reveal.jsx'
 import { RevealHeading } from './RevealHeading.jsx'
 
-export default function CtaBanner({ scrollTarget, navigateTo, headingAs = 'h1' }) {
+export default function CtaBanner({ scrollTarget, navigateTo, headingAs = 'h2' }) {
   const handleQuoteClick = () => {
     if (scrollTarget) {
       document

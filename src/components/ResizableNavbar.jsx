@@ -1,4 +1,4 @@
-import { Children, cloneElement, isValidElement, useRef, useState } from 'react'
+import { Children, cloneElement, isValidElement, useEffect, useRef, useState } from 'react'
 import { IconMenu2, IconX } from '@tabler/icons-react'
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'motion/react'
 import { cn } from '../lib/utils'
@@ -21,7 +21,7 @@ export const Navbar = ({ children, className }) => {
   })
 
   return (
-    <motion.div
+    <motion.header
       ref={ref}
       className={cn('sticky inset-x-0 top-0 z-40 w-full', className)}
     >
@@ -30,7 +30,7 @@ export const Navbar = ({ children, className }) => {
           ? cloneElement(child, { visible })
           : child,
       )}
-    </motion.div>
+    </motion.header>
   )
 }
 
@@ -68,7 +68,8 @@ export const NavItems = ({ items, className, onItemClick, activeName }) => {
   const [hovered, setHovered] = useState(null)
 
   return (
-    <motion.div
+    <motion.nav
+      aria-label="Main navigation"
       onMouseLeave={() => setHovered(null)}
       className={cn(
         'absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex lg:space-x-2',
@@ -98,7 +99,7 @@ export const NavItems = ({ items, className, onItemClick, activeName }) => {
           <span className="relative z-20">{item.name}</span>
         </a>
       ))}
-    </motion.div>
+    </motion.nav>
   )
 }
 
@@ -145,11 +146,21 @@ export const MobileNavHeader = ({ children, className }) => {
   )
 }
 
-export const MobileNavMenu = ({ children, className, isOpen, onClose: _onClose }) => {
+export const MobileNavMenu = ({ children, className, isOpen, onClose }) => {
+  useEffect(() => {
+    if (!isOpen) return
+    const onKey = (e) => {
+      if (e.key === 'Escape') onClose?.()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [isOpen, onClose])
+
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
+        <motion.nav
+          aria-label="Mobile navigation"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -159,29 +170,39 @@ export const MobileNavMenu = ({ children, className, isOpen, onClose: _onClose }
           )}
         >
           {children}
-        </motion.div>
+        </motion.nav>
       )}
     </AnimatePresence>
   )
 }
 
 export const MobileNavToggle = ({ isOpen, onClick }) => {
-  return isOpen ? (
-    <IconX className="text-black dark:text-white" onClick={onClick} />
-  ) : (
-    <IconMenu2 className="text-black dark:text-white" onClick={onClick} />
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={isOpen ? 'Close menu' : 'Open menu'}
+      aria-expanded={isOpen}
+      className="flex h-11 w-11 items-center justify-center rounded-full bg-transparent text-black transition-colors hover:bg-gray-100 dark:text-white dark:hover:bg-neutral-800"
+    >
+      {isOpen ? (
+        <IconX className="text-black dark:text-white" />
+      ) : (
+        <IconMenu2 className="text-black dark:text-white" />
+      )}
+    </button>
   )
 }
 
 export const NavbarLogo = () => {
   return (
     <a
-      href="#home"
+      href={import.meta.env.BASE_URL}
       className="relative z-20 mr-4 flex items-center px-2 py-1"
     >
       <img
         src={logoSvg}
-        alt="FortCT Logo"
+        alt="FortCT — go to homepage"
         width={146}
         height={39}
         className="h-[30px] w-auto object-contain dark:[filter:brightness(0)_invert(1)]"

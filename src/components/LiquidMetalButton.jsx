@@ -346,6 +346,7 @@ export function LiquidMetalButton({
             onMouseLeave={handleMouseLeave}
             onMouseDown={() => setIsPressed(true)}
             onMouseUp={() => setIsPressed(false)}
+            className="lm-btn"
             style={{
               position: 'absolute',
               top: 0,
@@ -355,7 +356,6 @@ export function LiquidMetalButton({
               background: 'transparent',
               border: 'none',
               cursor: 'pointer',
-              outline: 'none',
               zIndex: 40,
               transformStyle: 'preserve-3d',
               transform: 'translateZ(25px)',
