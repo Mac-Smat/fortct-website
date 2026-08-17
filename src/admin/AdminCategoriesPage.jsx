@@ -26,7 +26,7 @@ const EMPTY_FORM = {
   sort_order: 0,
 }
 
-function CategoryRow({ category, onEdit, onToggleStatus }) {
+function CategoryRow({ category, onEdit, onToggleStatus, busy }) {
   return (
     <div className="flex flex-col gap-3 rounded-[16px] border border-[#C5C8BC]/50 bg-white p-4 shadow-[0_2px_16px_rgba(0,0,0,0.04)] dark:border-[#26262B] dark:bg-[#1A1A1E] sm:flex-row sm:items-center sm:gap-5">
       <div className="min-w-0 flex-1">
@@ -45,15 +45,18 @@ function CategoryRow({ category, onEdit, onToggleStatus }) {
         <span className="rounded-full bg-[#E2E2E2]/60 px-3 py-1 text-[12px] font-semibold text-[#45483F] dark:bg-white/10 dark:text-[#A1A1AA]">
           {category.products?.[0]?.count ?? 0} services
         </span>
-        <AdminButton variant="outline" size="sm" onClick={() => onEdit(category)}>
+        <AdminButton variant="outline" size="sm" disabled={busy} onClick={() => onEdit(category)}>
           Edit
         </AdminButton>
         <AdminButton
           variant={category.status === 'published' ? 'danger' : 'outline'}
           size="sm"
+          disabled={busy}
           onClick={() => onToggleStatus(category)}
         >
-          {category.status === 'published' ? (
+          {busy ? (
+            'Please wait…'
+          ) : category.status === 'published' ? (
             <>
               <EyeOff className="h-3.5 w-3.5" />
               Hide
@@ -81,6 +84,7 @@ export default function AdminCategoriesPage() {
   const [errors, setErrors] = useState({})
   const [slugTouched, setSlugTouched] = useState(false)
   const [busy, setBusy] = useState(false)
+  const [statusBusy, setStatusBusy] = useState(null)
 
   const load = async () => {
     setLoading(true)
@@ -157,7 +161,9 @@ export default function AdminCategoriesPage() {
   }
 
   const handleToggleStatus = async (category) => {
+    if (statusBusy) return
     const next = category.status === 'published' ? 'hidden' : 'published'
+    setStatusBusy(category.id)
     try {
       await updateCategory(category.id, {
         name: category.name,
@@ -174,6 +180,8 @@ export default function AdminCategoriesPage() {
       load()
     } catch (err) {
       toast.error(err.message)
+    } finally {
+      setStatusBusy(null)
     }
   }
 
@@ -212,6 +220,7 @@ export default function AdminCategoriesPage() {
               <CategoryRow
                 key={category.id}
                 category={category}
+                busy={statusBusy === category.id}
                 onEdit={openEdit}
                 onToggleStatus={handleToggleStatus}
               />

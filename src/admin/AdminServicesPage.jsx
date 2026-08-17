@@ -28,6 +28,8 @@ const PAGE_SIZE = 20
 const SORT_OPTIONS = [
   { value: 'sort_order', label: 'Sort order' },
   { value: 'name', label: 'Name (A–Z)' },
+  { value: 'category', label: 'Category (A–Z)' },
+  { value: 'featured', label: 'Featured first' },
   { value: 'price_high', label: 'Price (high → low)' },
   { value: 'price_low', label: 'Price (low → high)' },
   { value: 'updated', label: 'Last updated' },
@@ -153,6 +155,7 @@ export default function AdminServicesPage() {
   const [sortBy, setSortBy] = useState('sort_order')
   const [page, setPage] = useState(1)
   const [archiveTarget, setArchiveTarget] = useState(null)
+  const [archiveBusy, setArchiveBusy] = useState(false)
 
   const load = async () => {
     setLoading(true)
@@ -196,6 +199,14 @@ export default function AdminServicesPage() {
     switch (sortBy) {
       case 'name':
         sorted.sort((a, b) => a.name.localeCompare(b.name))
+        break
+      case 'category':
+        sorted.sort((a, b) =>
+          (a.categories?.name ?? '').localeCompare(b.categories?.name ?? ''),
+        )
+        break
+      case 'featured':
+        sorted.sort((a, b) => Number(b.featured) - Number(a.featured))
         break
       case 'price_high':
         sorted.sort((a, b) => Number(b.price ?? -1) - Number(a.price ?? -1))
@@ -247,6 +258,11 @@ export default function AdminServicesPage() {
   const handleToggleFeatured = async (product) => {
     try {
       await setProductFeatured(product.id, !product.featured)
+      toast.success(
+        product.featured
+          ? `"${product.name}" removed from featured`
+          : `"${product.name}" marked as featured`,
+      )
       load()
     } catch (err) {
       toast.error(err.message)
@@ -413,10 +429,17 @@ export default function AdminServicesPage() {
             : `"${archiveTarget?.name}" will become visible on the public website.`
         }
         confirmLabel={archiveTarget?.status === 'published' ? 'Archive' : 'Publish'}
+        busy={archiveBusy}
         onClose={() => setArchiveTarget(null)}
         onConfirm={async () => {
-          if (archiveTarget) await applyArchive(archiveTarget)
-          setArchiveTarget(null)
+          if (!archiveTarget || archiveBusy) return
+          setArchiveBusy(true)
+          try {
+            await applyArchive(archiveTarget)
+          } finally {
+            setArchiveBusy(false)
+            setArchiveTarget(null)
+          }
         }}
       />
     </div>

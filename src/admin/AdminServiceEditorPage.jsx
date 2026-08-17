@@ -113,6 +113,26 @@ export default function AdminServiceEditorPage() {
   })
   const [errors, setErrors] = useState({})
   const [slugTouched, setSlugTouched] = useState(false)
+  const [savedFormJson, setSavedFormJson] = useState(null)
+  const leavingRef = useRef(false)
+
+  const dirty = savedFormJson !== null && JSON.stringify(form) !== savedFormJson
+
+  useEffect(() => {
+    if (!dirty) return undefined
+    const onBeforeUnload = (e) => {
+      e.preventDefault()
+      e.returnValue = ''
+    }
+    window.addEventListener('beforeunload', onBeforeUnload)
+    return () => window.removeEventListener('beforeunload', onBeforeUnload)
+  }, [dirty])
+
+  const confirmLeave = () => {
+    if (leavingRef.current) return true
+    if (!dirty) return true
+    return window.confirm('You have unsaved changes. Leave without saving?')
+  }
 
   const setField = (key, value) => {
     setForm((f) => {
@@ -134,7 +154,7 @@ export default function AdminServiceEditorPage() {
           fetchProductImages(id),
         ])
         if (!product) throw new Error('Service not found — it may have been removed.')
-        setForm({
+        const nextForm = {
           name: product.name,
           slug: product.slug,
           category_id: product.category_id ?? '',
@@ -145,7 +165,9 @@ export default function AdminServiceEditorPage() {
           status: product.status,
           featured: product.featured,
           sort_order: product.sort_order ?? 0,
-        })
+        }
+        setForm(nextForm)
+        setSavedFormJson(JSON.stringify(nextForm))
         setImages(imagesData)
       }
     } catch (err) {
@@ -197,10 +219,12 @@ export default function AdminServiceEditorPage() {
       if (isNew) {
         const created = await createProduct(payload)
         toast.success(`"${created.name}" created`)
+        leavingRef.current = true
         navigate(`/admin/services/${created.id}`, { replace: true })
       } else {
         await updateProduct(id, payload)
         toast.success('Changes saved')
+        setSavedFormJson(JSON.stringify(form))
         load()
       }
     } catch (err) {
@@ -252,6 +276,11 @@ export default function AdminServiceEditorPage() {
       await reloadImages()
     } catch (err) {
       toast.error(err.message)
+      try {
+        await reloadImages()
+      } catch {
+        // keep the current view if the refresh itself fails
+      }
     } finally {
       setImageBusy(false)
     }
@@ -278,7 +307,9 @@ export default function AdminServiceEditorPage() {
     <div>
       <button
         type="button"
-        onClick={() => navigate('/admin/services')}
+        onClick={() => {
+          if (confirmLeave()) navigate('/admin/services')
+        }}
         className="mb-4 inline-flex items-center gap-2 text-[13px] font-semibold text-[#45483F] transition-colors hover:text-[#3D4D2B] dark:text-[#A1A1AA] dark:hover:text-[#AAB95F] cursor-pointer"
       >
         <ArrowLeft className="h-4 w-4" />
@@ -538,14 +569,14 @@ export default function AdminServiceEditorPage() {
         title="Delete image?"
         message="The image file will be removed from storage and the website. This cannot be undone."
         confirmLabel="Delete image"
+        busy={imageBusy}
         onClose={() => setDeleteTarget(null)}
         onConfirm={async () => {
-          if (deleteTarget) {
-            await runImageAction(
-              () => deleteProductImage(id, deleteTarget),
-              'Image deleted',
-            )
-          }
+          if (!deleteTarget || imageBusy) return
+          await runImageAction(
+            () => deleteProductImage(id, deleteTarget),
+            'Image deleted',
+          )
           setDeleteTarget(null)
         }}
       />

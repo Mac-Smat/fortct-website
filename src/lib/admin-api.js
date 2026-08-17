@@ -9,7 +9,13 @@ function messageFor(error, fallback) {
   if (msg.includes('foreign key') || msg.includes('23503')) {
     return 'This record is still used by other records'
   }
-  return msg || fallback
+  if (msg.includes('row-level security') || msg.includes('42501')) {
+    return 'You are not authorized to perform this action'
+  }
+  if (msg.includes('could not parse') || msg.includes('22P02')) {
+    return 'One of the values you entered is not valid'
+  }
+  return fallback
 }
 
 // ================= categories =================
@@ -229,7 +235,10 @@ export async function uploadProductImage(productId, file) {
     })
     .select()
     .single()
-  if (error) throw new Error(messageFor(error, 'Could not save image record'))
+  if (error) {
+    await supabase.storage.from('services').remove([path])
+    throw new Error(messageFor(error, 'Could not save image record'))
+  }
   return data
 }
 
