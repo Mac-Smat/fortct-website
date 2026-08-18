@@ -1,5 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
-import { ExternalLink } from 'lucide-react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { supabase } from '../lib/supabase.js'
 import { formatDate } from '../lib/format.js'
 import { Reveal } from './Reveal.jsx'
@@ -31,18 +30,53 @@ const INCLUDE_KEYWORDS = [
 
 const EXCLUDE_KEYWORDS = ['happy new week', 'happy new month']
 
-const MAX_TILES = 8
+const MAX_TILES = 7
 
+// Desktop bento per wireframe: top section = left square (42%) + two
+// stacked center cards (28%) + tall right card (30%); bottom row = three
+// equal cards (33% each). Tablet: feature spans full width, pairs of 2.
 const TILE_SPANS = [
-  'md:col-span-2 lg:col-span-6 lg:row-span-2 lg:min-h-[540px]',
-  'lg:col-span-3 lg:min-h-[256px]',
-  'lg:col-span-3 lg:min-h-[256px]',
-  'lg:col-span-3 lg:min-h-[256px]',
-  'lg:col-span-3 lg:min-h-[256px]',
-  'lg:col-span-4 lg:min-h-[256px]',
-  'lg:col-span-4 lg:min-h-[256px]',
-  'lg:col-span-4 lg:min-h-[256px]',
+  'md:col-span-2 lg:col-span-1 lg:col-start-1 lg:row-start-1 lg:row-span-2 min-h-[320px] md:min-h-[380px] lg:min-h-[500px]',
+  'lg:col-start-2 lg:row-start-1 min-h-[200px] md:min-h-[220px] lg:min-h-[248px]',
+  'lg:col-start-2 lg:row-start-2 min-h-[200px] md:min-h-[220px] lg:min-h-[248px]',
+  'lg:col-start-3 lg:row-start-1 lg:row-span-2 min-h-[200px] md:min-h-[220px] lg:min-h-[500px]',
+  'lg:col-start-1 lg:row-start-3 min-h-[200px] md:min-h-[220px] lg:min-h-[220px]',
+  'lg:col-start-2 lg:row-start-3 min-h-[200px] md:min-h-[220px] lg:min-h-[220px]',
+  'lg:col-start-3 lg:row-start-3 min-h-[200px] md:min-h-[220px] lg:min-h-[220px]',
 ]
+
+const STACK_CSS = `
+  .social-stack [data-stack] {
+    position: relative;
+    z-index: 0;
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  @media (max-width: 1023px) {
+    .social-stack [data-stack] {
+      opacity: 0.55;
+      transform: scale(0.975);
+    }
+    .social-stack [data-stack].is-active {
+      opacity: 1;
+      transform: scale(1);
+      z-index: 5;
+    }
+  }
+  @media (max-width: 767px) {
+    .social-stack [data-stack] + [data-stack] {
+      margin-top: -28px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .social-stack [data-stack] {
+      transition: none;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+`
 
 function matchesHighlights(caption) {
   const text = String(caption ?? '').toLowerCase().trim()
@@ -70,13 +104,15 @@ function TikTokIcon({ className }) {
 }
 
 function HighlightCard({ post, index }) {
+  const platformName = post.platform === 'instagram' ? 'Instagram' : 'TikTok'
   return (
     <a
       href={post.permalink}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`${post.platform === 'instagram' ? 'Instagram' : 'TikTok'} post: ${post.caption}`}
-      className={`group relative flex flex-col overflow-hidden rounded-[24px] bg-[#F2F2F0] dark:bg-[#1A1A1E] min-h-[220px] md:min-h-[240px] ${TILE_SPANS[index % TILE_SPANS.length]}`}
+      aria-label={`${platformName} post: ${post.caption}`}
+      data-stack
+      className={`group block overflow-hidden rounded-[24px] bg-[#F2F2F0] outline-none focus-visible:ring-2 focus-visible:ring-[#E0EC38] focus-visible:ring-offset-2 dark:bg-[#1A1A1E] ${TILE_SPANS[index % TILE_SPANS.length]}`}
     >
       {post.mediaUrl ? (
         <img
@@ -88,30 +124,28 @@ function HighlightCard({ post, index }) {
       ) : (
         <div className="absolute inset-0 flex items-center justify-center bg-[#E7E7E4] dark:bg-[#26262B]">
           <span className="text-[13px] font-semibold text-[#45483F]/60 dark:text-[#A1A1AA]/60">
-            {post.platform === 'instagram' ? 'Instagram' : 'TikTok'}
+            {platformName}
           </span>
         </div>
       )}
 
-      <div className="absolute inset-0 bg-gradient-to-t from-[#1A1C1C]/85 via-[#1A1C1C]/20 to-transparent" aria-hidden="true" />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100"
+      />
 
-      <div className="relative mt-auto flex w-full flex-col gap-2 p-5">
-        <div className="flex items-center justify-between gap-3">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-1 text-[11px] font-semibold tracking-[0.4px] text-white backdrop-blur">
-            {post.platform === 'instagram' ? <InstagramIcon className="h-3 w-3" /> : <TikTokIcon className="h-3 w-3" />}
-            {post.platform === 'instagram' ? 'Instagram' : 'TikTok'}
-          </span>
-          <span className="text-[11px] font-medium text-white/60">
-            {formatDate(post.timestamp)}
-          </span>
-        </div>
-        <p className="line-clamp-2 text-[14px] font-medium leading-[20px] text-white">
+      <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-1 text-[10px] font-semibold tracking-[0.3px] text-white backdrop-blur">
+        {post.platform === 'instagram' ? <InstagramIcon className="h-3 w-3" /> : <TikTokIcon className="h-3 w-3" />}
+        {platformName}
+      </span>
+
+      <div className="absolute inset-x-0 bottom-0 p-4 translate-y-3 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
+        <p className="line-clamp-2 text-[13px] font-semibold leading-[18px] text-white">
           {post.caption}
         </p>
-        <span className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#E0EC38] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-          Open post
-          <ExternalLink className="h-3 w-3" />
-        </span>
+        <p className="mt-1 text-[10px] font-medium tracking-[0.3px] text-white/70">
+          {formatDate(post.timestamp)}
+        </p>
       </div>
     </a>
   )
@@ -119,13 +153,14 @@ function HighlightCard({ post, index }) {
 
 function SkeletonTile({ span }) {
   return (
-    <div className={`min-h-[220px] md:min-h-[240px] animate-pulse rounded-[24px] bg-[#E7E7E4] dark:bg-[#1A1A1E] ${span}`} role="status" aria-label="Loading highlights" />
+    <div className={`animate-pulse rounded-[24px] bg-[#E7E7E4] dark:bg-[#1A1A1E] ${span}`} role="status" aria-label="Loading highlights" />
   )
 }
 
 export default function SocialMediaHighlight() {
   const [status, setStatus] = useState('loading')
   const [posts, setPosts] = useState([])
+  const gridRef = useRef(null)
 
   const load = useCallback(async () => {
     setStatus('loading')
@@ -150,8 +185,27 @@ export default function SocialMediaHighlight() {
       .slice(0, MAX_TILES)
   }, [posts])
 
+  useEffect(() => {
+    if (status !== 'ready' || highlights.length === 0) return
+    if (window.matchMedia('(min-width: 1024px)').matches) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const cards = gridRef.current?.querySelectorAll('[data-stack]')
+    if (!cards?.length) return
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          entry.target.classList.toggle('is-active', entry.isIntersecting)
+        }
+      },
+      { threshold: 0.35 },
+    )
+    cards.forEach((card) => observer.observe(card))
+    return () => observer.disconnect()
+  }, [status, highlights.length])
+
   return (
-    <section id="social-highlights" className="w-full bg-white pt-6 lg:pt-[80px] pb-16 md:pb-20 dark:bg-[#0C0C0E]">
+    <section id="social-highlights" className="w-full bg-white pt-4 lg:pt-16 pb-10 lg:pb-16 dark:bg-[#0C0C0E]">
+      <style>{STACK_CSS}</style>
       <div className="max-w-[1280px] mx-auto px-6">
         <Reveal className="max-w-[672px]">
           <RevealHeading
@@ -167,23 +221,23 @@ export default function SocialMediaHighlight() {
             per="word"
             preset="fade"
             speedReveal={1.4}
-            className="mt-8 lg:mt-[40px] text-[15px] sm:text-[16px] font-normal leading-[24px] text-[#45483F] dark:text-[#A1A1AA]"
+            className="mt-6 lg:mt-8 text-[15px] sm:text-[16px] font-normal leading-[24px] text-[#45483F] dark:text-[#A1A1AA]"
           >
-            Fresh work, new projects and recently launched services — straight from our Instagram and TikTok.
+            Fresh projects and launches, straight from our socials.
           </RevealHeading>
         </Reveal>
 
-        <Reveal className="mt-10 lg:mt-[72px]">
+        <Reveal className="mt-8 lg:mt-12">
           {status === 'loading' && (
-            <div className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:gap-[20px]">
-              {TILE_SPANS.slice(0, 7).map((span, i) => (
-                <SkeletonTile key={i} span={i === 0 ? 'md:col-span-2 lg:col-span-6 lg:row-span-2' : 'lg:col-span-3 lg:min-h-[256px]'} />
+            <div className="social-stack grid grid-cols-1 gap-0 md:grid-cols-2 md:gap-3 lg:grid-cols-[42fr_28fr_30fr] lg:grid-rows-[250px_250px_220px] lg:gap-3">
+              {TILE_SPANS.map((span, i) => (
+                <SkeletonTile key={i} span={span} />
               ))}
             </div>
           )}
 
           {status === 'error' && (
-            <div className="flex flex-col items-center text-center py-24">
+            <div className="flex flex-col items-center text-center py-20">
               <p className="text-[16px] font-semibold text-[#1A1C1C] dark:text-[#F2F2F1]">
                 We could not load the social highlights
               </p>
@@ -201,7 +255,7 @@ export default function SocialMediaHighlight() {
           )}
 
           {status === 'ready' && highlights.length === 0 && (
-            <div className="flex flex-col items-center text-center py-24">
+            <div className="flex flex-col items-center text-center py-20">
               <p className="text-[16px] font-semibold text-[#1A1C1C] dark:text-[#F2F2F1]">
                 No highlights right now
               </p>
@@ -212,7 +266,10 @@ export default function SocialMediaHighlight() {
           )}
 
           {status === 'ready' && highlights.length > 0 && (
-            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-12 lg:gap-[20px]">
+            <div
+              ref={gridRef}
+              className="social-stack grid grid-cols-1 gap-0 md:grid-cols-2 md:gap-3 lg:grid-cols-[42fr_28fr_30fr] lg:grid-rows-[250px_250px_220px] lg:gap-3"
+            >
               {highlights.map((post, index) => (
                 <HighlightCard key={post.id} post={post} index={index} />
               ))}
