@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { supabase } from '../lib/supabase.js'
 import { formatDate } from '../lib/format.js'
 import { Reveal } from './Reveal.jsx'
@@ -63,30 +64,6 @@ const STACK_CSS = `
       opacity: 1;
       transform: scale(1);
       z-index: 5;
-    }
-  }
-  /* Mobile: sticky card stack — each card locks near the top of the
-     viewport and the next card slides over it. The section gate is
-     natural: once all cards are stacked, the container scrolls past
-     and the next section follows. */
-  @media (max-width: 767px) {
-    .social-stack {
-      display: flex !important;
-      flex-direction: column;
-      gap: 0 !important;
-    }
-    .social-stack [data-stack] {
-      position: sticky;
-      top: 72px;
-      opacity: 0.45;
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-      transition: opacity 0.45s ease;
-    }
-    .social-stack [data-stack] + [data-stack] {
-      margin-top: -88px !important;
-    }
-    .social-stack [data-stack].is-active {
-      opacity: 1;
     }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -177,9 +154,75 @@ function SkeletonTile({ span }) {
   )
 }
 
+function StickyStackCard({ post, index, progress, range, targetScale, reduceMotion }) {
+  const scale = useTransform(progress, range, [1, targetScale])
+  const platformName = post.platform === 'instagram' ? 'Instagram' : 'TikTok'
+  return (
+    <a
+      href={post.permalink}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${platformName} post: ${post.caption}`}
+      className="sticky top-0 flex items-center justify-center px-4 sm:px-6"
+    >
+      <motion.div
+        style={{
+          scale: reduceMotion ? 1 : scale,
+          top: `calc(-5vh + ${index * 15 + 200}px)`,
+        }}
+        className="relative flex h-[200px] w-[280px] origin-top flex-col overflow-hidden rounded-[24px] bg-[#F2F2F0] sm:h-[240px] sm:w-[360px] dark:bg-[#1A1A1E]"
+      >
+        {post.mediaUrl ? (
+          <img src={post.mediaUrl} alt="" loading="lazy" className="h-full w-full object-cover" />
+        ) : (
+          <div className="flex flex-1 items-center justify-center bg-[#E7E7E4] dark:bg-[#26262B]">
+            <span className="text-[13px] font-semibold text-[#45483F]/60 dark:text-[#A1A1AA]/60">
+              {platformName}
+            </span>
+          </div>
+        )}
+        <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-1 text-[10px] font-semibold tracking-[0.3px] text-white backdrop-blur">
+          {post.platform === 'instagram' ? <InstagramIcon className="h-3 w-3" /> : <TikTokIcon className="h-3 w-3" />}
+          {platformName}
+        </span>
+      </motion.div>
+    </a>
+  )
+}
+
+function MobileStickyStack({ posts }) {
+  const containerRef = useRef(null)
+  const reduceMotion = useReducedMotion()
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end end'],
+  })
+  const count = posts.length
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative flex w-full flex-col items-center justify-center pt-[5vh] pb-[50vh]"
+    >
+      {posts.map((post, index) => (
+        <StickyStackCard
+          key={post.id}
+          post={post}
+          index={index}
+          progress={scrollYProgress}
+          range={[index / count, 1]}
+          targetScale={Math.max(0.6, 1 - (count - index - 1) * 0.08)}
+          reduceMotion={reduceMotion}
+        />
+      ))}
+    </div>
+  )
+}
+
 export default function SocialMediaHighlight() {
   const [status, setStatus] = useState('loading')
   const [posts, setPosts] = useState([])
+  const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 767px)').matches)
   const gridRef = useRef(null)
 
   const load = useCallback(async () => {
@@ -198,6 +241,13 @@ export default function SocialMediaHighlight() {
     load()
   }, [load])
 
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)')
+    const onChange = (event) => setIsMobile(event.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+
   const highlights = useMemo(() => {
     return posts
       .filter((post) => matchesHighlights(post.caption))
@@ -207,6 +257,7 @@ export default function SocialMediaHighlight() {
 
   useEffect(() => {
     if (status !== 'ready' || highlights.length === 0) return
+    if (isMobile) return
     if (window.matchMedia('(min-width: 1024px)').matches) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const cards = gridRef.current?.querySelectorAll('[data-stack]')
@@ -221,7 +272,7 @@ export default function SocialMediaHighlight() {
     )
     cards.forEach((card) => observer.observe(card))
     return () => observer.disconnect()
-  }, [status, highlights.length])
+  }, [status, highlights.length, isMobile])
 
   return (
     <section id="social-highlights" className="w-full bg-white pt-4 lg:pt-16 pb-10 lg:pb-16 dark:bg-[#0C0C0E]">
@@ -286,14 +337,18 @@ export default function SocialMediaHighlight() {
           )}
 
           {status === 'ready' && highlights.length > 0 && (
-            <div
-              ref={gridRef}
-              className="social-stack grid grid-cols-1 gap-0 md:grid-cols-2 md:gap-3 lg:grid-cols-[42fr_28fr_30fr] lg:grid-rows-[250px_250px_220px] lg:gap-3"
-            >
-              {highlights.map((post, index) => (
-                <HighlightCard key={post.id} post={post} index={index} />
-              ))}
-            </div>
+            isMobile ? (
+              <MobileStickyStack posts={highlights} />
+            ) : (
+              <div
+                ref={gridRef}
+                className="social-stack grid grid-cols-1 gap-0 md:grid-cols-2 md:gap-3 lg:grid-cols-[42fr_28fr_30fr] lg:grid-rows-[250px_250px_220px] lg:gap-3"
+              >
+                {highlights.map((post, index) => (
+                  <HighlightCard key={post.id} post={post} index={index} />
+                ))}
+              </div>
+            )
           )}
         </Reveal>
       </div>
