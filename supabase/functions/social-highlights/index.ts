@@ -38,6 +38,10 @@ async function fetchInstagramPosts() {
         p.media_type === 'VIDEO'
           ? p.thumbnail_url ?? p.media_url
           : p.media_url,
+      videoUrl:
+        p.media_type === 'VIDEO' || p.media_type === 'REELS'
+          ? p.media_url ?? null
+          : null,
       permalink: p.permalink,
       timestamp: p.timestamp ?? null,
     }))

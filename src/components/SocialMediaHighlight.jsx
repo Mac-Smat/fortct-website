@@ -100,6 +100,56 @@ function TikTokIcon({ className }) {
   )
 }
 
+function useInViewport(ref, rootMargin = '100px') {
+  const [inView, setInView] = useState(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el || typeof IntersectionObserver === 'undefined') return
+    const io = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { rootMargin },
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [ref, rootMargin])
+  return inView
+}
+
+// GIF-like playback: muted looping video, only while the card is on screen.
+// Falls back to the static thumbnail when out of view or reduced motion.
+// The observer watches a stable wrapper, not the swapped media element,
+// so replacing img with video never fires a spurious "left viewport" event.
+function GifVideo({ videoUrl, poster, className }) {
+  const ref = useRef(null)
+  const reduceMotion = useReducedMotion()
+  const inView = useInViewport(ref)
+
+  return (
+    <div ref={ref} className={className}>
+      {videoUrl && inView && !reduceMotion ? (
+        <video
+          src={videoUrl}
+          poster={poster}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="none"
+          aria-hidden="true"
+          className="h-full w-full object-cover"
+        />
+      ) : (
+        <img
+          src={poster}
+          alt=""
+          loading="lazy"
+          className="h-full w-full object-cover"
+        />
+      )}
+    </div>
+  )
+}
+
 function HighlightCard({ post, index }) {
   const platformName = post.platform === 'instagram' ? 'Instagram' : 'TikTok'
   return (
@@ -112,10 +162,9 @@ function HighlightCard({ post, index }) {
       className={`group block overflow-hidden rounded-[24px] bg-[#F2F2F0] outline-none focus-visible:ring-2 focus-visible:ring-[#E0EC38] focus-visible:ring-offset-2 dark:bg-[#1A1A1E] ${TILE_SPANS[index % TILE_SPANS.length]}`}
     >
       {post.mediaUrl ? (
-        <img
-          src={post.mediaUrl}
-          alt=""
-          loading="lazy"
+        <GifVideo
+          videoUrl={post.videoUrl}
+          poster={post.mediaUrl}
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
         />
       ) : (
@@ -173,7 +222,11 @@ function StickyStackCard({ post, index, progress, range, targetScale, reduceMoti
         className="relative flex h-[200px] w-[280px] origin-top flex-col overflow-hidden rounded-[24px] bg-[#F2F2F0] sm:h-[240px] sm:w-[360px] dark:bg-[#1A1A1E]"
       >
         {post.mediaUrl ? (
-          <img src={post.mediaUrl} alt="" loading="lazy" className="h-full w-full object-cover" />
+          <GifVideo
+            videoUrl={post.videoUrl}
+            poster={post.mediaUrl}
+            className="h-full w-full object-cover"
+          />
         ) : (
           <div className="flex flex-1 items-center justify-center bg-[#E7E7E4] dark:bg-[#26262B]">
             <span className="text-[13px] font-semibold text-[#45483F]/60 dark:text-[#A1A1AA]/60">
