@@ -1,4 +1,4 @@
-import{i as e}from"./utils-BnzBBXST.js";import{H as t}from"./icons-BCuamfmq.js";import{s as n}from"./motion-DTF0sCZz.js";import{t as r}from"./Reveal-DCGykK7d.js";import{f as i}from"./index-Cs2S7vPg.js";import{t as a}from"./supabase-_KV4E9er.js";import{i as o}from"./format-Cx2Rrjn4.js";var s=e(t(),1),c=n(),l=[`new project`,`completed project`,`new service`,`updated service`,`new product`,`new services`,`services for`,`branding of`,`branding for`,`printing of`,`business card for`,`billboard`,`new gear`,`launching`,`from idea`,`from concept`,`jotted ideas`,`vehicle branding`,`roll-up`,`custom branded`,`nylons for`],u=[`happy new week`,`happy new month`],d=7,f=[`md:col-span-2 lg:col-span-1 lg:col-start-1 lg:row-start-1 lg:row-span-2 min-h-[320px] md:min-h-[380px] lg:min-h-[500px]`,`lg:col-start-2 lg:row-start-1 min-h-[200px] md:min-h-[220px] lg:min-h-[248px]`,`lg:col-start-2 lg:row-start-2 min-h-[200px] md:min-h-[220px] lg:min-h-[248px]`,`lg:col-start-3 lg:row-start-1 lg:row-span-2 min-h-[200px] md:min-h-[220px] lg:min-h-[500px]`,`lg:col-start-1 lg:row-start-3 min-h-[200px] md:min-h-[220px] lg:min-h-[220px]`,`lg:col-start-2 lg:row-start-3 min-h-[200px] md:min-h-[220px] lg:min-h-[220px]`,`lg:col-start-3 lg:row-start-3 min-h-[200px] md:min-h-[220px] lg:min-h-[220px]`],p=`
+import{i as e}from"./utils-BnzBBXST.js";import{H as t}from"./icons-BCuamfmq.js";import{s as n}from"./motion-DTF0sCZz.js";import{t as r}from"./Reveal-DCGykK7d.js";import{f as i}from"./index-BG7Bjb5o.js";import{t as a}from"./supabase-_KV4E9er.js";import{i as o}from"./format-Cx2Rrjn4.js";var s=e(t(),1),c=n(),l=[`new project`,`completed project`,`new service`,`updated service`,`new product`,`new services`,`services for`,`branding of`,`branding for`,`printing of`,`business card for`,`billboard`,`new gear`,`launching`,`from idea`,`from concept`,`jotted ideas`,`vehicle branding`,`roll-up`,`custom branded`,`nylons for`],u=[`happy new week`,`happy new month`],d=7,f=[`md:col-span-2 lg:col-span-1 lg:col-start-1 lg:row-start-1 lg:row-span-2 min-h-[320px] md:min-h-[380px] lg:min-h-[500px]`,`lg:col-start-2 lg:row-start-1 min-h-[200px] md:min-h-[220px] lg:min-h-[248px]`,`lg:col-start-2 lg:row-start-2 min-h-[200px] md:min-h-[220px] lg:min-h-[248px]`,`lg:col-start-3 lg:row-start-1 lg:row-span-2 min-h-[200px] md:min-h-[220px] lg:min-h-[500px]`,`lg:col-start-1 lg:row-start-3 min-h-[200px] md:min-h-[220px] lg:min-h-[220px]`,`lg:col-start-2 lg:row-start-3 min-h-[200px] md:min-h-[220px] lg:min-h-[220px]`,`lg:col-start-3 lg:row-start-3 min-h-[200px] md:min-h-[220px] lg:min-h-[220px]`],p=`
   .social-stack [data-stack] {
     position: relative;
     z-index: 0;
@@ -6,7 +6,8 @@ import{i as e}from"./utils-BnzBBXST.js";import{H as t}from"./icons-BCuamfmq.js";
     transform: none;
     transition: opacity 0.5s ease, transform 0.5s ease;
   }
-  @media (max-width: 1023px) {
+  /* Tablet: 2-column grid + scroll-triggered reveal */
+  @media (min-width: 768px) and (max-width: 1023px) {
     .social-stack [data-stack] {
       opacity: 0.55;
       transform: scale(0.975);
@@ -17,9 +18,28 @@ import{i as e}from"./utils-BnzBBXST.js";import{H as t}from"./icons-BCuamfmq.js";
       z-index: 5;
     }
   }
+  /* Mobile: sticky card stack — each card locks near the top of the
+     viewport and the next card slides over it. The section gate is
+     natural: once all cards are stacked, the container scrolls past
+     and the next section follows. */
   @media (max-width: 767px) {
+    .social-stack {
+      display: flex !important;
+      flex-direction: column;
+      gap: 0 !important;
+    }
+    .social-stack [data-stack] {
+      position: sticky;
+      top: 72px;
+      opacity: 0.45;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+      transition: opacity 0.45s ease;
+    }
     .social-stack [data-stack] + [data-stack] {
-      margin-top: -28px;
+      margin-top: -88px !important;
+    }
+    .social-stack [data-stack].is-active {
+      opacity: 1;
     }
   }
   @media (prefers-reduced-motion: reduce) {
