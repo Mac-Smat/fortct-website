@@ -42,7 +42,6 @@ import { usePageMeta } from './lib/seo.js'
 const BASE_URL = import.meta.env.BASE_URL
 const CONTACT_PATH = `${BASE_URL}contact`
 const SERVICES_PATH = `${BASE_URL}services`
-const ABOUT_PATH = `${BASE_URL}about`
 const CONTACT_ROUTE = '/contact'
 const SERVICES_ROUTE = '/services'
 const ABOUT_ROUTE = '/about'
@@ -50,7 +49,6 @@ const ABOUT_ROUTE = '/about'
 const NAV_ITEMS = [
   { name: 'Home', link: `${BASE_URL}#home` },
   { name: 'Services', link: SERVICES_PATH },
-  { name: 'About', link: ABOUT_PATH },
   { name: 'Portfolio', link: `${BASE_URL}#portfolio` },
   { name: 'Contact', link: CONTACT_PATH },
 ]
@@ -58,7 +56,6 @@ const NAV_ITEMS = [
 const PAGE_NAV_ITEMS = [
   { name: 'Home', link: BASE_URL },
   { name: 'Services', link: SERVICES_PATH },
-  { name: 'About', link: ABOUT_PATH },
   { name: 'Portfolio', link: `${BASE_URL}#portfolio` },
   { name: 'Contact', link: CONTACT_PATH },
 ]
