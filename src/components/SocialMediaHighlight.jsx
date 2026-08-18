@@ -12,6 +12,21 @@ const INCLUDE_KEYWORDS = [
   'updated service',
   'new product',
   'new services',
+  'services for',
+  'branding of',
+  'branding for',
+  'printing of',
+  'business card for',
+  'billboard',
+  'new gear',
+  'launching',
+  'from idea',
+  'from concept',
+  'jotted ideas',
+  'vehicle branding',
+  'roll-up',
+  'custom branded',
+  'nylons for',
 ]
 
 const EXCLUDE_KEYWORDS = ['happy new week', 'happy new month']
