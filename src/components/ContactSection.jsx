@@ -2,6 +2,7 @@ import { LiquidMetalButton } from './LiquidMetalButton.jsx'
 import { Reveal } from './Reveal.jsx'
 import { RevealHeading } from './RevealHeading.jsx'
 import ContactMap from './ContactMap.jsx'
+import { FORTCT_WHATSAPP_DISPLAY, FORTCT_PHONE_HREF } from '../lib/contact.js'
 
 function MailIcon() {
   return (
@@ -39,8 +40,8 @@ const infoCards = [
   {
     icon: <PhoneIcon />,
     label: 'Phone Number',
-    value: '0707 787 5475',
-    href: 'tel:+2347077875475',
+    value: FORTCT_WHATSAPP_DISPLAY,
+    href: FORTCT_PHONE_HREF,
   },
   {
     icon: <LocationIcon />,

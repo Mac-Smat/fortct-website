@@ -49,6 +49,13 @@ function WaStatusBadge({ label, status }) {
   return <AdminBadge tone={WA_STATUS_TONES[status] ?? 'neutral'}>{label}</AdminBadge>
 }
 
+const STATUS_LABELS = {
+  sent: 'Sent',
+  failed: 'Failed',
+  pending: 'Pending',
+  not_attempted: 'Not attempted',
+}
+
 function EnquiryRow({ enquiry, expanded, onToggleExpand, onChangeStatus }) {
   const [busy, setBusy] = useState(false)
   const wa = waLink(enquiry.whatsapp_number)
@@ -150,9 +157,14 @@ function EnquiryRow({ enquiry, expanded, onToggleExpand, onChangeStatus }) {
               </p>
             </div>
             <div className="flex flex-wrap gap-2 lg:shrink-0">
-              <WaStatusBadge label="FortCT notified" status={enquiry.whatsapp_notification_status} />
-              <WaStatusBadge label="Customer confirmation" status={enquiry.whatsapp_customer_confirmation_status} />
+              <WaStatusBadge label="WhatsApp: FortCT notified" status={enquiry.whatsapp_notification_status} />
+              <WaStatusBadge label="WhatsApp: Customer confirmation" status={enquiry.whatsapp_customer_confirmation_status} />
+              <WaStatusBadge label="Email: FortCT notified" status={enquiry.email_notification_status} />
+              <WaStatusBadge label="Email: Customer confirmation" status={enquiry.email_customer_confirmation_status} />
             </div>
+            <p className="mt-2 text-[11px] font-normal text-[#B7BBC4] dark:text-[#5C5C66]">
+              WhatsApp: {STATUS_LABELS[enquiry.whatsapp_notification_status] ?? enquiry.whatsapp_notification_status} · {STATUS_LABELS[enquiry.whatsapp_customer_confirmation_status] ?? enquiry.whatsapp_customer_confirmation_status} — Email: {STATUS_LABELS[enquiry.email_notification_status] ?? enquiry.email_notification_status} · {STATUS_LABELS[enquiry.email_customer_confirmation_status] ?? enquiry.email_customer_confirmation_status}
+            </p>
           </div>
         </div>
       )}

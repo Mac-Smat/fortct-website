@@ -15,6 +15,7 @@ import {
 } from 'lucide-react'
 import { fetchPublishedCategories, fetchPublishedProducts, fetchProductImages } from '../lib/public-api.js'
 import { formatPrice } from '../lib/format.js'
+import { createWhatsAppQuoteLink } from '../lib/contact.js'
 import { Tiles } from './Tiles.jsx'
 import { Reveal } from './Reveal.jsx'
 import { TextReveal } from './TextReveal.jsx'
@@ -264,10 +265,7 @@ export default function ServicesPage() {
 
   const handleGetQuote = (product) => {
     setDetailProduct(null)
-    const service = product?.category
-    window.location.href = service
-      ? `${CONTACT_PATH}?service=${encodeURIComponent(service)}`
-      : CONTACT_PATH
+    window.open(createWhatsAppQuoteLink(product?.name), '_blank', 'noopener,noreferrer')
   }
 
   return (

@@ -155,7 +155,7 @@ export default function ContactForm({ selectedService, onServiceChange }) {
               Enquiry received!
             </p>
             <p className="text-[13px] font-normal leading-[20px] text-[#45483F] dark:text-[#A1A1AA]">
-              Thank you for reaching out. Our team will contact you on WhatsApp within 24 hours.
+              Thank you for reaching out. Our team will contact you within 24 hours.
             </p>
           </div>
         </div>

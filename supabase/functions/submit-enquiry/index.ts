@@ -73,18 +73,112 @@ async function sendTemplate(supabase, to, templateName, parameters) {
     )
     if (!res.ok) {
       let code = `http_${res.status}`
+      let message = null
+      let subcode = null
       try {
         const err = await res.json()
         code = String(err?.error?.code ?? code)
+        message = err?.error?.message ?? null
+        subcode = err?.error?.error_subcode ?? null
+        console.error(
+          `submit-enquiry: meta send error template=${templateName} code=${code} subcode=${subcode ?? 'n/a'} message=${message ?? 'n/a'}`,
+        )
       } catch {
         // non-JSON error body; keep http status code
       }
-      return { sent: false, code }
+      return { sent: false, code, message, subcode }
     }
-    return { sent: true, code: null }
+    return { sent: true, code: null, message: null, subcode: null }
   } catch {
     return { sent: false, code: 'network_error' }
   }
+}
+
+async function sendEmail(to, subject, html) {
+  const apiKey = Deno.env.get('BREVO_API_KEY')
+  const fromEmail = Deno.env.get('BREVO_FROM_EMAIL')
+  if (!apiKey || !fromEmail || !to) {
+    return { sent: false, code: 'not_configured' }
+  }
+  try {
+    const res = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: {
+        'api-key': apiKey,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        sender: { name: Deno.env.get('BREVO_FROM_NAME') ?? 'FortCT', email: fromEmail },
+        to: [{ email: to }],
+        subject,
+        htmlContent: html,
+      }),
+    })
+    if (!res.ok) {
+      let code = `http_${res.status}`
+      let message = null
+      try {
+        const err = await res.json()
+        code = String(err?.code ?? code)
+        message = err?.message ?? null
+        console.error(
+          `submit-enquiry: brevo send error to=${to} code=${code} message=${message ?? 'n/a'}`,
+        )
+      } catch {
+        // non-JSON error body; keep http status code
+      }
+      return { sent: false, code, message }
+    }
+    return { sent: true, code: null, message: null }
+  } catch {
+    return { sent: false, code: 'network_error' }
+  }
+}
+
+function escapeHtml(text) {
+  return String(text ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+}
+
+function buildEnquiryEmailHtml(details) {
+  const rows = [
+    ['Full name', details.fullName],
+    ['WhatsApp number', details.whatsappNumber],
+    ['Email', details.email || 'Not provided'],
+    ['Service', details.serviceName || 'General Enquiry'],
+    ['Message', details.message],
+  ]
+  const rowsHtml = rows
+    .map(
+      ([label, value]) =>
+        `<tr><td style="padding:8px 0;vertical-align:top;color:#5C5C66;font-size:14px;white-space:nowrap">${label}</td><td style="padding:8px 0;vertical-align:top;color:#1A1C1C;font-size:14px">${escapeHtml(value)}</td></tr>`,
+    )
+    .join('')
+  return `<div style="font-family:Arial,Helvetica,sans-serif;background:#F5F5F2;padding:24px">
+    <div style="max-width:520px;margin:0 auto;background:#FFFFFF;border-radius:12px;overflow:hidden">
+      <div style="background:#3D4D2B;padding:18px 24px;color:#FFFFFF;font-size:16px;font-weight:bold">New enquiry received</div>
+      <div style="padding:24px">
+        <table style="border-collapse:collapse;width:100%">${rowsHtml}</table>
+      </div>
+    </div>
+  </div>`
+}
+
+function buildConfirmationEmailHtml(firstName) {
+  return `<div style="font-family:Arial,Helvetica,sans-serif;background:#F5F5F2;padding:24px">
+    <div style="max-width:520px;margin:0 auto;background:#FFFFFF;border-radius:12px;overflow:hidden">
+      <div style="background:#3D4D2B;padding:18px 24px;color:#FFFFFF;font-size:16px;font-weight:bold">We received your enquiry</div>
+      <div style="padding:24px;color:#1A1C1C;font-size:14px;line-height:1.6">
+        <p>Hi ${escapeHtml(firstName)},</p>
+        <p>Thank you for reaching out to FortCT. Your enquiry has been received and our team will get back to you within 24 hours.</p>
+        <p>If you need immediate assistance, you can reach us on WhatsApp at 0707 787 5475.</p>
+        <p>Best regards,<br/>The FortCT Team</p>
+      </div>
+    </div>
+  </div>`
 }
 
 Deno.serve(async (req) => {
@@ -222,6 +316,39 @@ Deno.serve(async (req) => {
     }
   }
 
+  const emailNotification = await sendEmail(
+    Deno.env.get('BREVO_FORTCT_NOTIFY_EMAIL'),
+    `New enquiry from ${fullName}`,
+    buildEnquiryEmailHtml({
+      fullName,
+      whatsappNumber,
+      email,
+      serviceName: service?.name ?? serviceName,
+      message,
+    }),
+  )
+  if (!emailNotification.sent) {
+    console.error(
+      `submit-enquiry: email notification failed id=${enquiry.id} code=${emailNotification.code}`,
+    )
+  }
+
+  let emailConfirmation = { sent: false, code: 'not_attempted' }
+  const emailConfirmationEnabled =
+    Deno.env.get('BREVO_CUSTOMER_CONFIRMATION_ENABLED') !== 'false'
+  if (emailConfirmationEnabled && email) {
+    emailConfirmation = await sendEmail(
+      email,
+      'We received your enquiry — FortCT',
+      buildConfirmationEmailHtml(fullName.split(' ')[0] || fullName),
+    )
+    if (!emailConfirmation.sent) {
+      console.error(
+        `submit-enquiry: email confirmation failed id=${enquiry.id} code=${emailConfirmation.code}`,
+      )
+    }
+  }
+
   const { error: updateError } = await supabase
     .from('enquiries')
     .update({
@@ -234,6 +361,17 @@ Deno.serve(async (req) => {
         ? 'sent'
         : confirmation.code === 'not_configured' ||
             confirmation.code === 'not_attempted'
+          ? 'not_attempted'
+          : 'failed',
+      email_notification_status: emailNotification.sent
+        ? 'sent'
+        : emailNotification.code === 'not_configured'
+          ? 'pending'
+          : 'failed',
+      email_customer_confirmation_status: emailConfirmation.sent
+        ? 'sent'
+        : emailConfirmation.code === 'not_configured' ||
+            emailConfirmation.code === 'not_attempted'
           ? 'not_attempted'
           : 'failed',
     })
@@ -252,12 +390,29 @@ Deno.serve(async (req) => {
         Deno.env.get('WHATSAPP_ACCESS_TOKEN') &&
           Deno.env.get('WHATSAPP_PHONE_NUMBER_ID'),
       ),
-      notification: notification.sent ? 'sent' : notification.code,
+      notification: notification.sent
+        ? 'sent'
+        : { code: notification.code, message: notification.message, subcode: notification.subcode },
       confirmation: confirmation.sent
         ? 'sent'
         : confirmation.code === 'not_attempted'
           ? 'not_attempted'
-          : confirmation.code,
+          : { code: confirmation.code, message: confirmation.message, subcode: confirmation.subcode },
+    },
+    email: {
+      configured: Boolean(
+        Deno.env.get('BREVO_API_KEY') && Deno.env.get('BREVO_FROM_EMAIL'),
+      ),
+      notification: emailNotification.sent
+        ? 'sent'
+        : emailNotification.code === 'not_attempted'
+          ? 'not_attempted'
+          : emailNotification.code,
+      confirmation: emailConfirmation.sent
+        ? 'sent'
+        : emailConfirmation.code === 'not_attempted'
+          ? 'not_attempted'
+          : emailConfirmation.code,
     },
   })
 })

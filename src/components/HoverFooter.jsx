@@ -4,6 +4,7 @@ import { cn } from '../lib/utils'
 import logoSvg from '../assets/logo.svg'
 import { Reveal } from './Reveal.jsx'
 import { RevealHeading } from './RevealHeading.jsx'
+import { FORTCT_WHATSAPP_DISPLAY, FORTCT_PHONE_HREF } from '../lib/contact.js'
 
 function MailIcon() {
   return (
@@ -215,8 +216,8 @@ const contactInfo = [
   },
   {
     icon: <PhoneIcon />,
-    text: '0707 787 5475',
-    href: 'tel:+2347077875475',
+    text: FORTCT_WHATSAPP_DISPLAY,
+    href: FORTCT_PHONE_HREF,
   },
   {
     icon: <MapPinIcon />,

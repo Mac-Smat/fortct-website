@@ -9,6 +9,7 @@ import { LiquidMetalButton } from './LiquidMetalButton.jsx'
 import ContactMap from './ContactMap.jsx'
 import ContactForm from './ContactForm.jsx'
 import CtaBanner from './CtaBanner.jsx'
+import { FORTCT_WHATSAPP_DISPLAY, FORTCT_PHONE_HREF } from '../lib/contact.js'
 
 const SERVICE_CARDS = [
   { title: 'Business Printing', note: 'Flyers, stationery & documents' },
@@ -27,8 +28,8 @@ const infoCards = [
   {
     icon: <Phone className="w-5 h-5 text-white" />,
     label: 'Call Us',
-    value: '0707 787 5475',
-    href: 'tel:+2347077875475',
+    value: FORTCT_WHATSAPP_DISPLAY,
+    href: FORTCT_PHONE_HREF,
   },
   {
     icon: <Mail className="w-5 h-5 text-white" />,

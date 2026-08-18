@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { FORTCT_WHATSAPP_NUMBER } from './contact.js'
 
 export const SITE_URL = 'https://mac-smat.github.io'
 const BASE_URL = import.meta.env.BASE_URL
@@ -85,7 +86,7 @@ const BUSINESS_JSONLD = {
   description:
     'FortCT Ltd is a printing and branding company in Ibadan offering printing, branding, billboard, large format, packaging and design services.',
   url: `${SITE_URL}${BASE_URL}`,
-  telephone: '+2347077875475',
+  telephone: `+${FORTCT_WHATSAPP_NUMBER}`,
   email: 'hello@fortct.ltd',
   image: OG_IMAGE,
   address: {
