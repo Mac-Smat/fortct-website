@@ -115,18 +115,29 @@ function useInViewport(ref, rootMargin = '100px') {
   return inView
 }
 
-// GIF-like playback: muted looping video, only while the card is on screen.
-// Falls back to the static thumbnail when out of view or reduced motion.
-// The observer watches a stable wrapper, not the swapped media element,
-// so replacing img with video never fires a spurious "left viewport" event.
-function GifVideo({ videoUrl, poster, className }) {
+// GIF-like playback on hover: the video mounts and loops while the pointer
+// is over the card and unmounts (stopping playback) when it leaves. On
+// touch devices there is no hover, so the video auto-plays while the card
+// is on screen instead. The observer watches a stable wrapper, not the
+// swapped media element, so replacing img with video never fires a
+// spurious "left viewport" event.
+function GifVideo({ videoUrl, poster, className, hoverOnly }) {
   const ref = useRef(null)
+  const [hovered, setHovered] = useState(false)
   const reduceMotion = useReducedMotion()
   const inView = useInViewport(ref)
 
+  const showVideo =
+    videoUrl && inView && !reduceMotion && (!hoverOnly || hovered)
+
   return (
-    <div ref={ref} className={className}>
-      {videoUrl && inView && !reduceMotion ? (
+    <div
+      ref={ref}
+      onMouseEnter={hoverOnly ? () => setHovered(true) : undefined}
+      onMouseLeave={hoverOnly ? () => setHovered(false) : undefined}
+      className={className}
+    >
+      {showVideo ? (
         <video
           src={videoUrl}
           poster={poster}
@@ -150,7 +161,7 @@ function GifVideo({ videoUrl, poster, className }) {
   )
 }
 
-function HighlightCard({ post, index }) {
+function HighlightCard({ post, index, hoverOnly }) {
   const platformName = post.platform === 'instagram' ? 'Instagram' : 'TikTok'
   return (
     <a
@@ -165,6 +176,7 @@ function HighlightCard({ post, index }) {
         <GifVideo
           videoUrl={post.videoUrl}
           poster={post.mediaUrl}
+          hoverOnly={hoverOnly}
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
         />
       ) : (
@@ -203,7 +215,7 @@ function SkeletonTile({ span }) {
   )
 }
 
-function StickyStackCard({ post, index, progress, range, targetScale, reduceMotion }) {
+function StickyStackCard({ post, index, progress, range, targetScale, reduceMotion, hoverOnly }) {
   const scale = useTransform(progress, range, [1, targetScale])
   const platformName = post.platform === 'instagram' ? 'Instagram' : 'TikTok'
   return (
@@ -225,6 +237,7 @@ function StickyStackCard({ post, index, progress, range, targetScale, reduceMoti
           <GifVideo
             videoUrl={post.videoUrl}
             poster={post.mediaUrl}
+            hoverOnly={hoverOnly}
             className="h-full w-full object-cover"
           />
         ) : (
@@ -243,7 +256,7 @@ function StickyStackCard({ post, index, progress, range, targetScale, reduceMoti
   )
 }
 
-function MobileStickyStack({ posts }) {
+function MobileStickyStack({ posts, hoverOnly }) {
   const containerRef = useRef(null)
   const reduceMotion = useReducedMotion()
   const { scrollYProgress } = useScroll({
@@ -266,6 +279,7 @@ function MobileStickyStack({ posts }) {
           range={[index / count, 1]}
           targetScale={Math.max(0.6, 1 - (count - index - 1) * 0.08)}
           reduceMotion={reduceMotion}
+          hoverOnly={hoverOnly}
         />
       ))}
     </div>
@@ -391,14 +405,14 @@ export default function SocialMediaHighlight() {
 
           {status === 'ready' && highlights.length > 0 && (
             isMobile ? (
-              <MobileStickyStack posts={highlights} />
+              <MobileStickyStack posts={highlights} hoverOnly={!isMobile} />
             ) : (
               <div
                 ref={gridRef}
                 className="social-stack grid grid-cols-1 gap-0 md:grid-cols-2 md:gap-3 lg:grid-cols-[42fr_28fr_30fr] lg:grid-rows-[250px_250px_220px] lg:gap-3"
               >
                 {highlights.map((post, index) => (
-                  <HighlightCard key={post.id} post={post} index={index} />
+                  <HighlightCard key={post.id} post={post} index={index} hoverOnly={!isMobile} />
                 ))}
               </div>
             )
