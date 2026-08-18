@@ -170,7 +170,45 @@ const IMAGES_3 = [
   galleryPhoto12,
 ]
 
+const ALL_IMAGES = [...IMAGES_1, ...IMAGES_2, ...IMAGES_3]
+
+function MobileGallery() {
+  return (
+    <div className="relative z-20 pt-14 pb-16">
+      <div
+        role="region"
+        aria-label="Photo gallery, swipe to browse"
+        className="flex snap-x snap-mandatory gap-3 overflow-x-auto px-6 overscroll-x-contain pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {ALL_IMAGES.map((imageUrl, index) => (
+          <div
+            key={index}
+            className="w-[78vw] shrink-0 snap-center overflow-hidden rounded-2xl shadow-md"
+          >
+            <img
+              src={imageUrl}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              className="aspect-[4/5] w-full object-cover"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export default function GallerySection() {
+  const [isMobile, setIsMobile] = React.useState(() => window.matchMedia('(max-width: 767px)').matches)
+
+  React.useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)')
+    const onChange = (event) => setIsMobile(event.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+
   return (
     <section id="portfolio" className="relative bg-white dark:bg-[#0C0C0E]">
       <ContainerStagger className="relative z-[9999] -mb-12 place-self-center px-6 pt-12 text-center">
@@ -219,42 +257,46 @@ export default function GallerySection() {
         }}
       />
 
-      <ContainerScroll className="relative h-[350vh]">
-        <ContainerSticky className="h-svh">
-          <GalleryContainer className="">
-            <GalleryCol yRange={['-10%', '2%']} className="-mt-2">
-              {IMAGES_1.map((imageUrl, index) => (
-                <img
-                  key={index}
-                  className="aspect-[1600/1835] block h-auto max-h-full w-full rounded-md object-cover shadow"
-                  src={imageUrl}
-                  alt="" loading="lazy" decoding="async"
-                />
-              ))}
-            </GalleryCol>
-            <GalleryCol className="mt-[-50%]" yRange={['15%', '5%']}>
-              {IMAGES_2.map((imageUrl, index) => (
-                <img
-                  key={index}
-                  className="aspect-video block h-auto max-h-full w-full rounded-md object-cover shadow"
-                  src={imageUrl}
-                  alt="" loading="lazy" decoding="async"
-                />
-              ))}
-            </GalleryCol>
-            <GalleryCol yRange={['-10%', '2%']} className="-mt-2">
-              {IMAGES_3.map((imageUrl, index) => (
-                <img
-                  key={index}
-                  className="aspect-[1600/1835] block h-auto max-h-full w-full rounded-md object-cover shadow"
-                  src={imageUrl}
-                  alt="" loading="lazy" decoding="async"
-                />
-              ))}
-            </GalleryCol>
-          </GalleryContainer>
-        </ContainerSticky>
-      </ContainerScroll>
+      {isMobile ? (
+        <MobileGallery />
+      ) : (
+        <ContainerScroll className="relative h-[350vh]">
+          <ContainerSticky className="h-svh">
+            <GalleryContainer className="">
+              <GalleryCol yRange={['-10%', '2%']} className="-mt-2">
+                {IMAGES_1.map((imageUrl, index) => (
+                  <img
+                    key={index}
+                    className="aspect-[1600/1835] block h-auto max-h-full w-full rounded-md object-cover shadow"
+                    src={imageUrl}
+                    alt="" loading="lazy" decoding="async"
+                  />
+                ))}
+              </GalleryCol>
+              <GalleryCol className="mt-[-50%]" yRange={['15%', '5%']}>
+                {IMAGES_2.map((imageUrl, index) => (
+                  <img
+                    key={index}
+                    className="aspect-video block h-auto max-h-full w-full rounded-md object-cover shadow"
+                    src={imageUrl}
+                    alt="" loading="lazy" decoding="async"
+                  />
+                ))}
+              </GalleryCol>
+              <GalleryCol yRange={['-10%', '2%']} className="-mt-2">
+                {IMAGES_3.map((imageUrl, index) => (
+                  <img
+                    key={index}
+                    className="aspect-[1600/1835] block h-auto max-h-full w-full rounded-md object-cover shadow"
+                    src={imageUrl}
+                    alt="" loading="lazy" decoding="async"
+                  />
+                ))}
+              </GalleryCol>
+            </GalleryContainer>
+          </ContainerSticky>
+        </ContainerScroll>
+      )}
     </section>
   )
 }
