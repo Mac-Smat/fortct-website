@@ -1,4 +1,4 @@
-﻿import { useState, lazy, Suspense } from 'react'
+﻿import { useState, lazy, Suspense, useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import starIconSvg from './assets/icon-star.svg'
 import galleryPhoto7 from '../assets/Gallery Section Images/gallery-photo-7.webp'
@@ -90,6 +90,17 @@ function PublicSite() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
   usePageMeta(pathname)
+  useEffect(() => {
+    const prefetch = () => {
+      import('./lib/public-api.js').then(({ prefetchCatalogue }) => prefetchCatalogue())
+    }
+    if ('requestIdleCallback' in window) {
+      const id = requestIdleCallback(prefetch, { timeout: 2000 })
+      return () => cancelIdleCallback(id)
+    }
+    const id = setTimeout(prefetch, 2000)
+    return () => clearTimeout(id)
+  }, [])
   const isContactPage = pathname === CONTACT_ROUTE
   const isServicesPage = pathname === SERVICES_ROUTE
   const isAboutPage = pathname === ABOUT_ROUTE

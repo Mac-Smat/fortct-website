@@ -13,7 +13,7 @@ import {
   Search,
   X,
 } from 'lucide-react'
-import { fetchPublishedCategories, fetchPublishedProducts, fetchProductImages } from '../lib/public-api.js'
+import { fetchPublishedCategories, fetchPublishedProducts, fetchProductImages, getCachedCatalogue, saveCatalogueCache, optimizeImageUrl } from '../lib/public-api.js'
 import { formatPrice } from '../lib/format.js'
 import { createWhatsAppQuoteLink } from '../lib/contact.js'
 import { Tiles } from './Tiles.jsx'
@@ -205,38 +205,49 @@ export default function ServicesPage() {
   const [categories, setCategories] = useState([])
   const [services, setServices] = useState([])
 
+  const applyData = useCallback((categoryRows, productRows, imageRows) => {
+    const imageByProduct = {}
+    for (const img of imageRows) {
+      if (!imageByProduct[img.product_id]) imageByProduct[img.product_id] = optimizeImageUrl(img.image_url)
+    }
+    const publishedCategories = new Set(categoryRows.map((c) => c.name))
+    setCategories(categoryRows.map((c) => c.name))
+    setServices(
+      productRows
+        .filter((p) => p.categories?.name && publishedCategories.has(p.categories.name))
+        .map((p) => ({
+          id: p.id,
+          name: p.name,
+          category: p.categories.name,
+          price: formatPrice(p),
+          image: imageByProduct[p.id],
+          featured: p.featured,
+          slug: p.slug,
+        })),
+    )
+  }, [])
+
   const load = useCallback(async () => {
-    setStatus('loading')
+    const cached = getCachedCatalogue()
+    if (cached) {
+      applyData(cached.categories, cached.products, cached.images)
+      setStatus('ready')
+    } else {
+      setStatus('loading')
+    }
     try {
       const [categoryRows, productRows, imageRows] = await Promise.all([
         fetchPublishedCategories(),
         fetchPublishedProducts(),
         fetchProductImages(),
       ])
-      const imageByProduct = {}
-      for (const img of imageRows) {
-        if (!imageByProduct[img.product_id]) imageByProduct[img.product_id] = img.image_url
-      }
-      const publishedCategories = new Set(categoryRows.map((c) => c.name))
-      setCategories(categoryRows.map((c) => c.name))
-      setServices(
-        productRows
-          .filter((p) => p.categories?.name && publishedCategories.has(p.categories.name))
-          .map((p) => ({
-            id: p.id,
-            name: p.name,
-            category: p.categories.name,
-            price: formatPrice(p),
-            image: imageByProduct[p.id],
-            featured: p.featured,
-            slug: p.slug,
-          })),
-      )
+      saveCatalogueCache(categoryRows, productRows, imageRows)
+      applyData(categoryRows, productRows, imageRows)
       setStatus('ready')
     } catch {
-      setStatus('error')
+      if (!cached) setStatus('error')
     }
-  }, [])
+  }, [applyData])
 
   useEffect(() => {
     load()
