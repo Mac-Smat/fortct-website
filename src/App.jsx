@@ -5,7 +5,6 @@ import galleryPhoto7 from '../assets/Gallery Section Images/gallery-photo-7.webp
 import imgGemini1 from './assets/img-gemini-1.png'
 import imgGemini2 from './assets/img-gemini-2.png'
 import watermarkImg from './assets/watermark.png'
-import serviceFormat from '../assets/Services Section Images/service-large-format.webp'
 import heroMainImage from '../assets/Hero Section Images/hero-main-image.webp'
 import heroCardImage1 from '../assets/Hero Section Images/hero-card-image-1.webp'
 import heroCardImage2 from '../assets/Hero Section Images/hero-card-image-2.webp'
@@ -35,7 +34,6 @@ import { ThemeToggle } from './components/ThemeToggle.jsx'
 import { LiquidMetalButton } from './components/LiquidMetalButton.jsx'
 import { Reveal } from './components/Reveal.jsx'
 import { TextReveal } from './components/TextReveal.jsx'
-import { RevealHeading } from './components/RevealHeading.jsx'
 import { Tiles } from './components/Tiles.jsx'
 import { usePageMeta } from './lib/seo.js'
 
@@ -69,6 +67,7 @@ const AdminArea = lazy(() => import('./admin/AdminArea.jsx'))
 const ContactPage = lazy(() => import('./components/ContactPage.jsx'))
 const ServicesPage = lazy(() => import('./components/ServicesPage.jsx'))
 const AboutPage = lazy(() => import('./components/AboutPage.jsx'))
+const SocialMediaHighlight = lazy(() => import('./components/SocialMediaHighlight.jsx'))
 const NotFoundPage = lazy(() => import('./components/NotFoundPage.jsx'))
 
 export default function App() {
@@ -321,124 +320,8 @@ function PublicSite() {
       {/* ============ SERVICES SECTION (HoverSlider template) ============ */}
       <ServiceSlider />
 
-      {/* ============ WHY CHOOSE US / BENTO SECTION (3:323) ============ */}
-      <section id="why-us" className="w-full bg-white pt-6 lg:pt-[80px] pb-16 md:pb-20 dark:bg-[#0C0C0E]">
-        <div className="max-w-[1280px] mx-auto px-6">
-          {/* Header (3:326) */}
-          <Reveal className="max-w-[672px]">
-            <RevealHeading
-              as="h2"
-              per="word"
-              preset="fade-in-blur"
-              className="text-[36px] sm:text-[48px] lg:text-[70px] font-bold text-[#1A1C1C] leading-[44px] sm:leading-[56px] tracking-[-0.96px] dark:text-[#F2F2F1]"
-            >
-              Why Choose us
-            </RevealHeading>
-            <RevealHeading
-              as="p"
-              per="word"
-              preset="fade"
-              speedReveal={1.4}
-              className="mt-8 lg:mt-[40px] text-[15px] sm:text-[16px] font-normal leading-[24px] text-[#45483F] dark:text-[#A1A1AA]"
-            >
-              Expert team, proven strategies, personalized approach, and dedicated support to help your brand thrive and grow in the physical space.
-            </RevealHeading>
-          </Reveal>
-
-          {/* Bento Grid (3:330) */}
-          <Reveal className="mt-10 lg:mt-[72px]">
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 lg:gap-[20px]">
-              {/* 5.0 Rating (span 2x1) â€” 3:356 */}
-              <Reveal delay={0} className="md:col-span-3 lg:col-span-2 h-[290px]">
-                <TiltCard className="relative bg-[#E0EC38] rounded-[24px] p-6 w-full h-full flex flex-col justify-center overflow-hidden">
-                  <div aria-hidden className="absolute -top-[56px] right-[62px] w-[192px] h-[192px] rounded-full border-[20px] border-[#1A1C1C]/10 pointer-events-none" />
-                  <p className="font-[Plus Jakarta Sans] font-bold text-[44px] sm:text-[54px] lg:text-[60px] leading-[60px] text-[#1A1C1C] tracking-[-0.32px]">
-                    5.0
-                  </p>
-                  <div className="mt-[18px] flex flex-col gap-[8px]">
-                    <div className="flex items-center gap-1">
-                      {[...Array(5)].map((_, i) => (
-                        <img key={i} src={starIconSvg} alt="" className="w-[20px] h-[19px]" />
-                      ))}
-                    </div>
-                    <span className="text-[12px] font-semibold tracking-[0.6px] text-[#1A1C1C]/70">
-                      CLIENT SATISFACTION RATING
-                    </span>
-                  </div>
-                </TiltCard>
-              </Reveal>
-
-              {/* 100% Print & Ship â€” 3:331 */}
-              <Reveal delay={70} className="h-[290px]">
-                <TiltCard className="bg-[#1A1C1C] rounded-[24px] p-6 w-full h-full flex flex-col justify-between">
-                  <p className="font-[Plus Jakarta Sans] font-bold text-[36px] leading-[40px] text-white">
-                    100%
-                  </p>
-                  <span className="text-[12px] font-semibold tracking-[0.6px] text-white/60">
-                    PRINT &amp; SHIP ACCURACY
-                  </span>
-                </TiltCard>
-              </Reveal>
-
-              {/* Our Dedicated Team (span 1x2) â€” 3:374 */}
-              <Reveal delay={140} className="hidden lg:flex h-[600px] row-span-2">
-                <TiltCard className="relative rounded-[24px] overflow-hidden w-full h-full bg-[#D9D9D9] dark:bg-[#1E1E22]">
-                  <img src={serviceFormat} alt="Our Dedicated Team" className="w-full h-full object-cover" />
-                  <div className="absolute bottom-0 left-0 right-0 bg-[#1A1C1C]/80 backdrop-blur-sm">
-                    <span className="block px-6 py-5 text-[16px] font-medium leading-[24px] text-white">
-                      Our Dedicated Team
-                    </span>
-                  </div>
-                </TiltCard>
-              </Reveal>
-
-              {/* 24/7 â€” 3:338 */}
-              <Reveal delay={210} className="h-[290px]">
-                <TiltCard className="bg-[#1A1C1C] rounded-[24px] p-6 w-full h-full flex flex-col justify-between">
-                  <p className="font-[Plus Jakarta Sans] font-bold text-[36px] leading-[40px] text-white">
-                    24/7
-                  </p>
-                  <span className="text-[12px] font-semibold tracking-[0.6px] text-white/60">
-                    PRODUCTION CYCLE
-                  </span>
-                </TiltCard>
-              </Reveal>
-
-              {/* Testimonial Quote â€” 3:345 */}
-              <Reveal delay={280} className="h-[290px]">
-                <TiltCard className="bg-white border border-[#C5C8BC] rounded-[24px] p-6 w-full h-full flex flex-col justify-between dark:bg-[#1A1A1E] dark:border-[#26262B]">
-                  <span className="text-[12px] font-semibold tracking-[0.6px] text-[#3D4D2B] dark:text-[#AAB95F]">
-                    Building Lasting Success
-                  </span>
-                  <p className="text-[16px] font-normal leading-[24px] text-[#45483F] dark:text-[#A1A1AA]">
-                    &ldquo;Your success is our mission &mdash; we don&rsquo;t just deliver prints, we build lasting brand partnerships.&rdquo;
-                  </p>
-                  <span className="text-[12px] font-semibold tracking-[0.6px] text-[#1A1C1C] dark:text-[#F2F2F1]">
-                    Sarah Jenkins, CEO
-                  </span>
-                </TiltCard>
-              </Reveal>
-
-              {/* Lime Accent 3x â€” 3:379 */}
-              <Reveal delay={350} className="h-[290px]">
-                <TiltCard className="relative bg-[#E0EC38] rounded-[24px] p-6 w-full h-full flex flex-col justify-between overflow-hidden">
-                  <p className="font-[Plus Jakarta Sans] font-bold text-[36px] leading-[40px] text-[#1B1D00]">
-                    3x
-                  </p>
-                  <div className="flex items-end justify-between gap-4">
-                    <span className="text-[12px] font-semibold tracking-[0.6px] text-[#1B1D00]/70">
-                      ENGAGEMENT GROWTH
-                    </span>
-                    <svg className="w-[54px] h-[40px] text-[#1B1D00]" viewBox="0 0 100 60" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M8 46c10 4 34 8 30-8s-4-16-2-26c14-8 38-6 56 2 4 10-4 12-4 12s-6 2-6-6c-6 4-10 12-22 12-12 0-16-10-24-6 6 10 10 22 30 22 16 0 28-8 34-16" />
-                    </svg>
-                  </div>
-                </TiltCard>
-              </Reveal>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      {/* ============ SOCIAL MEDIA HIGHLIGHTS SECTION (replaces Why Choose Us bento) ============ */}
+      <SocialMediaHighlight />
 
       {/* ============ GALLERY SECTION (21st animated gallery template) ============ */}
       <GallerySection />
