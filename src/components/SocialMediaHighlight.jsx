@@ -53,7 +53,8 @@ const STACK_CSS = `
     transform: none;
     transition: opacity 0.5s ease, transform 0.5s ease;
   }
-  @media (max-width: 1023px) {
+  /* Tablet: 2-column grid + scroll-triggered reveal */
+  @media (min-width: 768px) and (max-width: 1023px) {
     .social-stack [data-stack] {
       opacity: 0.55;
       transform: scale(0.975);
@@ -64,9 +65,28 @@ const STACK_CSS = `
       z-index: 5;
     }
   }
+  /* Mobile: sticky card stack — each card locks near the top of the
+     viewport and the next card slides over it. The section gate is
+     natural: once all cards are stacked, the container scrolls past
+     and the next section follows. */
   @media (max-width: 767px) {
+    .social-stack {
+      display: flex !important;
+      flex-direction: column;
+      gap: 0 !important;
+    }
+    .social-stack [data-stack] {
+      position: sticky;
+      top: 72px;
+      opacity: 0.45;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+      transition: opacity 0.45s ease;
+    }
     .social-stack [data-stack] + [data-stack] {
-      margin-top: -28px;
+      margin-top: -88px !important;
+    }
+    .social-stack [data-stack].is-active {
+      opacity: 1;
     }
   }
   @media (prefers-reduced-motion: reduce) {
