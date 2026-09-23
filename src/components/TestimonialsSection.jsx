@@ -1,8 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { LiquidMetalButton } from './LiquidMetalButton.jsx'
+import { fetchGoogleReviews } from '../lib/google-reviews.js'
 
-const testimonials = [
+// Fallback used only while loading or when the edge function is unavailable,
+// so the section never renders empty.
+const fallbackTestimonials = [
   {
     id: 1,
     quote: 'The attention to detail and creative vision transformed our brand identity completely.',
@@ -32,9 +35,46 @@ const testimonials = [
   },
 ]
 
+// Google wordmark in official brand colors (attribution for Places data).
+function GoogleWordmark() {
+  return (
+    <span aria-hidden="true" className="text-sm font-semibold leading-none">
+      <span className="text-[#4285F4]">G</span>
+      <span className="text-[#EA4335]">o</span>
+      <span className="text-[#FBBC05]">o</span>
+      <span className="text-[#4285F4]">g</span>
+      <span className="text-[#34A853]">l</span>
+      <span className="text-[#EA4335]">e</span>
+    </span>
+  )
+}
+
 export default function TestimonialsSection() {
   const [active, setActive] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
+  const [reviews, setReviews] = useState(fallbackTestimonials)
+  const [googleAttribution, setGoogleAttribution] = useState(null)
+
+  useEffect(() => {
+    let cancelled = false
+    fetchGoogleReviews()
+      .then(({ reviews: fetched, placeId }) => {
+        if (cancelled) return
+        if (Array.isArray(fetched) && fetched.length > 0) {
+          setActive((current) => (current >= fetched.length ? 0 : current))
+          setReviews(fetched)
+          setGoogleAttribution(placeId || '')
+        }
+      })
+      .catch(() => {
+        // keep the fallback testimonials when the fetch fails
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  const testimonials = reviews
 
   const handleChange = (index) => {
     if (index === active || isTransitioning) return
@@ -88,14 +128,37 @@ export default function TestimonialsSection() {
             >
               <div className="flex items-center gap-4">
                 <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-[#1A1C1C]/10 group-hover:ring-[#1A1C1C]/30 transition-all duration-300 dark:ring-[#F2F2F1]/10 dark:group-hover:ring-[#F2F2F1]/30 shrink-0">
-                  <img
-                    src={current.image}
-                    alt={current.author}
-                    className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                  />
+                  {current.image ? (
+                    <img
+                      src={current.image}
+                      alt={current.author}
+                      className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                    />
+                  ) : (
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-0 w-full h-full flex items-center justify-center text-sm font-semibold text-[#1A1C1C] dark:text-[#F2F2F1] select-none"
+                    >
+                      {(current.author || '?').trim().charAt(0).toUpperCase()}
+                    </span>
+                  )}
                 </div>
                 <div className="min-w-0">
-                  <p className="font-medium text-[#1A1C1C] dark:text-[#F2F2F1]">{current.author}</p>
+                  <p className="font-medium text-[#1A1C1C] dark:text-[#F2F2F1]">
+                    {current.url ? (
+                      <a
+                        href={current.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title={current.relativeDate}
+                        className="font-medium text-[#1A1C1C] hover:underline underline-offset-4 dark:text-[#F2F2F1] dark:hover:underline"
+                      >
+                        {current.author}
+                      </a>
+                    ) : (
+                      current.author
+                    )}
+                  </p>
                   <p className="flex flex-wrap items-center text-sm text-[#45483F] dark:text-[#A1A1AA]">
                     {current.role}
                     <span className="mx-2 text-[#1A1C1C]/20 dark:text-[#F2F2F1]/20">/</span>
@@ -165,6 +228,21 @@ export default function TestimonialsSection() {
             }}
           />
         </div>
+
+        {/* Google attribution (required when showing Places data without a map) */}
+        {googleAttribution && (
+          <div className="flex justify-center mt-6">
+            <a
+              href={`https://www.google.com/maps/place/?q=place_id:${googleAttribution}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-xs text-[#45483F] transition-colors hover:text-[#1A1C1C] dark:text-[#A1A1AA] dark:hover:text-[#F2F2F1]"
+            >
+              <GoogleWordmark />
+              Reviews from Google
+            </a>
+          </div>
+        )}
       </div>
     </section>
   )
