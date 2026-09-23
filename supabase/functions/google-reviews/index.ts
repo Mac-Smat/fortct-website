@@ -5,9 +5,13 @@ const corsHeaders = {
   'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
 }
 
-// Read-only fetch of the business place; `reviews` returns the 5 most
-// recent Google reviews for the place (capped by Google, not by us).
-const FIELD_MASK = 'id,displayName,rating,userRatingCount,reviews'
+// Google Business Profile API v4.9 — official, free (no billing), OAuth only.
+// Docs: https://developers.google.com/my-business/reference/rest/v4/accounts.locations.reviews
+// Requires: verified listing + Google-approved API access + one-time OAuth
+// consent (scope https://www.googleapis.com/auth/business.manage).
+const GBP_BASE = 'https://mybusiness.googleapis.com/v4'
+const OAUTH_TOKEN_URL = 'https://oauth2.googleapis.com/token'
+const DEFAULT_BUSINESS_NAME = 'FortCT Ltd'
 const CACHE_TTL_MS = 5 * 60 * 1000
 
 function json(body, status = 200) {
@@ -17,70 +21,213 @@ function json(body, status = 200) {
   })
 }
 
+// --- OAuth: exchange the long-lived refresh token for a short-lived access token ---
+
+let accessTokenCache = null // { token, expiresAt }
+
+async function getAccessToken() {
+  const clientId = Deno.env.get('GOOGLE_OAUTH_CLIENT_ID')
+  const clientSecret = Deno.env.get('GOOGLE_OAUTH_CLIENT_SECRET')
+  const refreshToken = Deno.env.get('GOOGLE_REFRESH_TOKEN')
+  if (!clientId || !clientSecret || !refreshToken) return null
+
+  if (accessTokenCache && Date.now() < accessTokenCache.expiresAt - 60_000) {
+    return accessTokenCache.token
+  }
+
+  const res = await fetch(OAUTH_TOKEN_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      grant_type: 'refresh_token',
+      client_id: clientId,
+      client_secret: clientSecret,
+      refresh_token: refreshToken,
+    }),
+  })
+  if (!res.ok) {
+    let message = null
+    try {
+      const err = await res.json()
+      message = err?.error_description ?? err?.error ?? null
+    } catch {
+      // non-JSON error body — keep the http status code
+    }
+    console.error(
+      `google-reviews: oauth http_${res.status} message=${message ?? 'n/a'}`,
+    )
+    return null
+  }
+  const data = await res.json()
+  if (!data.access_token) return null
+  accessTokenCache = {
+    token: data.access_token,
+    expiresAt: Date.now() + (data.expires_in ?? 3600) * 1000,
+  }
+  return data.access_token
+}
+
+// --- Resolve the listing by business name (no Place ID needed) ---
+
+async function resolveLocation(token) {
+  const auth = { Authorization: `Bearer ${token}` }
+
+  const accountsRes = await fetch(`${GBP_BASE}/accounts`, { headers: auth })
+  if (!accountsRes.ok) {
+    console.error(`google-reviews: accounts http_${accountsRes.status}`)
+    return { error: `accounts_http_${accountsRes.status}` }
+  }
+  const accounts = (await accountsRes.json())?.accounts ?? []
+  const accountId = accounts[0]?.name?.split('/')[1]
+  if (!accountId) {
+    console.error('google-reviews: no account found')
+    return { error: 'no_account' }
+  }
+
+  const locationsRes = await fetch(
+    `${GBP_BASE}/accounts/${accountId}/locations?pageSize=50`,
+    { headers: auth },
+  )
+  if (!locationsRes.ok) {
+    console.error(`google-reviews: locations http_${locationsRes.status}`)
+    return { error: `locations_http_${locationsRes.status}` }
+  }
+  const locations = (await locationsRes.json())?.locations ?? []
+  const wanted = (
+    Deno.env.get('GOOGLE_BUSINESS_NAME') || DEFAULT_BUSINESS_NAME
+  ).toLowerCase()
+  const matches = locations.filter((l) =>
+    (l?.locationName ?? '').toLowerCase().includes(wanted),
+  )
+  const location =
+    matches.length === 1
+      ? matches[0]
+      : matches.length > 1
+        ? (matches.find((l) => l?.isVerified === true) ?? matches[0])
+        : locations.length === 1
+          ? locations[0]
+          : null
+  if (!location) {
+    console.error('google-reviews: no matching location')
+    return { error: 'no_location' }
+  }
+  const locationId = location.name?.split('/').pop()
+  if (!locationId) return { error: 'no_location' }
+
+  // Single-location GET for the mapsUri used in the Google attribution link.
+  const metaRes = await fetch(
+    `${GBP_BASE}/accounts/${accountId}/locations/${locationId}`,
+    { headers: auth },
+  )
+  if (!metaRes.ok) {
+    console.error(`google-reviews: location meta http_${metaRes.status}`)
+    return { error: `location_http_${metaRes.status}` }
+  }
+  const meta = await metaRes.json()
+
+  return {
+    error: null,
+    accountId,
+    locationId,
+    locationName: meta?.locationName ?? location.locationName ?? null,
+    mapsUrl: meta?.metadata?.mapsUri ?? null,
+  }
+}
+
+// --- Review mapping ---
+
+const STAR_RATINGS = { ONE: 1, TWO: 2, THREE: 3, FOUR: 4, FIVE: 5 }
+
+function ratingNumber(value) {
+  if (typeof value === 'number') return value >= 1 && value <= 5 ? value : null
+  if (typeof value === 'string' && STAR_RATINGS[value]) return STAR_RATINGS[value]
+  return null
+}
+
 function starRating(rating) {
-  const stars = Math.max(0, Math.min(5, Number(rating) || 0))
-  return `${'★'.repeat(stars)}${'☆'.repeat(5 - stars)}`
+  if (!rating || rating < 1 || rating > 5) return null
+  return '★'.repeat(rating) + '☆'.repeat(5 - rating)
+}
+
+function relativeDateFromIso(iso) {
+  if (!iso) return null
+  const time = Date.parse(iso)
+  if (Number.isNaN(time)) return null
+  const minutes = Math.max(1, Math.floor((Date.now() - time) / 60_000))
+  const hours = Math.floor(minutes / 60)
+  const days = Math.floor(hours / 24)
+  const weeks = Math.floor(days / 7)
+  const months = Math.floor(days / 30)
+  const years = Math.floor(days / 365)
+  if (years >= 1) return `${years} year${years > 1 ? 's' : ''} ago`
+  if (months >= 1) return `${months} month${months > 1 ? 's' : ''} ago`
+  if (weeks >= 1) return `${weeks} week${weeks > 1 ? 's' : ''} ago`
+  if (days >= 1) return `${days} day${days > 1 ? 's' : ''} ago`
+  if (hours >= 1) return `${hours} hour${hours > 1 ? 's' : ''} ago`
+  return `${minutes} minute${minutes > 1 ? 's' : ''} ago`
 }
 
 function mapReview(review) {
-  const author = review?.authorAttribution ?? {}
-  const photoUri = typeof author.photoUri === 'string' ? author.photoUri : ''
-  // Prefer the original language text, exactly as the reviewer wrote it.
-  const quote =
-    review?.originalText?.text ?? review?.text?.text ?? ''
+  const reviewer = review?.reviewer ?? {}
+  const rating = ratingNumber(review?.starRating)
+  const photoUrl =
+    typeof reviewer.profilePhotoUrl === 'string' ? reviewer.profilePhotoUrl : ''
   return {
     id: review?.name ?? null,
-    author: author.displayName ?? 'Google User',
-    quote,
-    rating: review?.rating ?? null,
+    author: reviewer.displayName ?? 'Google User',
+    quote: typeof review?.comment === 'string' ? review.comment : '',
+    rating,
     role: 'Google Review',
-    company: starRating(review?.rating),
-    date: review?.publishTime ?? null,
-    relativeDate: review?.relativePublishTimeDescription ?? null,
+    company: starRating(rating),
+    date: review?.createTime ?? null,
+    relativeDate: relativeDateFromIso(review?.createTime),
+    // The GBP API exposes no per-review URL; attribution is carried by the
+    // business mapsUri via the "Reviews from Google" wordmark link instead.
+    url: null,
     // Only pass through directly-loadable profile photos; otherwise the
     // front-end falls back to a letter avatar.
-    image: /^https:\/\//.test(photoUri) ? photoUri : null,
-    // Reviewer profile link — required by Google's attribution policy.
-    url: typeof author.uri === 'string' ? author.uri : null,
+    image: /^https:\/\//.test(photoUrl) ? photoUrl : null,
   }
 }
 
 async function fetchGoogleReviews() {
-  const apiKey = Deno.env.get('GOOGLE_MAPS_API_KEY')
-  const placeId = Deno.env.get('GOOGLE_PLACE_ID')
-  if (!apiKey || !placeId) {
+  const hasSecrets =
+    Deno.env.get('GOOGLE_OAUTH_CLIENT_ID') &&
+    Deno.env.get('GOOGLE_OAUTH_CLIENT_SECRET') &&
+    Deno.env.get('GOOGLE_REFRESH_TOKEN')
+  if (!hasSecrets) {
     return { configured: false, error: 'not_configured', reviews: [] }
   }
   try {
-    const res = await fetch(
-      `https://places.googleapis.com/v1/places/${encodeURIComponent(placeId)}`,
-      {
-        headers: {
-          'X-Goog-Api-Key': apiKey,
-          'X-Goog-FieldMask': FIELD_MASK,
-        },
-      },
-    )
-    if (!res.ok) {
-      let message = null
-      try {
-        message = (await res.json())?.error?.message ?? null
-      } catch {
-        // non-JSON error body — keep the http status code
-      }
-      console.error(
-        `google-reviews: places http_${res.status} message=${message ?? 'n/a'}`,
-      )
-      return { configured: true, error: `http_${res.status}`, reviews: [] }
+    const token = await getAccessToken()
+    if (!token) return { configured: true, error: 'oauth_failed', reviews: [] }
+
+    const location = await resolveLocation(token)
+    if (location.error) {
+      return { configured: true, error: location.error, reviews: [] }
     }
-    const place = await res.json()
+
+    const reviewsRes = await fetch(
+      `${GBP_BASE}/accounts/${location.accountId}/locations/${location.locationId}/reviews?pageSize=5&orderBy=updateTime%20desc`,
+      { headers: { Authorization: `Bearer ${token}` } },
+    )
+    if (!reviewsRes.ok) {
+      console.error(`google-reviews: reviews http_${reviewsRes.status}`)
+      return {
+        configured: true,
+        error: `reviews_http_${reviewsRes.status}`,
+        reviews: [],
+      }
+    }
+    const payload = await reviewsRes.json()
+
     return {
       configured: true,
-      placeId,
-      name: place?.displayName?.text ?? place?.displayName ?? null,
-      rating: place?.rating ?? null,
-      userRatingCount: place?.userRatingCount ?? null,
-      reviews: (place?.reviews ?? []).map(mapReview),
+      name: location.locationName,
+      rating: payload?.averageRating ?? null,
+      userRatingCount: payload?.totalReviewCount ?? null,
+      mapsUrl: location.mapsUrl,
+      reviews: (payload?.reviews ?? []).map(mapReview),
     }
   } catch (err) {
     console.error('google-reviews: network error', err)

@@ -35,7 +35,7 @@ const fallbackTestimonials = [
   },
 ]
 
-// Google wordmark in official brand colors (attribution for Places data).
+// Google wordmark in official brand colors (attribution for Google review data).
 function GoogleWordmark() {
   return (
     <span aria-hidden="true" className="text-sm font-semibold leading-none">
@@ -58,12 +58,17 @@ export default function TestimonialsSection() {
   useEffect(() => {
     let cancelled = false
     fetchGoogleReviews()
-      .then(({ reviews: fetched, placeId }) => {
+      .then(({ reviews: fetched, placeId, mapsUrl }) => {
         if (cancelled) return
         if (Array.isArray(fetched) && fetched.length > 0) {
           setActive((current) => (current >= fetched.length ? 0 : current))
           setReviews(fetched)
-          setGoogleAttribution(placeId || '')
+          setGoogleAttribution(
+            mapsUrl ||
+              (placeId
+                ? `https://www.google.com/maps/place/?q=place_id:${placeId}`
+                : ''),
+          )
         }
       })
       .catch(() => {
@@ -156,7 +161,7 @@ export default function TestimonialsSection() {
                         {current.author}
                       </a>
                     ) : (
-                      current.author
+                      <span title={current.relativeDate}>{current.author}</span>
                     )}
                   </p>
                   <p className="flex flex-wrap items-center text-sm text-[#45483F] dark:text-[#A1A1AA]">
@@ -229,11 +234,11 @@ export default function TestimonialsSection() {
           />
         </div>
 
-        {/* Google attribution (required when showing Places data without a map) */}
+        {/* Google attribution (required when showing Google review data) */}
         {googleAttribution && (
           <div className="flex justify-center mt-6">
             <a
-              href={`https://www.google.com/maps/place/?q=place_id:${googleAttribution}`}
+              href={googleAttribution}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-xs text-[#45483F] transition-colors hover:text-[#1A1C1C] dark:text-[#A1A1AA] dark:hover:text-[#F2F2F1]"
