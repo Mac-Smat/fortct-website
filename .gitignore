@@ -29,3 +29,6 @@ assets/**/_source-png/
 *.njsproj
 *.sln
 *.sw?
+
+# Temporary test/verification files (never commit)
+.tmp-*
