@@ -14,7 +14,73 @@ const OAUTH_TOKEN_URL = 'https://oauth2.googleapis.com/token'
 const DEFAULT_BUSINESS_NAME = 'FortCT Ltd'
 const CACHE_TTL_MS = 5 * 60 * 1000
 
-function json(body, status = 200) {
+// --- Shared types for GBP API payloads, mapped reviews, and caches ---
+
+interface GbpAccount {
+  name?: string
+}
+
+interface GbpLocation {
+  name?: string
+  locationName?: string
+  isVerified?: boolean
+}
+
+interface GbpReviewer {
+  displayName?: string
+  profilePhotoUrl?: string
+}
+
+interface GbpReview {
+  name?: string
+  comment?: string
+  createTime?: string
+  starRating?: string | number
+  reviewer?: GbpReviewer
+}
+
+interface ResolvedLocation {
+  error: string | null
+  accountId?: string
+  locationId?: string
+  locationName?: string | null
+  mapsUrl?: string | null
+}
+
+interface MappedReview {
+  id: string | null
+  author: string
+  quote: string
+  rating: number | null
+  role: string
+  company: string | null
+  date: string | null
+  relativeDate: string | null
+  url: null
+  image: string | null
+}
+
+interface ReviewsResponse {
+  configured: boolean
+  error?: string
+  name?: string | null
+  rating?: number | null
+  userRatingCount?: number | null
+  mapsUrl?: string | null
+  reviews: MappedReview[]
+}
+
+interface AccessTokenCache {
+  token: string
+  expiresAt: number
+}
+
+interface ResponseCache {
+  at: number
+  data: ReviewsResponse
+}
+
+function json(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {
     status,
     headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -23,7 +89,7 @@ function json(body, status = 200) {
 
 // --- OAuth: exchange the long-lived refresh token for a short-lived access token ---
 
-let accessTokenCache = null // { token, expiresAt }
+let accessTokenCache: AccessTokenCache | null = null // { token, expiresAt }
 
 async function getAccessToken() {
   const clientId = Deno.env.get('GOOGLE_OAUTH_CLIENT_ID')
@@ -69,7 +135,7 @@ async function getAccessToken() {
 
 // --- Resolve the listing by business name (no Place ID needed) ---
 
-async function resolveLocation(token) {
+async function resolveLocation(token: string): Promise<ResolvedLocation> {
   const auth = { Authorization: `Bearer ${token}` }
 
   const accountsRes = await fetch(`${GBP_BASE}/accounts`, { headers: auth })
@@ -77,7 +143,7 @@ async function resolveLocation(token) {
     console.error(`google-reviews: accounts http_${accountsRes.status}`)
     return { error: `accounts_http_${accountsRes.status}` }
   }
-  const accounts = (await accountsRes.json())?.accounts ?? []
+  const accounts: GbpAccount[] = (await accountsRes.json())?.accounts ?? []
   const accountId = accounts[0]?.name?.split('/')[1]
   if (!accountId) {
     console.error('google-reviews: no account found')
@@ -92,7 +158,7 @@ async function resolveLocation(token) {
     console.error(`google-reviews: locations http_${locationsRes.status}`)
     return { error: `locations_http_${locationsRes.status}` }
   }
-  const locations = (await locationsRes.json())?.locations ?? []
+  const locations: GbpLocation[] = (await locationsRes.json())?.locations ?? []
   const wanted = (
     Deno.env.get('GOOGLE_BUSINESS_NAME') || DEFAULT_BUSINESS_NAME
   ).toLowerCase()
@@ -136,20 +202,26 @@ async function resolveLocation(token) {
 
 // --- Review mapping ---
 
-const STAR_RATINGS = { ONE: 1, TWO: 2, THREE: 3, FOUR: 4, FIVE: 5 }
+const STAR_RATINGS: Record<string, number> = {
+  ONE: 1,
+  TWO: 2,
+  THREE: 3,
+  FOUR: 4,
+  FIVE: 5,
+}
 
-function ratingNumber(value) {
+function ratingNumber(value: unknown) {
   if (typeof value === 'number') return value >= 1 && value <= 5 ? value : null
   if (typeof value === 'string' && STAR_RATINGS[value]) return STAR_RATINGS[value]
   return null
 }
 
-function starRating(rating) {
+function starRating(rating: number | null) {
   if (!rating || rating < 1 || rating > 5) return null
   return '★'.repeat(rating) + '☆'.repeat(5 - rating)
 }
 
-function relativeDateFromIso(iso) {
+function relativeDateFromIso(iso: string | null | undefined) {
   if (!iso) return null
   const time = Date.parse(iso)
   if (Number.isNaN(time)) return null
@@ -167,8 +239,8 @@ function relativeDateFromIso(iso) {
   return `${minutes} minute${minutes > 1 ? 's' : ''} ago`
 }
 
-function mapReview(review) {
-  const reviewer = review?.reviewer ?? {}
+function mapReview(review: GbpReview): MappedReview {
+  const reviewer: GbpReviewer = review?.reviewer ?? {}
   const rating = ratingNumber(review?.starRating)
   const photoUrl =
     typeof reviewer.profilePhotoUrl === 'string' ? reviewer.profilePhotoUrl : ''
@@ -190,7 +262,7 @@ function mapReview(review) {
   }
 }
 
-async function fetchGoogleReviews() {
+async function fetchGoogleReviews(): Promise<ReviewsResponse> {
   const hasSecrets =
     Deno.env.get('GOOGLE_OAUTH_CLIENT_ID') &&
     Deno.env.get('GOOGLE_OAUTH_CLIENT_SECRET') &&
@@ -237,9 +309,9 @@ async function fetchGoogleReviews() {
 
 // Only successful responses are cached so a transient Google outage does
 // not poison the cache for the TTL window.
-let cache = null
+let cache: ResponseCache | null = null
 
-Deno.serve(async (req) => {
+Deno.serve(async (req: Request) => {
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders })
   }
