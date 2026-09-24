@@ -221,17 +221,21 @@ export default function TestimonialsSection() {
           </div>
         </div>
 
-        {/* See more reviews button */}
+        {/* See more reviews button — opens the Google Business Profile in a new tab */}
         <div className="flex justify-center mt-12">
-          <LiquidMetalButton
-            variant="light"
-            label="See more reviews"
-            showArrow
-            width={190}
-            onClick={() => {
-              window.location.hash = '#contact'
-            }}
-          />
+          <a
+            href="https://share.google/4L9C6SJY74WiTnea6"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="See more reviews on Google"
+          >
+            <LiquidMetalButton
+              variant="light"
+              label="See more reviews"
+              showArrow
+              width={190}
+            />
+          </a>
         </div>
 
         {/* Google attribution (required when showing Google review data) */}
