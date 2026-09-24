@@ -2,36 +2,44 @@ import { useEffect, useState } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { LiquidMetalButton } from './LiquidMetalButton.jsx'
 import { fetchGoogleReviews } from '../lib/google-reviews.js'
+import moyinoluwaLaniyanAvatar from '../../assets/Testimonials Section Images/moyinoluwa-laniyan.webp'
+import abassOlaiyaAvatar from '../../assets/Testimonials Section Images/abass-olaiya.webp'
 
-// Fallback used only while loading or when the edge function is unavailable,
-// so the section never renders empty.
+// Google Business Profile link — used by the "See more reviews" button and as
+// the Google attribution link while live reviews are not being fetched.
+const GOOGLE_PROFILE_URL = 'https://g.page/r/CXzjsGLpIIVtEAE/review'
+
+// Manually collected Google Business Profile reviews. They render whenever the
+// google-reviews edge function returns no live data (the function is not
+// deployed yet) and use the exact object shape that function returns, so
+// adding another review is a single append here — the UI stays untouched.
 const fallbackTestimonials = [
   {
-    id: 1,
-    quote: 'The attention to detail and creative vision transformed our brand identity completely.',
-    author: 'Sarah Chen',
-    role: 'Creative Director',
-    company: 'Studio Forma',
-    image:
-      'https://plus.unsplash.com/premium_photo-1689551671548-79ff30459d2a?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGF2YXRhcnN8ZW58MHx8MHx8fDA%3D',
+    id: 'moyinoluwa-laniyan',
+    author: 'Moyinoluwa Laniyan',
+    quote:
+      'It was a very fast service. My item branding consultation was done ASAP and delivery done within a short while.\n\nI highly recommend',
+    rating: 5,
+    role: 'Google Review',
+    // Same ★/☆ string the google-reviews edge function builds from the rating.
+    company: '★★★★★',
+    date: null,
+    relativeDate: '8 months ago',
+    url: null,
+    image: moyinoluwaLaniyanAvatar,
   },
   {
-    id: 2,
-    quote: 'Working with them felt like a true creative partnership from day one.',
-    author: 'Marcus Webb',
-    role: 'Head of Design',
-    company: 'Minimal Co',
-    image:
-      'https://images.unsplash.com/photo-1649123245135-4db6ead931b5?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjZ8fGF2YXRhcnN8ZW58MHx8MHx8fDA%3D',
-  },
-  {
-    id: 3,
-    quote: 'They understand that great design is invisible yet unforgettable.',
-    author: 'Elena Voss',
-    role: 'Art Director',
-    company: 'Pixel & Co',
-    image:
-      'https://images.unsplash.com/photo-1701615004837-40d8573b6652?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDB8fGF2YXRhcnN8ZW58MHx8MHx8fDA%3D',
+    id: 'abass-olaiya',
+    author: 'ABASS OLAIYA',
+    quote:
+      'FortCT is truly exceptional. Their large-format printing is of outstanding quality, with sharp detail, vibrant colors, and a flawless finish every time. The team is professional, responsive, and genuinely committed to bringing ideas to life exactly as envisioned. From concept to final delivery, the process is smooth, efficient, and handled with great care. If you’re looking for a large-format printing firm that combines creativity, precision, and reliability, FortCT is an absolute standout.',
+    rating: 5,
+    role: 'Google Review',
+    company: '★★★★★',
+    date: null,
+    relativeDate: '8 months ago',
+    url: null,
+    image: abassOlaiyaAvatar,
   },
 ]
 
@@ -53,7 +61,7 @@ export default function TestimonialsSection() {
   const [active, setActive] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
   const [reviews, setReviews] = useState(fallbackTestimonials)
-  const [googleAttribution, setGoogleAttribution] = useState(null)
+  const [googleAttribution, setGoogleAttribution] = useState(GOOGLE_PROFILE_URL)
 
   useEffect(() => {
     let cancelled = false
@@ -224,7 +232,7 @@ export default function TestimonialsSection() {
         {/* See more reviews button — opens the Google Business Profile in a new tab */}
         <div className="flex justify-center mt-12">
           <a
-            href="https://g.page/r/CXzjsGLpIIVtEAE/review"
+            href={GOOGLE_PROFILE_URL}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="See more reviews on Google"
