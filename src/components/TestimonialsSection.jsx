@@ -224,7 +224,7 @@ export default function TestimonialsSection() {
         {/* See more reviews button — opens the Google Business Profile in a new tab */}
         <div className="flex justify-center mt-12">
           <a
-            href="https://share.google/4L9C6SJY74WiTnea6"
+            href="https://g.page/r/CXzjsGLpIIVtEAE/review"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="See more reviews on Google"
