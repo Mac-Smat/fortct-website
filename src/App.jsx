@@ -35,7 +35,9 @@ import { LiquidMetalButton } from './components/LiquidMetalButton.jsx'
 import { Reveal } from './components/Reveal.jsx'
 import { TextReveal } from './components/TextReveal.jsx'
 import { Tiles } from './components/Tiles.jsx'
+import { LogoMarquee } from './components/LogoMarquee.jsx'
 import { usePageMeta } from './lib/seo.js'
+import { CLIENT_LOGOS } from './data/clientLogos.js'
 
 const BASE_URL = import.meta.env.BASE_URL
 const CONTACT_PATH = `${BASE_URL}contact`
@@ -314,6 +316,14 @@ function PublicSite() {
           </Reveal>
         </div>
       </section>
+
+      {/* ============ CLIENT LOGO MARQUEE (trusted-by strip under the hero) ============ */}
+      <LogoMarquee
+        title="Trusted by Businesses Across Ibadan"
+        description="From startups to established brands, businesses rely on FortCT for precise printing, reliable turnaround and lasting brand quality."
+        logos={CLIENT_LOGOS}
+        speed="normal"
+      />
 
       <AboutSection />
 

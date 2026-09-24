@@ -89,6 +89,28 @@ html.dark #contact .leaflet-tile {
   will-change: filter, opacity;
 }
 
+/* 3. Infinite logo marquee (LogoMarquee) — duration comes from the --marquee-duration
+   inline custom property; pausing on hover lives here so it wins the cascade. */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll var(--marquee-duration, 40s) linear infinite;
+  will-change: transform;
+}
+
+.marquee-viewport:hover .marquee-track {
+  animation-play-state: paused;
+}
+
 /* Respect user's motion preferences */
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -97,7 +119,8 @@ html.dark #contact .leaflet-tile {
   }
 
   .animate-spin-slow,
-  .animate-star-glow {
+  .animate-star-glow,
+  .marquee-track {
     animation: none !important;
   }
 
