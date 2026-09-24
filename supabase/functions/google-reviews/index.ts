@@ -14,6 +14,23 @@ const OAUTH_TOKEN_URL = 'https://oauth2.googleapis.com/token'
 const DEFAULT_BUSINESS_NAME = 'FortCT Ltd'
 const CACHE_TTL_MS = 5 * 60 * 1000
 
+// VS Code's built-in TypeScript service has no Deno global types (no
+// tsconfig/deno.json in this workspace and the Deno extension may be off),
+// which surfaces "Cannot find name 'Deno'" in the editor. This module-scoped
+// declaration satisfies the editor only: it is erased at compile time and
+// shadows — rather than conflicts with — the real Deno runtime globals when
+// the file is checked with `deno check`.
+declare const Deno: {
+  env: {
+    get(key: string): string | undefined
+    set(key: string, value: string): void
+    has(key: string): boolean
+  }
+  serve(handler: (req: Request) => Response | Promise<Response>): void
+  [key: string]: any
+}
+export {}
+
 // --- Shared types for GBP API payloads, mapped reviews, and caches ---
 
 interface GbpAccount {
