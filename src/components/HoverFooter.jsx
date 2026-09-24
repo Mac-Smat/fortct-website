@@ -1,6 +1,3 @@
-import { useRef, useEffect, useState } from 'react'
-import { motion } from 'motion/react'
-import { cn } from '../lib/utils'
 import logoSvg from '../assets/logo.svg'
 import { Reveal } from './Reveal.jsx'
 import { RevealHeading } from './RevealHeading.jsx'
@@ -54,116 +51,6 @@ function LinkedInIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
       <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.55V9h3.57v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0Z" />
-    </svg>
-  )
-}
-
-export function TextHoverEffect({ text, duration, className }) {
-  const svgRef = useRef(null)
-  const [cursor, setCursor] = useState({ x: 0, y: 0 })
-  const [hovered, setHovered] = useState(false)
-  const [maskPosition, setMaskPosition] = useState({ cx: '50%', cy: '50%' })
-
-  useEffect(() => {
-    if (svgRef.current && cursor.x !== null && cursor.y !== null) {
-      const svgRect = svgRef.current.getBoundingClientRect()
-      const cxPercentage = ((cursor.x - svgRect.left) / svgRect.width) * 100
-      const cyPercentage = ((cursor.y - svgRect.top) / svgRect.height) * 100
-      setMaskPosition({
-        cx: `${cxPercentage}%`,
-        cy: `${cyPercentage}%`,
-      })
-    }
-  }, [cursor])
-
-  return (
-    <svg
-      ref={svgRef}
-      width="100%"
-      height="100%"
-      viewBox="0 0 300 100"
-      xmlns="http://www.w3.org/2000/svg"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onMouseMove={(e) => setCursor({ x: e.clientX, y: e.clientY })}
-      className={cn('select-none uppercase cursor-pointer', className)}
-    >
-      <defs>
-        <linearGradient
-          id="textGradient"
-          gradientUnits="userSpaceOnUse"
-          cx="50%"
-          cy="50%"
-          r="25%"
-        >
-          {hovered && (
-            <>
-              <stop offset="0%" stopColor="#E0EC38" />
-              <stop offset="25%" stopColor="#9FB04A" />
-              <stop offset="50%" stopColor="#3D4D2B" />
-              <stop offset="75%" stopColor="#6E7D3E" />
-              <stop offset="100%" stopColor="#E0EC38" />
-            </>
-          )}
-        </linearGradient>
-
-        <motion.radialGradient
-          id="revealMask"
-          gradientUnits="userSpaceOnUse"
-          r="20%"
-          initial={{ cx: '50%', cy: '50%' }}
-          animate={maskPosition}
-          transition={{ duration: duration ?? 0, ease: 'easeOut' }}
-        >
-          <stop offset="0%" stopColor="white" />
-          <stop offset="100%" stopColor="black" />
-        </motion.radialGradient>
-        <mask id="textMask">
-          <rect x="0" y="0" width="100%" height="100%" fill="url(#revealMask)" />
-        </mask>
-      </defs>
-      <text
-        x="50%"
-        y="50%"
-        textAnchor="middle"
-        dominantBaseline="middle"
-        strokeWidth="0.3"
-        className="fill-transparent stroke-white/10 font-sans text-7xl font-bold"
-        style={{ opacity: hovered ? 0.7 : 0 }}
-      >
-        {text}
-      </text>
-      <motion.text
-        x="50%"
-        y="50%"
-        textAnchor="middle"
-        dominantBaseline="middle"
-        strokeWidth="0.3"
-        className="fill-transparent stroke-[#E0EC38] font-sans text-7xl font-bold"
-        initial={{ strokeDashoffset: 1000, strokeDasharray: 1000 }}
-        animate={{
-          strokeDashoffset: 0,
-          strokeDasharray: 1000,
-        }}
-        transition={{
-          duration: 4,
-          ease: 'easeInOut',
-        }}
-      >
-        {text}
-      </motion.text>
-      <text
-        x="50%"
-        y="50%"
-        textAnchor="middle"
-        dominantBaseline="middle"
-        stroke="url(#textGradient)"
-        strokeWidth="0.3"
-        mask="url(#textMask)"
-        className="fill-transparent font-sans text-7xl font-bold"
-      >
-        {text}
-      </text>
     </svg>
   )
 }
@@ -318,7 +205,7 @@ export default function HoverFooter({ prefixLanding = false }) {
         <hr className="border-t border-white/10 my-8" />
 
         {/* Footer bottom */}
-        <Reveal delay={400}>
+        <div>
           <div className="flex flex-col md:flex-row justify-between items-center text-sm space-y-4 md:space-y-0">
             <div className="flex space-x-6 text-white/40">
               {socialLinks.map(({ icon, label, href }) => (
@@ -341,12 +228,7 @@ export default function HoverFooter({ prefixLanding = false }) {
               </p>
             </div>
           </div>
-        </Reveal>
-      </div>
-
-      {/* Text hover effect */}
-      <div className="hidden lg:flex h-[30rem] -mt-52 -mb-36">
-        <TextHoverEffect text="FortCT" className="z-50" />
+        </div>
       </div>
 
       <FooterBackgroundGradient />
