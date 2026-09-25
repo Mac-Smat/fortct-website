@@ -126,7 +126,7 @@ export default function TestimonialsSection() {
           <div className="flex-1 min-w-0 pt-2 sm:pt-6">
             {/* Quote */}
             <blockquote
-              className={`text-xl sm:text-2xl md:text-3xl font-light leading-relaxed text-[#1A1C1C] tracking-tight transition-all duration-300 dark:text-[#F2F2F1] ${
+              className={`text-xl sm:text-2xl md:text-3xl font-light leading-relaxed text-[#1A1C1C] tracking-tight line-clamp-5 transition-all duration-300 dark:text-[#F2F2F1] ${
                 isTransitioning ? 'opacity-0 translate-x-4' : 'opacity-100 translate-x-0'
               }`}
             >
