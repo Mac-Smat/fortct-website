@@ -329,8 +329,8 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* ============ FINAL CTA (shared CtaBanner, scrolls to form) ============ */}
-      <CtaBanner scrollTarget="contact-form" headingAs="h2" />
+      {/* ============ FINAL CTA (shared CtaBanner, opens WhatsApp) ============ */}
+      <CtaBanner headingAs="h2" />
     </>
   )
 }

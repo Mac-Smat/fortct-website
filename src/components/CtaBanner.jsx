@@ -1,21 +1,12 @@
 import ctaBannerImage from '../../assets/CTA Banner Section Images/cta-banner-image.webp'
+import { openWhatsAppChat } from '../lib/contact.js'
 import { LiquidMetalButton } from './LiquidMetalButton.jsx'
 import { Reveal } from './Reveal.jsx'
 import { RevealHeading } from './RevealHeading.jsx'
 
-export default function CtaBanner({ scrollTarget, navigateTo, headingAs = 'h2' }) {
+export default function CtaBanner({ headingAs = 'h2' }) {
   const handleQuoteClick = () => {
-    if (scrollTarget) {
-      document
-        .getElementById(scrollTarget)
-        ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      return
-    }
-    if (navigateTo) {
-      window.location.href = navigateTo
-      return
-    }
-    window.location.hash = '#contact'
+    openWhatsAppChat()
   }
 
   return (

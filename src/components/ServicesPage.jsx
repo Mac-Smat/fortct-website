@@ -15,15 +15,12 @@ import {
 } from 'lucide-react'
 import { fetchPublishedCategories, fetchPublishedProducts, fetchProductImages, getCachedCatalogue, saveCatalogueCache, optimizeImageUrl } from '../lib/public-api.js'
 import { formatPrice } from '../lib/format.js'
-import { createWhatsAppQuoteLink } from '../lib/contact.js'
+import { createWhatsAppQuoteMessage, openWhatsAppChat } from '../lib/contact.js'
 import { Tiles } from './Tiles.jsx'
 import { Reveal } from './Reveal.jsx'
 import { TextReveal } from './TextReveal.jsx'
 import { LiquidMetalButton } from './LiquidMetalButton.jsx'
 import CtaBanner from './CtaBanner.jsx'
-
-const BASE_URL = import.meta.env.BASE_URL
-const CONTACT_PATH = `${BASE_URL}contact`
 
 const CATEGORY_ICONS = {
   'Business Printing': Printer,
@@ -276,7 +273,7 @@ export default function ServicesPage() {
 
   const handleGetQuote = (product) => {
     setDetailProduct(null)
-    window.open(createWhatsAppQuoteLink(product?.name), '_blank', 'noopener,noreferrer')
+    openWhatsAppChat(createWhatsAppQuoteMessage(product?.name))
   }
 
   return (
@@ -468,7 +465,7 @@ export default function ServicesPage() {
       </section>
 
       {/* ============ FINAL CTA ============ */}
-      <CtaBanner navigateTo={CONTACT_PATH} headingAs="h2" />
+      <CtaBanner headingAs="h2" />
 
       <AnimatePresence>
         {detailProduct && (

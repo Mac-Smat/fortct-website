@@ -44,7 +44,7 @@ export default function AboutPage() {
 
       <AboutSection eyebrow="OUR STORY" learnMoreHref={CONTACT_PATH} />
       <TestimonialsSection />
-      <CtaBanner navigateTo={CONTACT_PATH} headingAs="h2" />
+      <CtaBanner headingAs="h2" />
     </>
   )
 }

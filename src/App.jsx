@@ -37,6 +37,7 @@ import { TextReveal } from './components/TextReveal.jsx'
 import { Tiles } from './components/Tiles.jsx'
 import { LogoMarquee } from './components/LogoMarquee.jsx'
 import { usePageMeta } from './lib/seo.js'
+import { openWhatsAppChat } from './lib/contact.js'
 import { CLIENT_LOGOS } from './data/clientLogos.js'
 
 const BASE_URL = import.meta.env.BASE_URL
@@ -115,18 +116,9 @@ function PublicSite() {
         ? 'About'
         : undefined
 
+  // "Get a Quote" CTAs open the FortCT WhatsApp Business chat (wa.me/2347077875475).
   const handleQuoteClick = () => {
-    if (isContactPage) {
-      document
-        .getElementById('contact-form')
-        ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      return
-    }
-    if (isServicesPage || isAboutPage || isUnknownPage) {
-      window.location.href = CONTACT_PATH
-      return
-    }
-    window.location.hash = '#quote'
+    openWhatsAppChat()
   }
 
   return (
