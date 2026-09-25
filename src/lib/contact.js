@@ -18,9 +18,18 @@ export function createWhatsAppQuoteMessage(serviceName) {
   return `Hello FortCT! I'm interested in ${name}. Can you share pricing and options?`
 }
 
+/** Opening message pre-filled by the generic "Get a Quote" CTAs (navbar, banner). */
+export const FORTCT_QUOTE_MESSAGE =
+  "Hello! I'm interested in getting a quote for some printing and branding services. Could you please let me know how to proceed?"
+
 /** Opens the FortCT WhatsApp Business chat in a new tab and returns the link used. */
 export function openWhatsAppChat(message) {
   const url = createWhatsAppLink(message)
   window.open(url, '_blank', 'noopener,noreferrer')
   return url
+}
+
+/** Opens the WhatsApp chat with the default quote opening message pre-filled. */
+export function openWhatsAppQuoteChat() {
+  return openWhatsAppChat(FORTCT_QUOTE_MESSAGE)
 }

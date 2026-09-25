@@ -37,7 +37,7 @@ import { TextReveal } from './components/TextReveal.jsx'
 import { Tiles } from './components/Tiles.jsx'
 import { LogoMarquee } from './components/LogoMarquee.jsx'
 import { usePageMeta } from './lib/seo.js'
-import { openWhatsAppChat } from './lib/contact.js'
+import { openWhatsAppQuoteChat } from './lib/contact.js'
 import { CLIENT_LOGOS } from './data/clientLogos.js'
 
 const BASE_URL = import.meta.env.BASE_URL
@@ -116,9 +116,9 @@ function PublicSite() {
         ? 'About'
         : undefined
 
-  // "Get a Quote" CTAs open the FortCT WhatsApp Business chat (wa.me/2347077875475).
+  // "Get a Quote" CTAs open the FortCT WhatsApp Business chat pre-filled with an opener.
   const handleQuoteClick = () => {
-    openWhatsAppChat()
+    openWhatsAppQuoteChat()
   }
 
   return (

@@ -1,12 +1,12 @@
 import ctaBannerImage from '../../assets/CTA Banner Section Images/cta-banner-image.webp'
-import { openWhatsAppChat } from '../lib/contact.js'
+import { openWhatsAppQuoteChat } from '../lib/contact.js'
 import { LiquidMetalButton } from './LiquidMetalButton.jsx'
 import { Reveal } from './Reveal.jsx'
 import { RevealHeading } from './RevealHeading.jsx'
 
 export default function CtaBanner({ headingAs = 'h2' }) {
   const handleQuoteClick = () => {
-    openWhatsAppChat()
+    openWhatsAppQuoteChat()
   }
 
   return (
