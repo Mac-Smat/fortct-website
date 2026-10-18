@@ -6,6 +6,7 @@ const corsHeaders = {
 }
 
 const MAX_RAW_POSTS_PER_PLATFORM = 30
+const INSTAGRAM_GRAPH_API_VERSION = 'v26.0'
 
 function json(body, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -24,18 +25,32 @@ async function fetchInstagramPosts() {
       limit: String(MAX_RAW_POSTS_PER_PLATFORM),
       access_token: token,
     })
-    const res = await fetch(`https://graph.instagram.com/me/media?${params}`)
+    const res = await fetch(
+      `https://graph.instagram.com/${INSTAGRAM_GRAPH_API_VERSION}/me/media?${params}`,
+    )
     if (!res.ok) {
-      console.error(`social-highlights: instagram http_${res.status}`)
+      const payload = await res.json().catch(() => null)
+      const apiError = payload?.error
+      console.error(
+        `social-highlights: instagram http_${res.status} code_${apiError?.code ?? 'unknown'} ${apiError?.type ?? ''} ${apiError?.message ?? ''}`,
+      )
       return { configured: true, posts: [] }
     }
     const payload = await res.json()
-    const posts = (payload?.data ?? []).map((p) => ({
+    if (payload?.error) {
+      console.error(
+        `social-highlights: instagram api_error code_${payload.error.code ?? 'unknown'} ${payload.error.type ?? ''} ${payload.error.message ?? ''}`,
+      )
+      return { configured: true, posts: [] }
+    }
+    const media = payload?.data ?? []
+    console.log(`social-highlights: instagram media_count_${media.length}`)
+    const posts = media.map((p) => ({
       id: `ig-${p.id}`,
       platform: 'instagram',
       caption: p.caption ?? '',
       mediaUrl:
-        p.media_type === 'VIDEO'
+        p.media_type === 'VIDEO' || p.media_type === 'REELS'
           ? p.thumbnail_url ?? p.media_url
           : p.media_url,
       videoUrl:
