@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/fortct-website/',
+  base: process.env.BASE_URL || '/',
   build: {
     rollupOptions: {
       output: {
