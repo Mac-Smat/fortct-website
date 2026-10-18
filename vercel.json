@@ -5,22 +5,10 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
-  "routes": [
+  "rewrites": [
     {
-      "src": "/contact",
-      "dest": "/"
-    },
-    {
-      "src": "/services",
-      "dest": "/"
-    },
-    {
-      "src": "/about",
-      "dest": "/"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/"
+      "source": "/((?!assets/|.*\\.).*)",
+      "destination": "/"
     }
   ],
   "headers": [
