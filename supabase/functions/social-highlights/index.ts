@@ -53,28 +53,36 @@ async function fetchInstagramPosts() {
 }
 
 async function fetchTikTokPosts() {
-  const clientKey = Deno.env.get('TIKTOK_CLIENT_KEY')
-  const clientSecret = Deno.env.get('TIKTOK_CLIENT_SECRET')
   const accessToken = Deno.env.get('TIKTOK_ACCESS_TOKEN')
-  if (!clientKey || !clientSecret || !accessToken) {
+  if (!accessToken) {
     return { configured: false, posts: [] }
   }
   try {
     const params = new URLSearchParams({
       fields: 'id,create_time,cover_image_url,share_url,video_description',
-      max_count: String(MAX_RAW_POSTS_PER_PLATFORM),
-      ac: clientKey,
-      secret: clientSecret,
-      access_token: accessToken,
     })
     const res = await fetch(
-      `https://open.tiktok.com/apis/v1.1/tts/display/list?${params}`,
+      `https://open.tiktokapis.com/v2/video/list/?${params}`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          max_count: Math.min(MAX_RAW_POSTS_PER_PLATFORM, 20),
+        }),
+      },
     )
     if (!res.ok) {
       console.error(`social-highlights: tiktok http_${res.status}`)
       return { configured: true, posts: [] }
     }
     const payload = await res.json()
+    if (payload?.error?.code && payload.error.code !== 'ok') {
+      console.error(`social-highlights: tiktok ${payload.error.code}`)
+      return { configured: true, posts: [] }
+    }
     const videos = payload?.data?.videos ?? []
     const posts = videos.map((v) => ({
       id: `tt-${v.id}`,
