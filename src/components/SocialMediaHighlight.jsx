@@ -27,6 +27,9 @@ const INCLUDE_KEYWORDS = [
   'roll-up',
   'custom branded',
   'nylons for',
+  'we branded',
+  't-shirts',
+  'we delivered',
 ]
 
 const EXCLUDE_KEYWORDS = ['happy new week', 'happy new month']
