@@ -234,7 +234,7 @@ function StickyStackCard({ post, index, progress, range, targetScale, reduceMoti
           scale: reduceMotion ? 1 : scale,
           top: `calc(-5vh + ${index * 15 + 200}px)`,
         }}
-        className="relative flex h-[240px] w-[300px] origin-top flex-col overflow-hidden rounded-[24px] bg-[#F2F2F0] sm:h-[240px] sm:w-[360px] dark:bg-[#1A1A1E]"
+        className="relative flex h-[246px] w-[306px] origin-top flex-col overflow-hidden rounded-[24px] bg-[#F2F2F0] sm:h-[240px] sm:w-[360px] dark:bg-[#1A1A1E]"
       >
         {post.mediaUrl ? (
           <GifVideo
