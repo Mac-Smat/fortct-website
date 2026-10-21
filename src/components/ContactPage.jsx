@@ -34,8 +34,8 @@ const infoCards = [
   {
     icon: <Mail className="w-5 h-5 text-white" />,
     label: 'Email Us',
-    value: 'hello@fortct.ltd',
-    href: 'mailto:hello@fortct.ltd',
+    value: 'fortctltd@gmail.com',
+    href: 'mailto:fortctltd@gmail.com',
   },
   {
     icon: <Clock className="w-5 h-5 text-white" />,

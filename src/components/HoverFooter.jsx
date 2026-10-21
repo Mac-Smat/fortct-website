@@ -98,8 +98,8 @@ const linkColumns = [
 const contactInfo = [
   {
     icon: <MailIcon />,
-    text: 'hello@fortct.ltd',
-    href: 'mailto:hello@fortct.ltd',
+    text: 'fortctltd@gmail.com',
+    href: 'mailto:fortctltd@gmail.com',
   },
   {
     icon: <PhoneIcon />,

@@ -34,8 +34,8 @@ const infoCards = [
   {
     icon: <MailIcon />,
     label: 'Email Address',
-    value: 'hello@fortct.ltd',
-    href: 'mailto:hello@fortct.ltd',
+    value: 'fortctltd@gmail.com',
+    href: 'mailto:fortctltd@gmail.com',
   },
   {
     icon: <PhoneIcon />,

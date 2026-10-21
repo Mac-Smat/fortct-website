@@ -87,7 +87,7 @@ const BUSINESS_JSONLD = {
     'FortCT Ltd is a printing and branding company in Ibadan offering printing, branding, billboard, large format, packaging and design services.',
   url: `${SITE_URL}${BASE_URL}`,
   telephone: `+${FORTCT_WHATSAPP_NUMBER}`,
-  email: 'hello@fortct.ltd',
+  email: 'fortctltd@gmail.com',
   image: OG_IMAGE,
   address: {
     '@type': 'PostalAddress',
