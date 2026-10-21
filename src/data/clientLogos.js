@@ -1,12 +1,12 @@
 // Auto-discover all client logos from assets/Client Logos/
-// Drop a new .webp or .svg into this folder and it appears in the marquee automatically.
-// Original PNGs live in _source-png/ (gitignored) — only converted WebP/SVG files are loaded.
+// Drop a new .svg into this folder and it appears in the marquee automatically.
+// Original PNGs live in _source-png/ (gitignored) — only SVG files are loaded.
 const logoModules = import.meta.glob('../../assets/Client Logos/*', {
   eager: true,
   import: 'default',
 })
 
-const IMAGE_EXTENSIONS = ['.webp', '.svg']
+const IMAGE_EXTENSIONS = ['.svg']
 
 // Predefined gradients — cycled through in alphabetical filename order
 const GRADIENTS = [
