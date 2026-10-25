@@ -2,6 +2,7 @@ import logoSvg from '../assets/logo.svg'
 import { Reveal } from './Reveal.jsx'
 import { RevealHeading } from './RevealHeading.jsx'
 import { FORTCT_WHATSAPP_DISPLAY, FORTCT_PHONE_HREF } from '../lib/contact.js'
+import { BUSINESS } from '../lib/site-config.js'
 
 function MailIcon() {
   return (
@@ -113,10 +114,10 @@ const contactInfo = [
 ]
 
 const socialLinks = [
-  { icon: <InstagramIcon />, label: 'Instagram', href: '#' },
-  { icon: <XIcon />, label: 'X (Twitter)', href: '#' },
-  { icon: <LinkedInIcon />, label: 'LinkedIn', href: '#' },
-]
+  { icon: <InstagramIcon />, label: 'Instagram', href: BUSINESS.sameAs.instagram },
+  { icon: <XIcon />, label: 'X (Twitter)', href: BUSINESS.sameAs.twitter },
+  { icon: <LinkedInIcon />, label: 'LinkedIn', href: BUSINESS.sameAs.linkedin },
+].filter((link) => Boolean(link.href))
 
 export default function HoverFooter({ prefixLanding = false }) {
   const baseUrl = import.meta.env.BASE_URL

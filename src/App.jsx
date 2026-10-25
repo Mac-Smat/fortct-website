@@ -37,6 +37,7 @@ import { TextReveal } from './components/TextReveal.jsx'
 import { Tiles } from './components/Tiles.jsx'
 import { LogoMarquee } from './components/LogoMarquee.jsx'
 import { usePageMeta } from './lib/seo.js'
+import { fetchSeoSettings } from './lib/seo-api.js'
 import { openWhatsAppQuoteChat } from './lib/contact.js'
 import { CLIENT_LOGOS } from './data/clientLogos.js'
 
@@ -91,7 +92,13 @@ export default function App() {
 function PublicSite() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
-  usePageMeta(pathname)
+  const [seoSettings, setSeoSettings] = useState([])
+  useEffect(() => {
+    fetchSeoSettings()
+      .then(setSeoSettings)
+      .catch(() => setSeoSettings([]))
+  }, [])
+  usePageMeta(pathname, seoSettings)
   useEffect(() => {
     const prefetch = () => {
       import('./lib/public-api.js').then(({ prefetchCatalogue }) => prefetchCatalogue())

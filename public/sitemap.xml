@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://YOUR_VERCEL_DOMAIN.vercel.app/</loc>
+    <loc>https://mac-smat.github.io/fortct-website/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://YOUR_VERCEL_DOMAIN.vercel.app/services</loc>
+    <loc>https://mac-smat.github.io/fortct-website/services</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://YOUR_VERCEL_DOMAIN.vercel.app/about</loc>
+    <loc>https://mac-smat.github.io/fortct-website/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://YOUR_VERCEL_DOMAIN.vercel.app/contact</loc>
+    <loc>https://mac-smat.github.io/fortct-website/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

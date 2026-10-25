@@ -1,22 +1,17 @@
 import { useEffect } from 'react'
-import { FORTCT_WHATSAPP_NUMBER } from './contact.js'
+import { ORIGIN, BASE_URL, SITE_NAME, OG_IMAGE, BUSINESS } from './site-config.js'
 
-export const SITE_URL = 'https://mac-smat.github.io'
-const BASE_URL = import.meta.env.BASE_URL
-const OG_IMAGE = `${SITE_URL}${BASE_URL}og-image.webp`
-const SITE_NAME = 'FortCT Ltd'
-
-const PAGE_META = {
+export const PAGE_META = {
   home: {
-    title: 'FortCT Ltd — Premium Printing & Branding in Ibadan',
+    title: 'FortCT Ltd — Premium Printing & Branding in Ibadan, Nigeria',
     description:
-      'FortCT Ltd is a printing and branding company in Ibadan offering business cards, flyers, billboards, large format printing, packaging and creative design services.',
+      'FortCT Ltd is a printing and branding company in Ibadan, Oyo State, Nigeria offering business cards, flyers, billboards, large format printing, packaging and creative design services.',
     path: '',
   },
   services: {
-    title: 'Printing, Branding & Billboard Services | FortCT Ltd',
+    title: 'Printing, Branding & Billboard Services | FortCT Ltd Ibadan',
     description:
-      'Explore the full FortCT catalogue — business printing, branding & large format, packaging, apparel, event, office and creative services with clear pricing.',
+      'Explore the full FortCT catalogue — business printing, branding & large format, packaging, apparel, event, office and creative services with clear pricing in Ibadan, Nigeria.',
     path: 'services',
   },
   contact: {
@@ -82,36 +77,24 @@ function setJsonLd(obj) {
 const BUSINESS_JSONLD = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  name: 'FortCT Ltd',
-  description:
-    'FortCT Ltd is a printing and branding company in Ibadan offering printing, branding, billboard, large format, packaging and design services.',
-  url: `${SITE_URL}${BASE_URL}`,
-  telephone: `+${FORTCT_WHATSAPP_NUMBER}`,
-  email: 'fortctltd@gmail.com',
+  name: BUSINESS.name,
+  description: BUSINESS.description,
+  url: `${ORIGIN}${BASE_URL}`,
+  telephone: BUSINESS.telephone,
+  email: BUSINESS.email,
   image: OG_IMAGE,
   address: {
     '@type': 'PostalAddress',
-    streetAddress: '86, Ile-Pupa Bus Stop',
-    addressLocality: 'Ibadan',
-    addressCountry: 'NG',
+    streetAddress: BUSINESS.address.streetAddress,
+    addressLocality: BUSINESS.address.addressLocality,
+    addressRegion: BUSINESS.address.addressRegion,
+    addressCountry: BUSINESS.address.addressCountry,
   },
-  openingHoursSpecification: {
-    '@type': 'OpeningHoursSpecification',
-    dayOfWeek: [
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-      'Sunday',
-    ],
-    opens: '00:00',
-    closes: '23:59',
-  },
+  sameAs: Object.values(BUSINESS.sameAs).filter(Boolean),
+  hasMap: BUSINESS.hasMap,
 }
 
-export function applyPageMeta(pathname) {
+export function applyPageMeta(pathname, seoSettings = []) {
   const key = pathname.startsWith('/admin')
     ? 'admin'
     : pathname === '/services'
@@ -124,12 +107,16 @@ export function applyPageMeta(pathname) {
             ? 'home'
             : 'notfound'
   const meta = PAGE_META[key]
+  const setting = seoSettings.find((s) => s.page_key === key) ?? {}
+  const title = setting.title ?? meta.title
+  const description = setting.meta_description ?? meta.description
+  const ogImage = setting.og_image_url ?? OG_IMAGE
   const isPrivate = key === 'admin' || key === 'notfound'
-  const url = meta.path === null ? null : `${SITE_URL}${BASE_URL}${meta.path}`
+  const url = meta.path === null ? null : `${ORIGIN}${BASE_URL}${meta.path}`
 
-  document.title = meta.title
+  document.title = title
 
-  if (meta.description) upsertMeta('name', 'description', meta.description)
+  if (description) upsertMeta('name', 'description', description)
   else document.head.querySelector('meta[name="description"]')?.remove()
 
   upsertMeta('name', 'robots', isPrivate ? 'noindex, nofollow' : 'index, follow')
@@ -153,22 +140,22 @@ export function applyPageMeta(pathname) {
   }
 
   setCanonical(url)
-  upsertMeta('property', 'og:title', meta.title)
-  upsertMeta('property', 'og:description', meta.description)
+  upsertMeta('property', 'og:title', title)
+  upsertMeta('property', 'og:description', description)
   upsertMeta('property', 'og:type', 'website')
   upsertMeta('property', 'og:url', url)
-  upsertMeta('property', 'og:image', OG_IMAGE)
+  upsertMeta('property', 'og:image', ogImage)
   upsertMeta('property', 'og:site_name', SITE_NAME)
   upsertMeta('name', 'twitter:card', 'summary_large_image')
-  upsertMeta('name', 'twitter:title', meta.title)
-  upsertMeta('name', 'twitter:description', meta.description)
-  upsertMeta('name', 'twitter:image', OG_IMAGE)
+  upsertMeta('name', 'twitter:title', title)
+  upsertMeta('name', 'twitter:description', description)
+  upsertMeta('name', 'twitter:image', ogImage)
 
   setJsonLd({ ...BUSINESS_JSONLD, url })
 }
 
-export function usePageMeta(pathname) {
+export function usePageMeta(pathname, seoSettings) {
   useEffect(() => {
-    applyPageMeta(pathname)
-  }, [pathname])
+    applyPageMeta(pathname, seoSettings)
+  }, [pathname, seoSettings])
 }

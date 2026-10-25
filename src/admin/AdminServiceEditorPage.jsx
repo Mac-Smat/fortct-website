@@ -13,6 +13,7 @@ import {
   reorderProductImages,
 } from '../lib/admin-api.js'
 import { slugify, PRICING_TYPES, ALLOWED_IMAGE_TYPES, MAX_IMAGE_BYTES } from '../lib/format.js'
+import { fetchProductSeo, upsertProductSeo } from '../lib/seo-api.js'
 import { useAdminToast } from './useAdminToast.js'
 import { AdminButton } from './ui/AdminButton.jsx'
 import { AdminInput, AdminSelect, AdminTextarea, FieldLabel, FieldError } from './ui/AdminFields.jsx'
@@ -104,6 +105,8 @@ export default function AdminServiceEditorPage() {
     slug: '',
     category_id: '',
     description: '',
+    meta_title: '',
+    meta_description: '',
     pricing_type: 'fixed',
     price: '',
     pricing_unit: '',
@@ -149,9 +152,10 @@ export default function AdminServiceEditorPage() {
       const categoriesData = await fetchCategories()
       setCategories(categoriesData)
       if (!isNew) {
-        const [product, imagesData] = await Promise.all([
+        const [product, imagesData, productSeo] = await Promise.all([
           fetchProduct(id),
           fetchProductImages(id),
+          fetchProductSeo(id),
         ])
         if (!product) throw new Error('Service not found — it may have been removed.')
         const nextForm = {
@@ -159,6 +163,8 @@ export default function AdminServiceEditorPage() {
           slug: product.slug,
           category_id: product.category_id ?? '',
           description: product.description ?? '',
+          meta_title: productSeo?.meta_title ?? '',
+          meta_description: productSeo?.meta_description ?? '',
           pricing_type: product.pricing_type,
           price: product.price != null ? String(product.price) : '',
           pricing_unit: product.pricing_unit ?? '',
@@ -218,11 +224,19 @@ export default function AdminServiceEditorPage() {
       }
       if (isNew) {
         const created = await createProduct(payload)
+        await upsertProductSeo(created.id, {
+          meta_title: form.meta_title.trim() || null,
+          meta_description: form.meta_description.trim() || null,
+        })
         toast.success(`"${created.name}" created`)
         leavingRef.current = true
         navigate(`/admin/services/${created.id}`, { replace: true })
       } else {
         await updateProduct(id, payload)
+        await upsertProductSeo(id, {
+          meta_title: form.meta_title.trim() || null,
+          meta_description: form.meta_description.trim() || null,
+        })
         toast.success('Changes saved')
         setSavedFormJson(JSON.stringify(form))
         load()
@@ -394,6 +408,37 @@ export default function AdminServiceEditorPage() {
                   rows={4}
                   placeholder="What does this service include?"
                 />
+              </div>
+
+              <div className="sm:col-span-2">
+                <FieldLabel htmlFor="svc-meta-title">Search engine title</FieldLabel>
+                <AdminInput
+                  id="svc-meta-title"
+                  name="meta_title"
+                  value={form.meta_title}
+                  onChange={(e) => setField('meta_title', e.target.value)}
+                  maxLength={60}
+                  placeholder="e.g. Business card printing in Ibadan"
+                />
+                <p className="mt-1 text-[11px] font-normal text-[#666666] dark:text-[#A1A1AA]/60">
+                  {form.meta_title.length}/60 characters
+                </p>
+              </div>
+
+              <div className="sm:col-span-2">
+                <FieldLabel htmlFor="svc-meta-description">Search engine description</FieldLabel>
+                <AdminTextarea
+                  id="svc-meta-description"
+                  name="meta_description"
+                  value={form.meta_description}
+                  onChange={(e) => setField('meta_description', e.target.value)}
+                  rows={3}
+                  maxLength={160}
+                  placeholder="Short search-result description for this service"
+                />
+                <p className="mt-1 text-[11px] font-normal text-[#666666] dark:text-[#A1A1AA]/60">
+                  {form.meta_description.length}/160 characters
+                </p>
               </div>
 
               <div>

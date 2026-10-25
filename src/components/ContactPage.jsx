@@ -10,6 +10,7 @@ import ContactMap from './ContactMap.jsx'
 import ContactForm from './ContactForm.jsx'
 import CtaBanner from './CtaBanner.jsx'
 import { FORTCT_WHATSAPP_DISPLAY, FORTCT_PHONE_HREF } from '../lib/contact.js'
+import { BUSINESS } from '../lib/site-config.js'
 
 const SERVICE_CARDS = [
   { title: 'Business Printing', note: 'Flyers, stationery & documents' },
@@ -72,10 +73,10 @@ function LinkedInIcon() {
 }
 
 const socialLinks = [
-  { icon: <InstagramIcon />, label: 'Instagram', href: '#' },
-  { icon: <XIcon />, label: 'X (Twitter)', href: '#' },
-  { icon: <LinkedInIcon />, label: 'LinkedIn', href: '#' },
-]
+  { icon: <InstagramIcon />, label: 'Instagram', href: BUSINESS.sameAs.instagram },
+  { icon: <XIcon />, label: 'X (Twitter)', href: BUSINESS.sameAs.twitter },
+  { icon: <LinkedInIcon />, label: 'LinkedIn', href: BUSINESS.sameAs.linkedin },
+].filter((link) => Boolean(link.href))
 
 export default function ContactPage() {
   const [searchParams] = useSearchParams()
