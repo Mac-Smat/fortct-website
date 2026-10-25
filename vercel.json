@@ -4,7 +4,13 @@
   "buildCommand": "vite build",
   "outputDirectory": "dist",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/googleb00f2992860d99dd.html",
+      "destination": "/googleb00f2992860d99dd.html"
+    }
+  ]
 }
     {
       "source": "/(.*)",
