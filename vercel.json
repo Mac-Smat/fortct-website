@@ -4,6 +4,11 @@
   "buildCommand": "vite build",
   "outputDirectory": "dist",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/((?!.*\.[a-zA-Z0-9]{1,5}$).*)",
+      "destination": "/index.html"
+    }
+  ]
 }
-
