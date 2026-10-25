@@ -113,7 +113,25 @@ const contactInfo = [
   },
 ]
 
+function TikTokIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M16 6 8.5 17a3 3 0 0 0 5 0L16 6M12 12v4M8 16v2M16 16v2" />
+    </svg>
+  )
+}
+
+function GoogleIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21.3 10.2h-11.6v4.1h4.1c-.2 1.2-2.5 1.1-2.5 3.8v2.7h4.7l.7-4.8h-5.5V6.2c0-1.5 1-2 1.7-2.1.5 0 1-.1 1.5-.4l.7.5c.2.2.3.5.3.8v11.6c0 1.5-1.1 2.3-2.7 2.3H21.3z" />
+    </svg>
+  )
+}
+
 const socialLinks = [
+  { icon: <TikTokIcon />, label: 'TikTok', href: BUSINESS.sameAs.tiktok },
+  { icon: <GoogleIcon />, label: 'Google', href: BUSINESS.sameAs.google_business },
   { icon: <InstagramIcon />, label: 'Instagram', href: BUSINESS.sameAs.instagram },
   { icon: <XIcon />, label: 'X (Twitter)', href: BUSINESS.sameAs.twitter },
   { icon: <LinkedInIcon />, label: 'LinkedIn', href: BUSINESS.sameAs.linkedin },

@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: /admin/
 
-Sitemap: https://mac-smat.github.io/fortct-website/sitemap.xml
+Sitemap: https://fortctltd.vercel.app/sitemap.xml
