@@ -5,6 +5,12 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/googleb00f2992860d99dd.html",
+      "destination": "/googleb00f2992860d99dd.html"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
