@@ -26,11 +26,14 @@ export const BUSINESS = {
     addressRegion: 'Oyo State',
     addressCountry: 'NG',
   },
-  // Real social profile URLs — leave empty until verified; never render placeholder links.
+  // Real social profile URLs — verified profiles set as code fallbacks;
+  // Vercel env vars (VITE_INSTAGRAM_URL, etc.) override these if set.
   sameAs: {
-    instagram: import.meta.env.VITE_INSTAGRAM_URL ?? '',
-    tiktok: import.meta.env.VITE_TIKTOK_URL ?? '',
-    google_business: import.meta.env.VITE_GOOGLE_BUSINESS_URL ?? '',
+    instagram:
+      import.meta.env.VITE_INSTAGRAM_URL ?? 'https://www.instagram.com/fortct.ltd/',
+    tiktok: import.meta.env.VITE_TIKTOK_URL ?? 'https://www.tiktok.com/@fortct.ltd',
+    google_business:
+      import.meta.env.VITE_GOOGLE_BUSINESS_URL ?? 'https://share.google/GGEB6XflzVbwzo2nW',
     linkedin: import.meta.env.VITE_LINKEDIN_URL ?? '',
   },
   hasMap:
@@ -38,3 +41,4 @@ export const BUSINESS = {
 }
 
 export const OG_IMAGE = ORIGIN + BASE_URL + 'og-image.webp'
+export const CANARY_MARK = "CANARY-SEO-TRUTH-99"
