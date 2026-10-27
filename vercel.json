@@ -8,6 +8,8 @@
   "rewrites": [
     { "source": "/assets/:path*", "destination": "/assets/:path*" },
     { "source": "/favicon.svg", "destination": "/favicon.svg" },
+    { "source": "/favicon-light.png", "destination": "/favicon-light.png" },
+    { "source": "/favicon-dark.png", "destination": "/favicon-dark.png" },
     { "source": "/googleb00f2992860d99dd.html", "destination": "/googleb00f2992860d99dd.html" },
     { "source": "/robots.txt", "destination": "/robots.txt" },
     { "source": "/sitemap.xml", "destination": "/sitemap.xml" },

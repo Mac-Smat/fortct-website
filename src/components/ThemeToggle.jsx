@@ -15,6 +15,13 @@ export function ThemeToggle({ className }) {
   useEffect(() => {
     document.documentElement.classList.toggle('dark', isDark)
     localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light')
+    const favicon = document.getElementById('site-favicon')
+    if (favicon) {
+      favicon.setAttribute(
+        'href',
+        `${import.meta.env.BASE_URL}favicon-${isDark ? 'dark' : 'light'}.png`,
+      )
+    }
   }, [isDark])
 
   return (
