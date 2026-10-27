@@ -292,7 +292,7 @@ function MobileStickyStack({ posts, hoverOnly }) {
 export default function SocialMediaHighlight() {
   const [status, setStatus] = useState('loading')
   const [posts, setPosts] = useState([])
-  const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 767px)').matches)
+  const [isMobile, setIsMobile] = useState(false)
   const gridRef = useRef(null)
 
   const load = useCallback(async () => {

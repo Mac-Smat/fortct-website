@@ -200,7 +200,7 @@ function MobileGallery() {
 }
 
 export default function GallerySection() {
-  const [isMobile, setIsMobile] = React.useState(() => window.matchMedia('(max-width: 767px)').matches)
+  const [isMobile, setIsMobile] = React.useState(false)
 
   React.useEffect(() => {
     const mq = window.matchMedia('(max-width: 767px)')

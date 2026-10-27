@@ -4,17 +4,12 @@ import { cn } from '../lib/utils'
 
 const THEME_KEY = 'fortct-theme'
 
-function getInitialTheme() {
-  const stored = localStorage.getItem(THEME_KEY)
-  if (stored) return stored === 'dark'
-  return window.matchMedia('(prefers-color-scheme: dark)').matches
-}
-
 export function ThemeToggle({ className }) {
   const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
-    setIsDark(getInitialTheme())
+    const stored = localStorage.getItem(THEME_KEY)
+    setIsDark(stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches)
   }, [])
 
   useEffect(() => {
