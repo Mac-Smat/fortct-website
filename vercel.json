@@ -11,7 +11,7 @@
     { "source": "/googleb00f2992860d99dd.html", "destination": "/googleb00f2992860d99dd.html" },
     { "source": "/robots.txt", "destination": "/robots.txt" },
     { "source": "/sitemap.xml", "destination": "/sitemap.xml" },
-    { "source": "/:path*", "destination": "/index.html" }
+    { "source": "/:path*", "destination": "/" }
   ]
 }
 
