@@ -65,18 +65,24 @@ function setCanonical(href) {
 
 function setJsonLd(obj) {
   const id = 'site-jsonld'
-  document.getElementById(id)?.remove()
-  if (!obj) return
-  const script = document.createElement('script')
-  script.type = 'application/ld+json'
-  script.id = id
+  let script = document.getElementById(id)
+  if (!obj) {
+    script?.remove()
+    return
+  }
+  if (!script) {
+    script = document.createElement('script')
+    script.type = 'application/ld+json'
+    script.id = id
+    document.head.appendChild(script)
+  }
   script.textContent = JSON.stringify(obj)
-  document.head.appendChild(script)
 }
 
 const BUSINESS_JSONLD = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
+  '@id': `${ORIGIN}${BASE_URL}#localbusiness`,
   name: BUSINESS.name,
   description: BUSINESS.description,
   url: `${ORIGIN}${BASE_URL}`,
@@ -151,7 +157,7 @@ export function applyPageMeta(pathname, seoSettings = []) {
   upsertMeta('name', 'twitter:description', description)
   upsertMeta('name', 'twitter:image', ogImage)
 
-  setJsonLd({ ...BUSINESS_JSONLD, url })
+  setJsonLd(BUSINESS_JSONLD)
 }
 
 export function usePageMeta(pathname, seoSettings) {
