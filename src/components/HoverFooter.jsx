@@ -1,4 +1,5 @@
 import logoSvg from '../assets/logo.svg'
+import { IconBrandGoogleMaps, IconBrandInstagram, IconBrandTiktok } from '@tabler/icons-react'
 import { Reveal } from './Reveal.jsx'
 import { RevealHeading } from './RevealHeading.jsx'
 import { FORTCT_WHATSAPP_DISPLAY, FORTCT_PHONE_HREF } from '../lib/contact.js'
@@ -26,16 +27,6 @@ function MapPinIcon() {
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E0EC38" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
       <circle cx="12" cy="10" r="3" />
-    </svg>
-  )
-}
-
-function InstagramIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
     </svg>
   )
 }
@@ -113,26 +104,10 @@ const contactInfo = [
   },
 ]
 
-function TikTokIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M16 6 8.5 17a3 3 0 0 0 5 0L16 6M12 12v4M8 16v2M16 16v2" />
-    </svg>
-  )
-}
-
-function GoogleIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21.3 10.2h-11.6v4.1h4.1c-.2 1.2-2.5 1.1-2.5 3.8v2.7h4.7l.7-4.8h-5.5V6.2c0-1.5 1-2 1.7-2.1.5 0 1-.1 1.5-.4l.7.5c.2.2.3.5.3.8v11.6c0 1.5-1.1 2.3-2.7 2.3H21.3z" />
-    </svg>
-  )
-}
-
 const socialLinks = [
-  { icon: <TikTokIcon />, label: 'TikTok', href: BUSINESS.sameAs.tiktok },
-  { icon: <GoogleIcon />, label: 'Google', href: BUSINESS.sameAs.google_business },
-  { icon: <InstagramIcon />, label: 'Instagram', href: BUSINESS.sameAs.instagram },
+  { icon: <IconBrandTiktok size={20} stroke={2} />, label: 'TikTok', href: BUSINESS.sameAs.tiktok },
+  { icon: <IconBrandGoogleMaps size={20} stroke={2} />, label: 'Google', href: BUSINESS.sameAs.google_business },
+  { icon: <IconBrandInstagram size={20} stroke={2} />, label: 'Instagram', href: BUSINESS.sameAs.instagram },
   { icon: <XIcon />, label: 'X (Twitter)', href: BUSINESS.sameAs.twitter },
   { icon: <LinkedInIcon />, label: 'LinkedIn', href: BUSINESS.sameAs.linkedin },
 ].filter((link) => Boolean(link.href))
